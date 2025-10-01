@@ -37,7 +37,9 @@ producto y división.
 
         System.out.println("\nEjercicio 04");
         Scanner lector =  new Scanner(System.in);
+        System.out.println("\nIntroduce un numero:");
         double numero1 = lector.nextDouble();
+        System.out.println("\nIntroduce otro numero:");
         double numero2 = lector.nextDouble();
         System.out.println("La suma de los numeros es:" + numero1 + numero2);
         System.out.println("La resta de los numeros es:" + (numero1 - numero2));
@@ -50,8 +52,9 @@ longitud de un radio y nos escribe la longitud de la circunferencia, el área de
 volumen de la esfera que corresponden con dicho radio. (C = 2pir / V = (4/3)πr³)
       */
         System.out.println("\nEjercicio 05");
-        Scanner lector2 = new Scanner(System.in);
-        double radio = lector2.nextDouble();
+        System.out.println("\nIntroduce un radio:");
+        lector = new Scanner(System.in);
+        double radio = lector.nextDouble();
         System.out.println("La longitud del radio es: " + radio);
         System.out.println("La longitud de la circunferencia es:" + (2 * Math.PI * radio) );
         System.out.println("El volumen de la esfera de" + radio +":"+ ((4/3) * Math.PI * Math.pow(radio,3)));
@@ -61,9 +64,66 @@ volumen de la esfera que corresponden con dicho radio. (C = 2pir / V = (4/3)πr�
 muestre el porcentaje de descuento realizado.
          */
         System.out.println("\nEjercicio 06");
-        Scanner lector3 = new Scanner(System.in);
-        System.out.println("Ingresa el precio costo de un producto:");
-        Scanner lector4 =  new Scanner(System.in);
-        System.out.println("Ingresa el precio venta de un producto:");
+        System.out.println("\nIntroduce un precio de costo:");
+        lector = new Scanner(System.in);
+        double precio = lector.nextDouble();
+        System.out.println("\nIntroduce un precio de venta:");
+        lector= new Scanner(System.in);
+        double precioVenta = lector.nextDouble();
+        System.out.println("Ingresa el precio costo de un producto:" + precio);
+        System.out.println("Ingresa el precio venta de un producto:" + precioVenta);
+        System.out.println("El porcentaje de descuento realizado es:"+ (((precioVenta-precio) / precioVenta) * 100));
+
+        /*
+        Escribe un programa que lea un valor correspondiente a una distancia en millas marinas
+y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852 metros.
+        */
+        System.out.println("\nEjercicio 07");
+        lector = new Scanner(System.in);
+        System.out.println("\nIntroduce dato en millas:");
+        double datoMillas = lector.nextDouble();
+        System.out.println("El valor en metros equivale a:" + (datoMillas * 1852));
+
+        /*
+        Escribe un programa que lee dos números y los visualiza en orden ascendente.
+         */
+        System.out.println("\nEjercicio 08");
+        lector = new Scanner(System.in);
+        System.out.println("\nIntroduce un numero:");
+        double numeroUno = lector.nextDouble();
+        System.out.println("\nIntroduce otro numero:");
+        double numeroDos = lector.nextDouble();
+        System.out.println("El numero mayor es:" + Math.min (numeroUno,numeroDos) + " , " + Math.max (numeroUno,numeroDos));
+
+      /*
+      Escribe un programa que lee dos números y nos dice cuál es el mayor o si son iguales.
+       */
+       System.out.println("\nEjercicio 09");
+       lector = new Scanner(System.in);
+       System.out.println("\nIntroduce un número:");
+       double primerNumero = lector.nextDouble();
+       System.out.println("\nIntroduce otro número:");
+       double segundoNumero = lector.nextDouble();
+       System.out.println("El numero mayor es:" + Math.max(primerNumero, segundoNumero));
+       System.out.println("El primernumero es igual que el otro nùmero:" + (primerNumero == segundoNumero));
+
+       /*
+       Escribe un programa que lea tres números distintos y nos diga cuál es el mayor.
+        */
+       System.out.println("\nEjercicio 10");
+       lector= new Scanner(System.in);
+       System.out.println("\nIntroduce un número a:");
+       double numeroA = lector.nextDouble();
+       System.out.println("\nIntroduce un número b:");
+       double numeroB = lector.nextDouble();
+       System.out.println("\nIntroduce un número c:");
+       double numeroC = lector.nextDouble();
+       double max = Math.max(Math.max(numeroA, numeroB), numeroC);
+       System.out.println("El mayor entre a, b y c es:" + max);
+
+
+
+
+
     }
 }
