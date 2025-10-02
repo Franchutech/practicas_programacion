@@ -41,7 +41,8 @@ producto y división.
         double numero1 = lector.nextDouble();
         System.out.println("\nIntroduce otro numero:");
         double numero2 = lector.nextDouble();
-        System.out.println("La suma de los numeros es:" + numero1 + numero2);
+
+        System.out.println("La suma de los numeros es:" + (numero1 + numero2);
         System.out.println("La resta de los numeros es:" + (numero1 - numero2));
         System.out.println("La multiplicación de los numeros es:" + (numero1 * numero2));
         System.out.println("La division de los numeros es:" + (numero1 / numero2));
@@ -55,8 +56,10 @@ volumen de la esfera que corresponden con dicho radio. (C = 2pir / V = (4/3)πr�
         System.out.println("\nIntroduce un radio:");
         lector = new Scanner(System.in);
         double radio = lector.nextDouble();
+
         System.out.println("La longitud del radio es: " + radio);
         System.out.println("La longitud de la circunferencia es:" + (2 * Math.PI * radio) );
+        Systen.out.println("El area del circulo es:" + (Math.PI * Math.pow(radio,2)));
         System.out.println("El volumen de la esfera de" + radio +":"+ ((4/3) * Math.PI * Math.pow(radio,3)));
 
         /*
@@ -70,9 +73,10 @@ muestre el porcentaje de descuento realizado.
         System.out.println("\nIntroduce un precio de venta:");
         lector= new Scanner(System.in);
         double precioVenta = lector.nextDouble();
-        System.out.println("Ingresa el precio costo de un producto:" + precio);
+
+        System.out.println("Ingresa el precio de un producto:" + precio);
         System.out.println("Ingresa el precio venta de un producto:" + precioVenta);
-        System.out.println("El porcentaje de descuento realizado es:"+ (((precioVenta-precio) / precioVenta) * 100));
+        System.out.println("El porcentaje de descuento realizado es:"+ (((precioVenta-precio) / precioVenta) * 100.0));
 
         /*
         Escribe un programa que lea un valor correspondiente a una distancia en millas marinas
@@ -82,7 +86,8 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         lector = new Scanner(System.in);
         System.out.println("\nIntroduce dato en millas:");
         double datoMillas = lector.nextDouble();
-        System.out.println("El valor en metros equivale a:" + (datoMillas * 1852));
+
+        System.out.println("El valor en metros equivale a:" + (datoMillas * 1852.0));
 
         /*
         Escribe un programa que lee dos números y los visualiza en orden ascendente.
@@ -93,6 +98,7 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         double numeroUno = lector.nextDouble();
         System.out.println("\nIntroduce otro numero:");
         double numeroDos = lector.nextDouble();
+
         System.out.println("El orden ascendente de los números es:" +
                 Math.min (numeroUno,numeroDos) + " , " + Math.max (numeroUno,numeroDos));
 
@@ -105,8 +111,9 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
        double primerNumero = lector.nextDouble();
        System.out.println("\nIntroduce otro número:");
        double segundoNumero = lector.nextDouble();
+
        System.out.println("El numero mayor es:" + Math.max(primerNumero, segundoNumero));
-       System.out.println("El primernumero es igual que el otro nùmero:" + (primerNumero == segundoNumero));
+       System.out.println("¿El primer numero es igual que el otro nùmero?" + (primerNumero == segundoNumero));
 
        /*
        Escribe un programa que lea tres números distintos y nos diga cuál es el mayor.
@@ -120,8 +127,8 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
        System.out.println("\nIntroduce un número c:");
        double numeroC = lector.nextDouble();
        double max = Math.max(Math.max(numeroA, numeroB), numeroC);
-       System.out.println("El mayor entre a, b y c es:" + max);
 
+       System.out.println("El mayor entre a, b y c es:" + max);
 
        /*
        Escribe un programa que lee dos números, calcula y muestra el valor de su suma, resta,
@@ -134,6 +141,7 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         double numA = lector.nextDouble();
         System.out.println("\nIntroduce el divisor para una divisiòn distinto de cero B:");
         double numB = lector.nextDouble();
+
         System.out.println("La Suma de A y B es:" + (numA + numB));
         System.out.println("La Resta de A y B es:" + (numA - numB));
         System.out.println("El producto de A y B es:" + (numA * numB));
@@ -146,8 +154,9 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         lector = new Scanner(System.in);
         System.out.println("\nIntroduce un número C:");
         double numC = lector.nextDouble();
-        System.out.println("\nIntroduce otro númer D:");
+        System.out.println("\nIntroduce otro número D:");
         double numD = lector.nextDouble();
+
         System.out.println("El numero mayor es:" + Math.max(numC, numD));
 
         /*
@@ -158,10 +167,13 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         lector = new Scanner(System.in);
         System.out.println("\nIntroduce un número:");
         double numE = lector.nextDouble();
+
         System.out.println("¿el número es positivo?" + (numE >= 0));
         System.out.println("¿El número es negativo?" +(numE < 0));
 
-        
+        lector.close();
+
+
 
 
 
