@@ -93,7 +93,8 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         double numeroUno = lector.nextDouble();
         System.out.println("\nIntroduce otro numero:");
         double numeroDos = lector.nextDouble();
-        System.out.println("El numero mayor es:" + Math.min (numeroUno,numeroDos) + " , " + Math.max (numeroUno,numeroDos));
+        System.out.println("El orden ascendente de los números es:" +
+                Math.min (numeroUno,numeroDos) + " , " + Math.max (numeroUno,numeroDos));
 
       /*
       Escribe un programa que lee dos números y nos dice cuál es el mayor o si son iguales.
@@ -120,6 +121,49 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
        double numeroC = lector.nextDouble();
        double max = Math.max(Math.max(numeroA, numeroB), numeroC);
        System.out.println("El mayor entre a, b y c es:" + max);
+
+
+       /*
+       Escribe un programa que lee dos números, calcula y muestra el valor de su suma, resta,
+      producto y división. (Ten en cuenta la división por cero).
+        */
+
+        System.out.println("\nEjercicio 11");
+        lector= new Scanner(System.in);
+        System.out.println("\nIntroduce el numerador para una divisiòn A:");
+        double numA = lector.nextDouble();
+        System.out.println("\nIntroduce el divisor para una divisiòn distinto de cero B:");
+        double numB = lector.nextDouble();
+        System.out.println("La Suma de A y B es:" + (numA + numB));
+        System.out.println("La Resta de A y B es:" + (numA - numB));
+        System.out.println("El producto de A y B es:" + (numA * numB));
+        System.out.println("La división de A y B es:" + (numA / numB));
+
+        /*
+         Escribe un programa que lee 2 números y muestra el mayor.
+         */
+        System.out.println("Ejercicio 12");
+        lector = new Scanner(System.in);
+        System.out.println("\nIntroduce un número C:");
+        double numC = lector.nextDouble();
+        System.out.println("\nIntroduce otro númer D:");
+        double numD = lector.nextDouble();
+        System.out.println("El numero mayor es:" + Math.max(numC, numD));
+
+        /*
+        Escribe un programa que lee un número y me dice si es positivo o negativo
+        consideraremos el cero como positivo.
+         */
+        System.out.println("Ejercicio 13");
+        lector = new Scanner(System.in);
+        System.out.println("\nIntroduce un número:");
+        double numE = lector.nextDouble();
+        System.out.println("¿el número es positivo?" + (numE >= 0));
+        System.out.println("¿El número es negativo?" +(numE < 0));
+
+        
+
+
 
 
 
