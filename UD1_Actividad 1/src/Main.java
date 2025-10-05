@@ -1,6 +1,10 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+package UD1_Actividad1;
+
 import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -42,7 +46,7 @@ producto y división.
         System.out.println("\nIntroduce otro numero:");
         double numero2 = lector.nextDouble();
 
-        System.out.println("La suma de los numeros es:" + (numero1 + numero2);
+        System.out.println("La suma de los numeros es:" + (numero1 + numero2));
         System.out.println("La resta de los numeros es:" + (numero1 - numero2));
         System.out.println("La multiplicación de los numeros es:" + (numero1 * numero2));
         System.out.println("La division de los numeros es:" + (numero1 / numero2));
@@ -59,7 +63,7 @@ volumen de la esfera que corresponden con dicho radio. (C = 2pir / V = (4/3)πr�
 
         System.out.println("La longitud del radio es: " + radio);
         System.out.println("La longitud de la circunferencia es:" + (2 * Math.PI * radio) );
-        Systen.out.println("El area del circulo es:" + (Math.PI * Math.pow(radio,2)));
+        System.out.println("El area del circulo es:" + (Math.PI * Math.pow(radio,2)));
         System.out.println("El volumen de la esfera de" + radio +":"+ ((4/3) * Math.PI * Math.pow(radio,3)));
 
         /*
