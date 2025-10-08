@@ -125,23 +125,40 @@ transcurrido un segundo.
         lector = new Scanner(System.in);
 
         System.out.println("\nEjercicio 9");
-        System.out.println("Introduce la hora:");
+        System.out.println("Introduce un número para la hora:");
         int hora;
         hora = lector.nextInt();
-        System.out.println("Introduce los minutos:");
+        System.out.println("Introduce un número para los minutos:");
         int min;
         min = lector.nextInt();
-        System.out.println("Introduce los segundos:");
+        System.out.println("Introduce un número para los segundos:");
         int segundos;
         segundos = lector.nextInt();
 
-        int segundo = 1;
-        int time = hora + min + segundos;
 
-            for (int i = 1; i <= segundo; i++){
-
+        if (segundos <0 || min < 0 || hora < 0){
+            System.out.println ("Los números no pueden ser negativos");
+        }
+        if (segundos == 60 || min == 60 || hora == 24){
+            System.out.println ("Los segundos y minutos, no pueden ser 60, y la hora no puede ser 24");
         }
 
+        if (segundos == 59){
+            segundos = 0;
+            min = min + 1;
+        }
+            else {
+                segundos = segundos + 1;
+            }
+        if (min == 60){
+            min = 0;
+            hora = hora + 1;
+        }
+
+        if (hora == 24){
+            hora = 0;
+        }
+        System.out.println ("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
 
     }
 }
