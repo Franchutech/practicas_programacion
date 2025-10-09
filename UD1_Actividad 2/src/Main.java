@@ -26,10 +26,9 @@ mayor de edad” o el mensaje de “eres menor de edad”.  */
         int edad2 = lector.nextInt();
         if (edad2 >= 18) {
             System.out.println("Usted es mayor de edad");
-        } else if(edad2 <18 && edad2 >= 0) {
+        } else if (edad2 < 18 && edad2 >= 0) {
             System.out.println("Eres menor de edad");
-        }
-        else{
+        } else {
             System.out.println("La edad no tiene sentido");
         }
 
@@ -47,7 +46,7 @@ mayor de edad” o el mensaje de “eres menor de edad”.  */
 Para ello utiliza un contador y suma de 2 en 2.
     */
         System.out.println("\nP3.Ejercicio 4");
-        for (int i = 2; i <= 200; i += 2){
+        for (int i = 2; i <= 200; i += 2) {
             System.out.print(i + ", ");
         }
     /*Ejercicio 5: Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
@@ -55,8 +54,8 @@ Esta vez utiliza un contador sumando de 1 en 1.
     */
         System.out.println("\nP3.Ejercicio 5");
 
-            for (int i = 1; i <= 200; i++) {
-                if(i % 2 == 0){
+        for (int i = 1; i <= 200; i++) {
+            if (i % 2 == 0) {
                 System.out.print(i + ", ");
             }
         }
@@ -66,8 +65,8 @@ Esta vez utiliza un contador sumando de 1 en 1.
         System.out.println("Introduce un número:");
         lector = new Scanner(System.in);
         int maxN;
-        maxN= lector.nextInt();
-        for (int i = 1; i <= maxN; i++){
+        maxN = lector.nextInt();
+        for (int i = 1; i <= maxN; i++) {
             System.out.print(i + ", ");
         }
     /* Ejercicio 7: Escribe un programa que lea una calificación numérica entre 0 y 10 y la transforma en
@@ -77,27 +76,27 @@ calificación alfabética, escribiendo el resultado.
 • de 5 a <6 Bien.
 • de 6 a <9 Notable
 • de 9 a 10 Sobresaliente*/
-        System.out.println("P3.Ejercicio 7");
+        System.out.println("\nP3.Ejercicio 7");
         System.out.println("Introduce una calificación:");
         lector = new Scanner(System.in);
         double nota;
         nota = lector.nextDouble();
-        if(nota < 0.0 || nota > 10.0){
-            System.out.println ("Valor no definido" + nota);
+        if (nota < 0.0 || nota > 10.0) {
+            System.out.println("Valor no definido" + nota);
         }
-        if(nota >= 0 && nota < 3){
+        if (nota >= 0 && nota < 3) {
             System.out.println("Muy Deficiente");
         }
-        if(nota >=3 && nota < 5){
+        if (nota >= 3 && nota < 5) {
             System.out.println("Insuficiente");
         }
-        if(nota >=5 && nota < 6){
+        if (nota >= 5 && nota < 6) {
             System.out.println("Bien");
         }
-        if(nota >=6 && nota <9){
+        if (nota >= 6 && nota < 9) {
             System.out.println("Notable");
         }
-        if(nota >= 9 && nota <= 10){
+        if (nota >= 9 && nota <= 10) {
             System.out.println("Sobresaliente");
         }
     /*Ejercicio 8: Realiza un programa que lea un número positivo N y calcule y visualice su factorial N!
@@ -113,10 +112,10 @@ Siendo el factorial:
         int num;
         int factorial = 1;
         num = lector.nextInt();
-        for (int i = 1; i <= num; i++){
+        for (int i = 1; i <= num; i++) {
             factorial = factorial * i;
         }
-    System.out.println ("El factorial es:" + factorial);
+        System.out.println("El factorial es:" + factorial);
     /* Ejercicio 9: Escribe un programa que recibe como datos de entrada una hora expresada en horas,
 minutos y segundos que nos calcula y escribe la hora, minutos y segundos que serán,
 transcurrido un segundo.*/
@@ -134,32 +133,142 @@ transcurrido un segundo.*/
         segundos = lector.nextInt();
 
 
-        if (segundos <0 || min < 0 || hora < 0){
-            System.out.println ("Los números no pueden ser negativos");
+        if (segundos < 0 || min < 0 || hora < 0) {
+            System.out.println("Los números no pueden ser negativos");
         }
-        if (segundos == 60 || min == 60 || hora == 24){
-            System.out.println ("Los segundos y minutos, no pueden ser 60, y la hora no puede ser 24");
+        if (segundos == 60 || min == 60 || hora == 24) {
+            System.out.println("Los segundos y minutos, no pueden ser 60, y la hora no puede ser 24");
         }
 
-        if (segundos == 59){
+        if (segundos == 59) {
             segundos = 0;
             min = min + 1;
+        } else {
+            segundos = segundos + 1;
         }
-            else {
-                segundos = segundos + 1;
-            }
-        if (min == 60){
+        if (min == 60) {
             min = 0;
             hora = hora + 1;
         }
 
-        if (hora == 24){
+        if (hora == 24) {
             hora = 0;
         }
-        System.out.println ("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
+        System.out.println("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
     /*Ejercicio 10: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje de si ha
 leído algún número negativo o no.
     */
+        System.out.println("\nEjercicio 10");
+        System.out.println("Introduce 10 números distintos de cero");
+        lector = new Scanner(System.in);
+        int num1 = lector.nextInt();
+        int num2 = lector.nextInt();
+        int num3 = lector.nextInt();
+        int num4 = lector.nextInt();
+        int num5 = lector.nextInt();
+        int num6 = lector.nextInt();
+        int num7 = lector.nextInt();
+        int num8 = lector.nextInt();
+        int num9 = lector.nextInt();
+        int num10 = lector.nextInt();
+
+        if (num1 == 0 || num2 == 0 || num3 == 0 || num4 == 0 ||
+                num5 == 0 || num6 == 0 || num7 == 0 || num8 == 0 ||
+                num9 == 0 || num10 == 0) {
+            System.out.println("Ingreso no válido");
+        } else {
+            if (num1 < 0 || num2 < 0 || num3 < 0 || num4 < 0 ||
+                    num5 < 0 || num6 < 0 || num7 < 0 || num8 < 0 ||
+                    num9 < 0 || num10 < 0) {
+                System.out.println("Hay al menos un número negativo");
+            } else {
+                System.out.println("No hay números negativos");
+            }
+        }
+/* Ejercicio 11: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje
+indicando cuántos son positivos y cuantos negativos. */
+        System.out.println("\nEjercicio 11");
+        System.out.println("Introduce 10 números distintos de cero");
+
+        lector = new Scanner(System.in);
+        int numero1 = lector.nextInt();
+        int numero2 = lector.nextInt();
+        int numero3 = lector.nextInt();
+        int numero4 = lector.nextInt();
+        int numero5 = lector.nextInt();
+        int numero6 = lector.nextInt();
+        int numero7 = lector.nextInt();
+        int numero8 = lector.nextInt();
+        int numero9 = lector.nextInt();
+        int numero10 = lector.nextInt();
+
+        int contadorPositivos  = 0;
+        int contadorNegativos = 0;
+
+        if (numero1 == 0 || numero2 == 0 || numero3 == 0 || numero4 == 0 ||
+                numero5 == 0 || numero6 == 0 || numero7 == 0 || numero8 == 0 ||
+                numero9 == 0 || numero10 == 0) {
+            System.out.println("Ingreso no válido");
+        }else {
+
+            if (numero1 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero2 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero3 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero4 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero5 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero6 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero7 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero8 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero9 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            if (numero10 > 0) {
+                contadorPositivos++;
+            } else {
+                contadorNegativos++;
+            }
+            System.out.println("El total de números Positivos es: " + contadorPositivos);
+            System.out.println("El total de números Negativos es: " + contadorNegativos);
+        }
+/* Ejercicio 12: Realiza un programa que lea una secuencia de números no nulos hasta que se introduzca
+un 0, y luego muestre si ha leído algún número negativo, cuantos positivos y cuantos
+negativos.  */
+
+
 
     }
 }
