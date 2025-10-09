@@ -117,11 +117,9 @@ Siendo el factorial:
             factorial = factorial * i;
         }
     System.out.println ("El factorial es:" + factorial);
-    /*
-    Escribe un programa que recibe como datos de entrada una hora expresada en horas,
+    /* Ejercicio 9: Escribe un programa que recibe como datos de entrada una hora expresada en horas,
 minutos y segundos que nos calcula y escribe la hora, minutos y segundos que serán,
-transcurrido un segundo.
-     */
+transcurrido un segundo.*/
         lector = new Scanner(System.in);
 
         System.out.println("\nEjercicio 9");
@@ -159,6 +157,9 @@ transcurrido un segundo.
             hora = 0;
         }
         System.out.println ("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
+    /*Ejercicio 10: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje de si ha
+leído algún número negativo o no.
+    */
 
     }
 }
