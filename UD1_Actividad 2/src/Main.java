@@ -136,8 +136,8 @@ transcurrido un segundo.*/
         if (segundos < 0 || min < 0 || hora < 0) {
             System.out.println("Los números no pueden ser negativos");
         }
-        if (segundos == 60 || min == 60 || hora == 24) {
-            System.out.println("Los segundos y minutos, no pueden ser 60, y la hora no puede ser 24");
+        if (segundos >= 60 || min >= 60 || hora >= 24) {
+            System.out.println("Número no válido");
         }
 
         if (segundos == 59) {
@@ -202,14 +202,14 @@ indicando cuántos son positivos y cuantos negativos. */
         int numero9 = lector.nextInt();
         int numero10 = lector.nextInt();
 
-        int contadorPositivos  = 0;
+        int contadorPositivos = 0;
         int contadorNegativos = 0;
 
         if (numero1 == 0 || numero2 == 0 || numero3 == 0 || numero4 == 0 ||
                 numero5 == 0 || numero6 == 0 || numero7 == 0 || numero8 == 0 ||
                 numero9 == 0 || numero10 == 0) {
             System.out.println("Ingreso no válido");
-        }else {
+        } else {
 
             if (numero1 > 0) {
                 contadorPositivos++;
@@ -267,6 +267,53 @@ indicando cuántos son positivos y cuantos negativos. */
 /* Ejercicio 12: Realiza un programa que lea una secuencia de números no nulos hasta que se introduzca
 un 0, y luego muestre si ha leído algún número negativo, cuantos positivos y cuantos
 negativos.  */
+
+        System.out.println("\nEjercicio 12");
+        lector = new Scanner(System.in);
+
+
+        int contarPositivos = 0;
+        int contarNegativos = 0;
+
+        int secuencia;
+        do {
+            System.out.println("Introduce números:");
+            secuencia = lector.nextInt();
+
+            if (secuencia > 0) {
+                contarPositivos++;
+            } else if (secuencia == 0) {
+                System.out.println("Has recibido cero");
+            } else {
+                contarNegativos++;
+            }
+        } while (secuencia != 0);
+
+
+/* Ejercicio 13: Realiza un programa que calcule y escriba la suma y el producto de los 10 primeros
+números naturales. */
+
+        System.out.println("\nEjercicio 13");
+
+        int suma = 0;
+        int mult = 1;
+
+        for(int i = 1; i <= 10; i++){
+            suma += i;
+            mult *= i;
+        }
+        System.out.println("La suma de los primeros 10 numeros naturales es:" + suma);
+        System.out.println("El producto de los primeros 10 numeros naturales es:" + mult);
+
+/* Ejercicio 14: Escribe un programa que calcula el salario neto semanal de un trabajador en función del
+número de horas trabajadas y la tasa de impuestos de acuerdo a las siguientes hipótesis:
+• Las primeras 35 horas se pagan a tarifa normal.
+• Las horas que pasen de 35 se pagan a 1,5 veces la tarifa normal.
+• Las tasas de impuestos son:
+• Los primeros 500 euros son libres de impuestos.
+• Los siguientes 400 tienen un 25% de impuestos.
+• Los restantes un 45% de impuestos.
+Escribir nombre, salario bruto, tasas y salario neto.  */
 
 
 
