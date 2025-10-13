@@ -132,6 +132,9 @@ transcurrido un segundo.*/
         int segundos;
         segundos = lector.nextInt();
 
+        if (min > 60 || segundos > 60 || hora > 24){
+            System.out.println("Error en los datos ingresados");
+        }
 
         if (segundos < 0 || min < 0 || hora < 0) {
             System.out.println("Los números no pueden ser negativos");
@@ -140,7 +143,7 @@ transcurrido un segundo.*/
             System.out.println("Número no válido");
         }
 
-        if (segundos == 59) {
+        if (segundos == 60) {
             segundos = 0;
             min = min + 1;
         } else {
@@ -155,6 +158,7 @@ transcurrido un segundo.*/
             hora = 0;
         }
         System.out.println("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
+
     /*Ejercicio 10: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje de si ha
 leído algún número negativo o no.
     */
@@ -282,8 +286,6 @@ negativos.  */
 
             if (secuencia > 0) {
                 contarPositivos++;
-            } else if (secuencia == 0) {
-                System.out.println("Has recibido cero");
             } else {
                 contarNegativos++;
             }
@@ -314,6 +316,48 @@ número de horas trabajadas y la tasa de impuestos de acuerdo a las siguientes h
 • Los siguientes 400 tienen un 25% de impuestos.
 • Los restantes un 45% de impuestos.
 Escribir nombre, salario bruto, tasas y salario neto.  */
+
+        System.out.println("\nEjercicio 14");
+
+        //Solicitud de datos:
+
+        lector = new Scanner(System.in);
+        System.out.println("Introduce el nombre del Empleado:");
+        String nombre = lector.nextLine();
+        System.out.println("Introduce el salario bruto semanal para calcular su salario neto:");
+        double salario_bruto = lector.nextInt();
+        System.out.println("Introduce el total de horas laboradas:");
+        int horas = lector.nextInt();
+
+        double salario_bruto_hora = salario_bruto / 40;
+
+
+        //Restricciones:
+
+        if(salario_bruto == 0){
+            System.out.println("El salario no puede ser cero");
+        }
+        if(horas > 70){
+            System.out.println("No es posible una jornada laboral de más de 70 horas");
+        }
+        if(horas == 0){
+            System.out.println("Las horas laboradas no pueden ser cero");
+        }
+        if(horas <= 35){
+            System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas );
+        }
+        if(horas > 35){
+            System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas * 1.5);
+        }
+        if (salario_bruto > 500 && salario_bruto <= 900){
+            System.out.println("El salario neto de " + nombre + " es: " + (salario_bruto_hora * horas) / 0.25);
+        }
+
+
+
+
+
+
 
 
 
