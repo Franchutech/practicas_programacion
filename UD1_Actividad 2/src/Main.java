@@ -143,7 +143,7 @@ transcurrido un segundo.*/
             System.out.println("Número no válido");
         }
 
-        if (segundos == 60) {
+        if (segundos == 59) {
             segundos = 0;
             min = min + 1;
         } else {
@@ -349,16 +349,8 @@ Escribir nombre, salario bruto, tasas y salario neto.  */
         if(horas > 35){
             System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas * 1.5);
         }
-        if (salario_bruto > 500 && salario_bruto <= 900){
-            System.out.println("El salario neto de " + nombre + " es: " + (salario_bruto_hora * horas) / 0.25);
-        }
-
-
-
-
-
-
-
+    /* Los siguientes 400 no es lo mismo que de 0 en adelante sino mas bien solo el monto que sea mayor a 500 los 500
+        iniciales siempre se mantienen */
 
 
     }
