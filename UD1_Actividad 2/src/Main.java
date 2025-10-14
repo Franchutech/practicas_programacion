@@ -35,7 +35,7 @@ mayor de edad” o el mensaje de “eres menor de edad”.  */
     /*Ejercicio3: Realiza un programa que muestre por pantalla los 20 primeros números naturales (1, 2,
 3... 20). */
         System.out.println("\nP3.Ejercicio 3");
-        for(int i = 1; i <= 20; i++){
+        for (int i = 1; i <= 20; i++) {
             System.out.println("El numero natural es: " + i);
         }
     /* Ejercicio 4: Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
@@ -121,24 +121,24 @@ transcurrido un segundo.*/
 
         System.out.println("Introduce los segundos: ");
         int segundos = lector.nextInt();
-        System.out.println("Introduce los minutos:" );
+        System.out.println("Introduce los minutos:");
         int minutos = lector.nextInt();
         System.out.println("Introduce las horas: ");
         int horas = lector.nextInt();
 
 
-        segundos ++;
+        segundos++;
 
-        if(segundos >= 60){
+        if (segundos >= 60) {
 
-            minutos ++;
+            minutos++;
             segundos = 0;
 
-            if(minutos >= 60){
+            if (minutos >= 60) {
                 horas++;
                 minutos = 0;
 
-                if(horas >= 24){
+                if (horas >= 24) {
                     horas = 0;
                 }
             }
@@ -153,10 +153,10 @@ leído algún número negativo o no.
         lector = new Scanner(System.in);
 
         boolean hayNegativos = false;
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("Introduce un numero  distinto de cero: ");
             double n = lector.nextDouble();
-            if(n < 0){
+            if (n < 0) {
                 hayNegativos = true;
             }
         }
@@ -171,13 +171,13 @@ leído algún número negativo o no.
 
         int nPositivos = 0;
         int nNegativos = 0;
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("Introduce un numero  distinto de cero: ");
             double n = lector.nextDouble();
-            if(n < 0){
-                nNegativos ++;
+            if (n < 0) {
+                nNegativos++;
             }
-            if(n > 0){
+            if (n > 0) {
                 nPositivos++;
             }
         }
@@ -214,7 +214,7 @@ números naturales. */
         int suma = 0;
         int mult = 1;
 
-        for(int i = 1; i <= 10; i++){
+        for (int i = 1; i <= 10; i++) {
             suma += i;
             mult *= i;
         }
@@ -233,38 +233,40 @@ Escribir nombre, salario bruto, tasas y salario neto.  */
 
         System.out.println("\nEjercicio 14");
 
-        //Solicitud de datos:
-
         lector = new Scanner(System.in);
-        System.out.println("Introduce el nombre del Empleado:");
+        System.out.print("Introduce el nombre del empleado: ");
         String nombre = lector.nextLine();
-        System.out.println("Introduce el salario bruto semanal para calcular su salario neto:");
-        double salario_bruto = lector.nextInt();
-        System.out.println("Introduce el total de horas laboradas:");
-        int horasl = lector.nextInt();
+        System.out.print("Introduce el salario por hora: ");
+        double tarifaHora = lector.nextDouble();
+        System.out.print("Introduce el total de horas trabajadas: ");
+        int hora = lector.nextInt();
 
-        double salario_bruto_hora = salario_bruto / 40;
+        if (tarifaHora <= 0 || hora <= 0 || hora > 70) {
+            System.out.println("Datos no válidos. Verifica salario y horas.");
+        } else {
+            double salarioBruto;
+            if (hora <= 35) {
+                salarioBruto = hora * tarifaHora;
+            } else {
+                salarioBruto = (35 * tarifaHora) + ((hora - 35) * tarifaHora * 1.5);
+            }
+
+            double impuestos = 0;
+            if (salarioBruto > 900) {
+                impuestos = (400 * 0.25) + ((salarioBruto - 900) * 0.45);
+            } else if (salarioBruto > 500) {
+                impuestos = (salarioBruto - 500) * 0.25;
+            }
+
+            double salarioNeto = salarioBruto - impuestos;
+
+            System.out.println("Empleado: " + nombre);
+            System.out.println("Salario bruto: " + salarioBruto + " €");
+            System.out.println("Impuestos: " + impuestos + " €");
+            System.out.println("Salario neto: " + salarioNeto + " €");
+        }
 
 
-        //Restricciones:
-
-        if(salario_bruto == 0){
-            System.out.println("El salario no puede ser cero");
-        }
-        if(horasl > 70){
-            System.out.println("No es posible una jornada laboral de más de 70 horas");
-        }
-        if(horasl == 0){
-            System.out.println("Las horas laboradas no pueden ser cero");
-        }
-        if(horasl <= 35){
-            System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas );
-        }
-        if(horasl > 35){
-            System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas * 1.5);
-        }
-    /* Los siguientes 400 no es lo mismo que de 0 en adelante sino mas bien solo el monto que sea mayor a 500 los 500
-        iniciales siempre se mantienen */
 
     }
 }
