@@ -35,12 +35,8 @@ mayor de edad” o el mensaje de “eres menor de edad”.  */
     /*Ejercicio3: Realiza un programa que muestre por pantalla los 20 primeros números naturales (1, 2,
 3... 20). */
         System.out.println("\nP3.Ejercicio 3");
-        System.out.println("Introduce un número máximo:");
-        lector = new Scanner(System.in);
-        int max;
-        max = lector.nextInt();
-        for (int i = 1; i <= max; i++) {
-            System.out.print(i + ", ");
+        for(int i = 1; i <= 20; i++){
+            System.out.println("El numero natural es: " + i);
         }
     /* Ejercicio 4: Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
 Para ello utiliza un contador y suma de 2 en 2.
@@ -121,153 +117,72 @@ minutos y segundos que nos calcula y escribe la hora, minutos y segundos que ser
 transcurrido un segundo.*/
         lector = new Scanner(System.in);
 
-        System.out.println("\nEjercicio 9");
-        System.out.println("Introduce un número para la hora:");
-        int hora;
-        hora = lector.nextInt();
-        System.out.println("Introduce un número para los minutos:");
-        int min;
-        min = lector.nextInt();
-        System.out.println("Introduce un número para los segundos:");
-        int segundos;
-        segundos = lector.nextInt();
+        System.out.println("\nEjercicio 09");
 
-        if (min > 60 || segundos > 60 || hora > 24){
-            System.out.println("Error en los datos ingresados");
-        }
+        System.out.println("Introduce los segundos: ");
+        int segundos = lector.nextInt();
+        System.out.println("Introduce los minutos:" );
+        int minutos = lector.nextInt();
+        System.out.println("Introduce las horas: ");
+        int horas = lector.nextInt();
 
-        if (segundos < 0 || min < 0 || hora < 0) {
-            System.out.println("Los números no pueden ser negativos");
-        }
-        if (segundos >= 60 || min >= 60 || hora >= 24) {
-            System.out.println("Número no válido");
-        }
 
-        if (segundos == 59) {
+        segundos ++;
+
+        if(segundos >= 60){
+
+            minutos ++;
             segundos = 0;
-            min = min + 1;
-        } else {
-            segundos = segundos + 1;
-        }
-        if (min == 60) {
-            min = 0;
-            hora = hora + 1;
-        }
 
-        if (hora == 24) {
-            hora = 0;
+            if(minutos >= 60){
+                horas++;
+                minutos = 0;
+
+                if(horas >= 24){
+                    horas = 0;
+                }
+            }
         }
-        System.out.println("La hora dada, después de un segundo es:" + hora + ":" + min + ":" + segundos);
+        System.out.println("La hora dada un segundo despuès es: " + horas + ":" + minutos + ":" + segundos);
+
 
     /*Ejercicio 10: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje de si ha
 leído algún número negativo o no.
     */
         System.out.println("\nEjercicio 10");
-        System.out.println("Introduce 10 números distintos de cero");
         lector = new Scanner(System.in);
-        int num1 = lector.nextInt();
-        int num2 = lector.nextInt();
-        int num3 = lector.nextInt();
-        int num4 = lector.nextInt();
-        int num5 = lector.nextInt();
-        int num6 = lector.nextInt();
-        int num7 = lector.nextInt();
-        int num8 = lector.nextInt();
-        int num9 = lector.nextInt();
-        int num10 = lector.nextInt();
 
-        if (num1 == 0 || num2 == 0 || num3 == 0 || num4 == 0 ||
-                num5 == 0 || num6 == 0 || num7 == 0 || num8 == 0 ||
-                num9 == 0 || num10 == 0) {
-            System.out.println("Ingreso no válido");
-        } else {
-            if (num1 < 0 || num2 < 0 || num3 < 0 || num4 < 0 ||
-                    num5 < 0 || num6 < 0 || num7 < 0 || num8 < 0 ||
-                    num9 < 0 || num10 < 0) {
-                System.out.println("Hay al menos un número negativo");
-            } else {
-                System.out.println("No hay números negativos");
+        boolean hayNegativos = false;
+        for(int i = 0; i < 10; i++){
+            System.out.println("Introduce un numero  distinto de cero: ");
+            double n = lector.nextDouble();
+            if(n < 0){
+                hayNegativos = true;
             }
         }
-/* Ejercicio 11: Realiza un programa que lea 10 números no nulos y luego muestre un mensaje
-indicando cuántos son positivos y cuantos negativos. */
+        System.out.println("Hay numeros negativos: " + hayNegativos);
+
+        /*
+        Ejercicio 11: Realiza un programa que lea 10 números no nulos
+        y luego muestre un mensaje indicando cuántos son positivos y cuantos negativos.
+        */
         System.out.println("\nEjercicio 11");
-        System.out.println("Introduce 10 números distintos de cero");
-
         lector = new Scanner(System.in);
-        int numero1 = lector.nextInt();
-        int numero2 = lector.nextInt();
-        int numero3 = lector.nextInt();
-        int numero4 = lector.nextInt();
-        int numero5 = lector.nextInt();
-        int numero6 = lector.nextInt();
-        int numero7 = lector.nextInt();
-        int numero8 = lector.nextInt();
-        int numero9 = lector.nextInt();
-        int numero10 = lector.nextInt();
 
-        int contadorPositivos = 0;
-        int contadorNegativos = 0;
-
-        if (numero1 == 0 || numero2 == 0 || numero3 == 0 || numero4 == 0 ||
-                numero5 == 0 || numero6 == 0 || numero7 == 0 || numero8 == 0 ||
-                numero9 == 0 || numero10 == 0) {
-            System.out.println("Ingreso no válido");
-        } else {
-
-            if (numero1 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
+        int nPositivos = 0;
+        int nNegativos = 0;
+        for(int i = 0; i < 10; i++){
+            System.out.println("Introduce un numero  distinto de cero: ");
+            double n = lector.nextDouble();
+            if(n < 0){
+                nNegativos ++;
             }
-            if (numero2 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
+            if(n > 0){
+                nPositivos++;
             }
-            if (numero3 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero4 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero5 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero6 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero7 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero8 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero9 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            if (numero10 > 0) {
-                contadorPositivos++;
-            } else {
-                contadorNegativos++;
-            }
-            System.out.println("El total de números Positivos es: " + contadorPositivos);
-            System.out.println("El total de números Negativos es: " + contadorNegativos);
         }
+        System.out.println("Hay " + nNegativos + "numeros negativos y hay " + nPositivos + " numeros positivos");
+
 /* Ejercicio 12: Realiza un programa que lea una secuencia de números no nulos hasta que se introduzca
 un 0, y luego muestre si ha leído algún número negativo, cuantos positivos y cuantos
 negativos.  */
@@ -290,7 +205,6 @@ negativos.  */
                 contarNegativos++;
             }
         } while (secuencia != 0);
-
 
 /* Ejercicio 13: Realiza un programa que calcule y escriba la suma y el producto de los 10 primeros
 números naturales. */
@@ -327,7 +241,7 @@ Escribir nombre, salario bruto, tasas y salario neto.  */
         System.out.println("Introduce el salario bruto semanal para calcular su salario neto:");
         double salario_bruto = lector.nextInt();
         System.out.println("Introduce el total de horas laboradas:");
-        int horas = lector.nextInt();
+        int horasl = lector.nextInt();
 
         double salario_bruto_hora = salario_bruto / 40;
 
@@ -337,21 +251,20 @@ Escribir nombre, salario bruto, tasas y salario neto.  */
         if(salario_bruto == 0){
             System.out.println("El salario no puede ser cero");
         }
-        if(horas > 70){
+        if(horasl > 70){
             System.out.println("No es posible una jornada laboral de más de 70 horas");
         }
-        if(horas == 0){
+        if(horasl == 0){
             System.out.println("Las horas laboradas no pueden ser cero");
         }
-        if(horas <= 35){
+        if(horasl <= 35){
             System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas );
         }
-        if(horas > 35){
+        if(horasl > 35){
             System.out.println("El salario neto de " + nombre + " es: " + salario_bruto_hora * horas * 1.5);
         }
     /* Los siguientes 400 no es lo mismo que de 0 en adelante sino mas bien solo el monto que sea mayor a 500 los 500
         iniciales siempre se mantienen */
-
 
     }
 }
