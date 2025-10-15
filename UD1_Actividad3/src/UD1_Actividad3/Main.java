@@ -83,10 +83,44 @@ public class Main {
         El menú debe de repetirse hasta que se escoja la opción 5 (Salir). */
 
         lector = new Scanner (System.in);
+        String opcion = "5";
 
+        do {
 
+            System.out.println("\nEscoja una de las siguientes opciones:");
+            System.out.println("1. Sumar");
+            System.out.println("2. Restar");
+            System.out.println("3. Multiplicar");
+            System.out.println("4. Dividir");
+            System.out.println("5. Salir");
 
+            opcion = lector.next();
 
+            switch (opcion) {
+                case "1":
+                    //sumar
+                    System.out.println("Sumar");
+                    break;
+                case "2":
+                    //restar
+                    System.out.println("Restar");
+                    break;
+                case "3":
+                    //multiplicar
+                    System.out.println("Multiplicar");
+                    break;
+                case "4":
+                    //dividir
+                    System.out.println("Dividir");
+                    break;
+                case "5":
+                    //salir
+                    lector = new Scanner(System.in);
+                    System.out.println("Saliendo del programa");
+                    break;
+            }
+
+        } while(!opcion.equals("5"));
 
 
 
