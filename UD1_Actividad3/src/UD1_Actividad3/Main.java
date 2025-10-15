@@ -2,6 +2,7 @@ package UD1_Actividad3;
 
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Prueba desde casa - UD1_Actividad 3");
@@ -81,6 +82,7 @@ public class Main {
         5. Salir
         El menú debe de repetirse hasta que se escoja la opción 5 (Salir). */
 
+        lector = new Scanner (System.in);
 
 
 
