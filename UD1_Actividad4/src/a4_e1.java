@@ -16,19 +16,10 @@ public class a4_e1 {
         int i;
         System.out.println("Ingrese diez numeros reales:");
 
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < numerosReales.length; i++) {
             numerosReales[i] = lector.nextDouble();
-        }
-        System.out.println("Los numeros reales ingresados fueron:");
-        for (i = 0; i < 10; i++) {
             System.out.println(numerosReales[i]);
         }
-
-
-
-
-
-
 
 
 
