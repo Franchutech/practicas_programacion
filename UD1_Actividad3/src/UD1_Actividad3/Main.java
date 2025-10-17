@@ -25,7 +25,7 @@ public class Main {
 
         if (monto % 5 != 0) {
             System.out.println("Monto no válido");
-            return;
+
         }
 
         if (monto >= 500) {
@@ -83,6 +83,7 @@ public class Main {
 
         lector = new Scanner (System.in);
         String opcion = "5";
+        double num1 = 0.0, num2= 0.0;
 
         do {
 
@@ -99,29 +100,53 @@ public class Main {
                 case "1":
                     //sumar
                     System.out.println("Sumar");
+                    lector = new Scanner(System.in);
+                    System.out.println("Introduce el primer numero");
+                    num1= lector.nextDouble();
+                    System.out.println("Introduce el segundo numero");
+                    num1= lector.nextDouble();
+                    System.out.println("La suma de los numeros es:" + (num1 + num2));
                     break;
                 case "2":
                     //restar
                     System.out.println("Restar");
+                    lector = new Scanner(System.in);
+                    System.out.println("Introduce el primer numero");
+                    num1= lector.nextDouble();
+                    System.out.println("Introduce el segundo numero");
+                    num1= lector.nextDouble();
+                    System.out.println("La resta de los numeros es:" + (num1 - num2));
                     break;
                 case "3":
                     //multiplicar
                     System.out.println("Multiplicar");
+                    lector = new Scanner(System.in);
+                    System.out.println("Introduce el primer numero");
+                    num1= lector.nextDouble();
+                    System.out.println("Introduce el segundo numero");
+                    num1= lector.nextDouble();
+                    System.out.println("La multiplicacion de los numeros es:" + (num1 * num2));
                     break;
                 case "4":
                     //dividir
                     System.out.println("Dividir");
+                    lector = new Scanner(System.in);
+                    System.out.println("Introduce el primer numero");
+                    num1= lector.nextDouble();
+                    System.out.println("Introduce el segundo numero");
+                    num1= lector.nextDouble();
+                    System.out.println("La divisiòn de los numeros es:" + (num1 / num2));
                     break;
                 case "5":
                     //salir
                     lector = new Scanner(System.in);
                     System.out.println("Saliendo del programa");
                     break;
+                default:
+                    System.out.println("Por favor escoja una opción")
             }
 
         } while(!opcion.equals("5"));
-
-
 
     } //void
 } //main
