@@ -16,8 +16,6 @@ public class a4_e8 {
 
     double[] numReales = new double[100];
 
-    double numReal = 0;
-
     //Pide contar los valores que son iguales o superiores, entonces ocupo un contador//
     int contador = 0;
 

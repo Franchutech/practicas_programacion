@@ -10,7 +10,7 @@ y luego muestre la suma de todos los valores. */
         System.out.println("Ejercicio A4_E2");
 
         Scanner lector = new Scanner(System.in);
-        double suma = 0;
+        double suma = 0.0;
         double numerosR [] = new double[10];
         System.out.println("Ingrese diez numeros reales:");
 

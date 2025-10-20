@@ -13,15 +13,23 @@ y luego lo recorra para averiguar el máximo y mínimo y mostrarlos por pantalla
 
         Scanner lector = new Scanner(System.in);
         double numReales [] = new double[10];
+        double max = Double.MIN_VALUE;
+        double min = Double.MAX_VALUE;
 
         System.out.println("Ingrese diez numeros reales:");
 
         for (int i = 0; i < numReales.length; i++) {
             numReales[i] = lector.nextDouble();
         }
-        Arrays.sort(numReales);
-        System.out.println(numReales[0]);
-        System.out.println(numReales[numReales.length -1]);
+
+        for (int i =0; i < numReales.length; i++){
+            max = Math.max(numReales[i], max);
+            min = Math.min(numReales[i], min);
+        }
+
+        System.out.println("El nùmero màximo es: " + max);
+        System.out.println("El nùmero minimo es: " + min);
+
 
     }//void
 } //main

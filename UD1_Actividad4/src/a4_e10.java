@@ -29,8 +29,8 @@ y por debajo de la media. */
         // ahora ocuparia definir las variables que usare más adelante //
 
         double suma = 0;
-        double min = 0;
-        double max = 0;
+        double min = Double.MIN_VALUE;
+        double max = Double.MAX_VALUE;
 
         //rellenar el array con las alturas//
 
