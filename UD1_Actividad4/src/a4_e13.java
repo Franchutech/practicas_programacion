@@ -15,5 +15,42 @@ public class a4_e13 {
         e I=2, la secuencia sería 1, 3, 5, 7, 9… Con V=7 e I=10, la secuencia sería 7, 17, 27, 37… El
         programa solicitará al usuario V, I además de N (nº de valores a crear).*/
 
-    }//void
-}//main
+        int tamanoN = 0;
+        int inicialV = 0;
+        int incrementoI = 0;
+
+        System.out.println("Introduce el tamaño que tendrá tu array");
+        tamanoN = lector.nextInt();
+
+        while (tamanoN <= 0) {
+            System.out.println("El tamaño del array no puede ser menor o igual que cero");
+            tamanoN = lector.nextInt();
+        }
+        System.out.println("Introduce el valor inicial de tu array");
+        inicialV = lector.nextInt();
+        System.out.println("Introduce el incremento que quieres en tu array");
+        incrementoI = lector.nextInt();
+
+        int secuencia[] = new int[tamanoN];
+
+        //aqui me faltaria limitar al usuario para que los numeros no den error//
+
+        System.out.print("El array con su incremental seria: ");
+        for(int i = 0; i<secuencia.length; i++){
+            secuencia[i] = inicialV + (i * incrementoI);
+            System.out.print(secuencia[i] + " ");
+        }
+
+
+
+    /*Crear variables N, V, I.
+    Pedir al usuario con Scanner.
+    Crear un array de tamaño N.
+    Recorrerlo con un solo for:
+    en cada iteración, calcular el valor aplicando el incremento.
+    asignarlo a la posición correspondiente del array.
+    Mostrar la secuencia por pantalla (con otro for o dentro del mismo).*/
+
+
+        }//void
+    }//main
