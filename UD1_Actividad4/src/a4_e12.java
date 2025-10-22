@@ -27,7 +27,7 @@ public class a4_e12 {
         int valorV = 0;
         int posicionP = 0;
 
-        String opcion = "a";
+        String opcion = "c";
         do{
             lector = new Scanner(System.in);
             System.out.println("\nEscoja una opción dentro de las siguientes:");
@@ -57,10 +57,12 @@ public class a4_e12 {
                     System.out.println("Cerrar el programa");
                     System.exit(0);
                     break;
+                default:
+                    System.out.println("Elija una opcion correcta");
             }
-        }while(!opcion.equals("c"));
+        }while(!opcion.equalsIgnoreCase("c"));
         //mientras el while sea distinto de a, para asegurar que se ejecutará mientras usuario no presione a//
-
+        //ignore case, elimina mayusculas y minusculas, no diferencia//
 
         /**Notas personales:
          * 1-Crear un array de tamaño 10.
