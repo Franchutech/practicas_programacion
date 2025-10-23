@@ -40,7 +40,31 @@ iguales, además de si son iguales sin diferenciar entre mayúsculas y minúscul
     /*Ejercicio 3: Crea un programa que pida por teclado tres cadenas de texto: nombre y dos apellidos.
     Luego mostrará un código de usuario (en mayúsculas) formado por la concatenación de
     las tres primeras letras de cada uno de ellos. Por ejemplo, si se introduce “Lionel”,
-   Tarazón” y “Alcocer” mostrará “LIOTARALC”. */
+    Tarazón” y “Alcocer” mostrará “LIOTARALC”. */
+
+        in = new Scanner(System.in);
+        System.out.println("A5_E3");
+
+        System.out.println("Introduzca un nombre: ");
+        String nombre = in.nextLine();
+        System.out.println("Introduzca un primer apellido: ");
+        String primerApellido = in.nextLine();
+        System.out.println("Introduzca un segundo apellido: ");
+        String segundoApellido = in.nextLine();
+
+        //aqui debo hacerlo hasta 3 porque el ultimo no cuenta segun las notas//
+
+        String codigo=nombre.substring(0,3) + primerApellido.substring(0,3) +  segundoApellido.substring(0,3);
+
+        String codigoMay= codigo.toUpperCase();
+        System.out.println(codigoMay);
+
+
+        /*En este ejercicio aprendi que si ya declare la variable antes, NO DEBO, volver a crearla.
+         * Debo pedir 3 cadenas de texto una para nombre y las otras dos apellido 1 y 2
+         * Mostrar un codigo de usuario en MAYUSCULAS que debe formarse de las primeras 3 LETRAS de cada cadena
+         * Ejemplo Francella Rojas Castillo (FRAROJCAS), seria mi Codigo, menciona el profe la concatenacion
+         * buscar e intentar con la teoría de clase primero.*/
 
 
 
