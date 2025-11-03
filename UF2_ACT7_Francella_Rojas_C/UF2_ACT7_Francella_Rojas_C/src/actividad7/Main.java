@@ -4,13 +4,27 @@ package actividad7;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.printf("Hello and welcome!");
+        System.out.printf("UF2_Actividad 7");
 
 
-        }
-    }
 
-    /** 1.Haber lo primero que haría sería pues imprimir las instrucciones
+
+
+        }//main
+
+        public static String instrucciones(){
+        String Instrucciones = "En el juego Piedra papel tijera, la piedra vence a la tijera, +" +
+                "la tijera vence al papel, y el papel vence a la piedra." +
+                "Para jugar Elija: la letra P para piedra, L para papel o T para tijeras.";
+            return "";
+        }//instrucciones:
+
+
+
+    }//clase
+
+    /* 1.Paso 1: hacer en un mètodo las instrucciones del Juego.
+       2.Paso 2:
      * 2.Defeniría como hacer un piedra papel tijera, porque creo que tendria que usar,
      * Strings, para poder usar palabras no se. y definir, que palabra le gana a cual.
      * Papel le gana a Piedra / piedra le gana a tijera / tijera le gana a papel, nose
