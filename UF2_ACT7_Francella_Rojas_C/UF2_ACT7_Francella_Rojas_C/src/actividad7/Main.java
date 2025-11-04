@@ -1,58 +1,93 @@
 package actividad7;
 
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
 
-        System.out.printf("UF2_Actividad 7");
+        System.out.println("UF2_Actividad 7");
+        instrucciones(); //este seria mi método.
+
+        String letra = "";
+        Scanner lector = new Scanner(System.in);
+
+        while (!letra.equals("S")) {
+
+
+            System.out.println("Elija una letra L, P, o T, para jugar:");
+            letra = lector.nextLine().toUpperCase();
+
+            //aqui quiero condicionar al usuario, a que no meta otra letra distinta
+
+            while (!"LPTS".contains(letra)) {
+                System.out.println("Entrada inválida. Solo se admite L, P, T o S. Intente de nuevo:");
+                letra = lector.nextLine().toUpperCase(); // dudo de esto p (si sirve, no tocar jaja)/
+            }// while
+
+            if (letra.equals("S")) {
+                System.out.println("Has salido del juego. ¡Gracias por jugar!");
+                break;
+            }
+
+            //convierto el String del usuario en un chart, para poder compararlo con el char de la PC.
+            char jugador = letra.charAt(0);
+
+            char jugadaPC = jugadaOrdenador();
+            System.out.println("La jugada del ordenador fue: " + jugadaPC);
+            System.out.println(elegirGanador(jugador, jugadaPC));
+
+        }
+    }//main
+        //metodo para instrucciones:
+        public static void instrucciones() {
+            System.out.println("En el juego Piedra, Papel o Tijera:");
+            System.out.println(" - La piedra vence a la tijera.");
+            System.out.println(" - La tijera vence al papel.");
+            System.out.println(" - El papel vence a la piedra.");
+            System.out.println("Para salir, pulse S.");
+        }
+
+        // metodo para jugada de ordenador
+        public static char jugadaOrdenador(){
+            char[] opciones = {'P', 'L', 'T'};
+            int numero = (int)(Math.random() * 3);
+            return opciones[numero];
+
+        }//clase_jugadaordenador
+
+        //metodo para decidir quien gana
+        public static String elegirGanador(char jugador, char jugada){
+        if (jugador == jugada){
+            return "Empate";
+        }else if ((jugador =='P' && jugada =='T') ||
+                 (jugador=='T' && jugada =='L') ||
+                 (jugador =='L' && jugada =='P')){
+            return "Haz Ganado";
+        }else{
+            return "Gana el ordenador";
+        }
+        }// clase elegirGanador.
+
+    }//class main
+
+/* Aqui es donde viene la explicacion de a que no tengo idea de que hice. jajaja
+1. Declare un metodo con las instrucciones, eso lo primero. porque por alguna extraña razón
+pensé, que ocupaba metodos (para estar trayendo las instrucciones una y otra vez.
+2. Seguido de eso hice otro metodo para hacer la jugada del ordenador.
+3. y mas adelante hice el de como decidir quien gana.
+4. Arriba hale las instrucciones del metodo.
+5. Luego puse el while, que hace la repetición del juego una y otra vez. y lo finalice con un if, para el caso de que
+el usuario toque la S, y tenga que salir.
+6. Pedi las entradas al usuario, (su partida pues)
+7. Luego hice un while para "restringir al usuario" y que no pueda meter otras letras.
+8. paso a Char tanto la entrada del usuario, como la jugada del metodo que hice para el ordenador, (pues para poder
+compararlos entre ellos y poder saber quien gana).
+9. Lío total, pero funciona. jajaja
+
+
+ */
 
 
 
 
-
-        }//main
-
-        public static String instrucciones(){
-        String Instrucciones = "En el juego Piedra papel tijera, la piedra vence a la tijera, +" +
-                "la tijera vence al papel, y el papel vence a la piedra." +
-                "Para jugar Elija: la letra P para piedra, L para papel o T para tijeras.";
-            return "";
-        }//instrucciones:
-
-
-
-    }//clase
-
-    /* 1.Paso 1: hacer en un mètodo las instrucciones del Juego.
-       2.Paso 2:
-     * 2.Defeniría como hacer un piedra papel tijera, porque creo que tendria que usar,
-     * Strings, para poder usar palabras no se. y definir, que palabra le gana a cual.
-     * Papel le gana a Piedra / piedra le gana a tijera / tijera le gana a papel, nose
-     * si se haría como una especi de mayor que y menor que no se, tal vez dandoles un valor a cada palabra
-     * 3. Crear la jugada, pues creo que puede ser un poco con if con condiciones
-     * pero es que no se si el piedra papel tijera es literal o si se haría definiendo numeros.
-     * porque definiendo numeros sería más facil pienso.
-     * 4. Pedir jugada al usuario, después de que el bucle de la jugada computador se complete.
-     * 5. decidir quién a ganado me imagino tendria que hacerse con un array, que guarde la respuesta
-     * del ordenador, y la respuesta del usuario, y ese array dentro tenga los if que deciden, quién
-     * ganó.
-     * 6. hacer todo en un bucle while, para hacer la jugada repetitiva
-     * 7. las opciones para la jugada pues deberían ser un switch para hacerlo más elegante, pero
-     * mas simple con un println que explique cual letra elegir.*/
-
-    /**Se debe realizar un proyecto para crear el juego de “Piedra, papel o tijera”, el programa debe
-     de seguir la siguiente estructura.
-      Explicarle al jugador cómo se juega.
-      Generar la jugada aleatoria del ordenador.
-      Pedir al jugador su jugada mediante una letra (P para piedra, L para papel, T para tijeras,
-     o S para salir terminando la partida):
-      Decidir quién ha ganado.
-     Una cosa es saber como se juega y otra es saberlo programar, los pasos a seguir serían:
-      Preparar el esqueleto y las constantes necesarias.
-      Mostrar instrucciones al usuario.
-      Generar la jugada del ordenador.
-      Recoger la jugada del usuario.
-      Interpretar la jugada del usuario.
-      Mostrar el resultado de la jugada.
-      Hacer el juego repetitivo.
-     Se admiten y se evaluarán mejoras sustanciales en el programa o en la complejidad del juego. */
