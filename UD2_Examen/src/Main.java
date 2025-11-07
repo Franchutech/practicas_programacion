@@ -12,14 +12,14 @@ public class Main {
 
         // con esos numeros creo el array que me permitira recorrerlo
         int[] numeroTotal = new int[n];
-
+        int caso = lector.nextInt();
         do {
             instrucciones();
             switch (numeroTotal) {
                 case 1://modificar seleccion
                     do {
                         instruccionesModificacion();
-                        switch () {
+                        switch (caso) {
                             case 0: // insertar numero
                                 //Insertar numero en la ultima posicion
                                 System.out.println("Introduzca un el número que desea sustituir en última posición");
@@ -43,7 +43,8 @@ public class Main {
                                 //borrar numero de ultima posicion ocupada
                                 for (int i = 0; i < numeroTotal.length; i++) {
                                     numeroTotal[i] = numeroTotal[i - 1];
-                                }System.out.println("El nuevo array es: " + numeroTotal[i]);
+                                }
+                                System.out.println("El nuevo array es: " + numeroTotal[i]);
                                 break;
                             case 3:
                                 //borrar numero de una posicion especifica
@@ -51,7 +52,7 @@ public class Main {
                                 int num4 = lector.nextInt();
                                 for (int i = num4; i < numeroTotal.length; i++) {
                                     numeroTotal[i] = numeroTotal[i - num4];
-                                System.out.println("El nuevo array es:" + numeroTotal[i]);
+                                    System.out.println("El nuevo array es:" + numeroTotal[i]);
 
                                 }
                                 break;
@@ -61,20 +62,19 @@ public class Main {
                                 int num5 = lector.nextInt();
                                 System.out.println("introduzca la posición en la que desea colocar el numero");
                                 int num6 = lector.nextInt();
-                                for (int i = num6 ; i < numeroTotal.length; i++) {
+                                for (int i = num6; i < numeroTotal.length; i++) {
                                     numeroTotal[i] = num5;
                                     System.out.println("El nuevo array es:" + numeroTotal[i]);
-
                                 }
                                 break;
                             case 5:
                                 System.out.println("Usted va a salir del programa.");
                                 break;
-                        } while (n != 5) ;
-                    }// do2
+                        }
+                    } while (n != 5);
+                    //do principal
+                    break;
 
-            }//do principal
-            break;
                 case 2:
                     //estadisticas de la seleccion
                     //media
@@ -88,25 +88,26 @@ public class Main {
                             System.out.println("La media es:" + media);
                         }
                     }
-                        //sumar
-                        int suma = 0;
-                        for (int j = 0; j < numeroTotal.length; j++) {
-                            suma += numeroTotal[j];
-                        }
+                    //sumar
+                    int suma = 0;
+                    for (int j = 0; j < numeroTotal.length; j++) {
+                        suma += numeroTotal[j];
+                    }
                     System.out.println("La suma de todos los valores es:" + suma);
                     //maximo
-                        //minimo
+                    //minimo
                     int max = 0;
                     int min = 0;
                     for (int j = 0; j < numeroTotal.length; j++) {
-                        if (i == 0){
+                        if (j == 0) {
                             max = numeroTotal[j];
                             min = numeroTotal[j];
-                        }else {
-                            if (numeroTotal[j] > max) max = numeroTotal[j];
-                            if (numeroTotal[j] < min) min = numeroTotal[j];
+                        } else {
+                            if (numeroTotal[j] > max) { max = numeroTotal[j]; }
+                            if (numeroTotal[j] < min) { min = numeroTotal[j]; }
                         }
-                    } System.out.println("El valor maximo de la colección es: " + max);
+                    }
+                    System.out.println("El valor maximo de la colección es: " + max);
                     System.out.println("El valor minimo de la colección es: " + min);
                     break;
                 case 3:
@@ -115,15 +116,16 @@ public class Main {
                         System.out.println("Introduzca el nuevo tamaño del array:");
                         int nuevoTamanio = lector.nextInt();
                         numeroTotal[j] = nuevoTamanio;
-                    } System.out.println("El nuevo array es: " + numeroTotal[i]);
-                        break;
+                    }
+                    System.out.println("El nuevo array es: " + numeroTotal[i]);
+                    break;
                 case 4:
                     //salir
                     System.out.println("Usted salió del programa");
                     break;
 
-        } while (n != 4);//switch numero total
-
+            }
+        } while (n != 4) ;
     }//void main
 
     //metodo para instrucciones:
@@ -145,7 +147,7 @@ public class Main {
 
 
 
-    }// main
+}// main
 
 
 /*Pasos que seguiría:
