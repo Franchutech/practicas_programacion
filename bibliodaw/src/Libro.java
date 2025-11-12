@@ -79,7 +79,7 @@ public class Libro {
 
 //METODOS
 
-    /**Metodo mostrar informacion del libro*/
+    /**Metodo mostrar informacion del libro, se encarga de preprarlo para poder pintar cada libro despues*/
 
     public String infoLibro() {
         String infoLibro = "";
