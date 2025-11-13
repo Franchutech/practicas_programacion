@@ -1,48 +1,65 @@
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Libro {
 
+    private static int contadorTotal = 0;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-   // Atributos atributos
-   // campos de
-
-    //la clase(encapsulacion)
-
+    //Atributos o campos de la clase (encapsulacion)
+    private final int id;
     private String titulo;
     private String autor;
     private int nPaginas;
     private String ISBN;
     private String editora;
-    private String fechaPublicaciones;
+    private String fechaPublicacion;
     private int edicion;
 
-
-//Constructor / Constructores
-
-    public Libro(String titulo, String ISBN, String fechaPublicaciones, String autor) {
+    //Constructor / Constructores
+    //Constructor con atributos imprescindibles
+    public Libro(String titulo, String autor, String ISBN, String fechaPublicacion) {
         this.titulo = titulo;
-        this.ISBN = ISBN;
-        this.fechaPublicaciones = fechaPublicaciones;
         this.autor = autor;
+        this.ISBN = ISBN;
+        this.fechaPublicacion = fechaPublicacion;
         this.edicion = 1;
         this.nPaginas = 1;
-        this.editora = "Auto-publicaciòn";
+        this.editora = "Auto-Publicacion";
+
+        this.id = contadorTotal;
+        contadorTotal++;
+
+        //Ejemplo de fecha instantanea
+        this.fechaPublicacion = LocalDateTime.now().format(dtf);
     }
 
-    //constructor con todos los atributos.
-    public Libro(String titulo, String autor, String ISBN, String fechaPublicaciones,
-                 String editora, int nPaginas, String edicion) {
+    //Constructor con todos los atributos
+    public Libro(String titulo, String autor, String ISBN, String fechaPublicacion,
+                 String editora, int edicion, int nPaginas) {
         this.titulo = titulo;
-        this.ISBN = ISBN;
-        this.fechaPublicaciones = fechaPublicaciones;
         this.autor = autor;
-        this.editora = editora;
+        this.ISBN = ISBN;
+        this.fechaPublicacion = fechaPublicacion;
+        this.edicion = edicion;
         this.setnPaginas(nPaginas);
-        this.edicion = Integer.parseInt(edicion);
+        this.editora = editora;
+
+        this.id = contadorTotal;
+        contadorTotal++;
+
+        //Ejemplo de fecha instantanea
+        this.fechaPublicacion = LocalDateTime.now().format(dtf);
     }
+
     /*
-     * DEFINIMOS LOS GETTER Y SETTER DE LOS ATRIBUTOS
-     * */
+        DEFINIMOS LOS GETTER Y SETTER DE LOS ATRIBUTOS
+    */
+
+    public int getId() {
+        return id;
+    }
+
     public String getTitulo() {
         return this.titulo;
     }
@@ -55,9 +72,14 @@ public class Libro {
         return this.ISBN;
     }
 
-    public String getFechaPublicaciones() {
-        return this.fechaPublicaciones;
+    public String getFechaPublicacion() {
+        return this.fechaPublicacion;
     }
+
+    public int getEdicion() {
+        return this.edicion;
+    }
+
     public void setEdicion(int edicion) {
         this.edicion = edicion;
     }
@@ -69,33 +91,40 @@ public class Libro {
         if(nPaginas > 0){
             this.nPaginas = nPaginas;
         }
+        else{
+            if(this.nPaginas < 1){
+                this.nPaginas = 1;
+            }
+        }
     }
+
     public String getEditora() {
         return this.editora;
-}
+    }
+
     public void setEditora(String editora) {
         this.editora = editora;
-}
+    }
 
-//METODOS
+    //Metodos
 
-    /**Metodo mostrar informacion del libro, se encarga de preprarlo para poder pintar cada libro despues*/
-
-    public String infoLibro() {
+    /**
+     * Metodo: mostrar informacion del libro
+     */
+    public String infoLibro(){
         String infoLibro = "";
-        infoLibro += "Titulo: " + this.titulo + "\n";
+        infoLibro = "Titulo: " + this.titulo + "\n";
         infoLibro += "Autor: " + this.autor + "\n";
         infoLibro += "ISBN: " + this.ISBN + "\n";
+        infoLibro += "Fecha de publicacion: " + this.fechaPublicacion + "\n";
         infoLibro += "Editora: " + this.editora + "\n";
-        infoLibro += "N<UNK> Paginas: " + this.nPaginas + "\n";
         infoLibro += "Edicion: " + this.edicion + "\n";
-        infoLibro += "Fecha: " + this.fechaPublicaciones + "\n";
+        infoLibro += "NPaginas: " + this.nPaginas + "\n";
 
-        String info = String.format("Libro - Titulo: %s, Autor: %s, Fecha publicación: %s, Numero de paginas: %s, Edicion: %s, ISBN: %s",
-                this.titulo, this.autor, this.editora, this.nPaginas, this.edicion, this.fechaPublicaciones, this.ISBN);
+        //Opcion alternativa usando String-format
+        String info = String.format("Libro - Titulo: %s, Autor: %s , Fecha publicacion: %s, Numero de paginas: %s, Edicion: %s, Editorial: %s, ISBN: %s"
+                , this.titulo, this.autor, this.fechaPublicacion, this.nPaginas, this.edicion, this.editora, this.ISBN);
 
         return infoLibro;
     }
-}// main class
-
-
+}
