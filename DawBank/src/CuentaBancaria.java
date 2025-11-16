@@ -6,68 +6,122 @@ public class CuentaBancaria {
 
     //atributos y campos de la clase
 
-    //La cuenta IBAN es un String porque son letras y numeros y no se operan entre ellas, es solo un dato.
-
     private final String iban;
     private final String titular;
     private double saldo;
-    private Movimiento[] movimientos;//array de la clase movimiento
+    private Movimiento[] movimientos;
+    private int contadorInternoMovimientos = 0; // para guardar movimientos en el array
 
-    //constructor de atributos
+    // Constructor
 
-    public CuentaBancaria(String iban, String titular,  double saldo, String movimientos) {
+    public CuentaBancaria(String iban, String titular, double saldo) {
         this.iban = iban;
         this.titular = titular;
         this.saldo = saldo;
-        this.movimientos = new Movimiento[100];
+        this.movimientos = new Movimiento[100]; // máximo 100 movimientos
+
     }//constructor
+
 
     //GETTER
     public String getIban() {
         return this.iban;
     }
-    public String getTitular() {
-        return this.titular;
-    }
-    public Double getSaldo() {
+
+    public double getSaldo() {
         return this.saldo;
-    }
+    } //tener cuidado con los double, escribirlos en minuscula.
 
     //SETTER
-    public void setSaldo(Double saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-    public void setIban(String iban) {
-    }
-    public void setTitular(String titular) {
-        this.titular = titular;
-    }
+
     public void setMovimientos(Movimiento[] movimientos) {
         this.movimientos = movimientos;
     }
-    //metodos
 
-    public String requerimientosIban() {
-        if (iban != null) {
-       //necesito hacer que la cuenta iban no tenga mas de 22 digitos
-            //necesito que tenga 2 letras al inicio y el resto numeros
-            //
+    //METODOS
+
+    //Validacion IBAN
+
+    public boolean requerimientosIban() {
+        //1. no deberia ser nulo, por lo que uso un booleano.
+
+        if (iban == null) return false;
+
+        //2. longitud maxima que permite es 22 digitos.
+        if (iban.length() != 22) return false;
+
+
+        //3. Los 2 primeros digitos deben ser letras.
+        char letra1 = iban.charAt(0);
+        char letra2 = iban.charAt(1);
+
+        if (!Character.isLetter(letra1) || !Character.isLetter(letra2)) return false;
+
+        //4. El resto deben ser numeros
+
+        for (int i = 2; i < iban.length(); i++) {
+            if (!Character.isDigit(iban.charAt(i))) {
+                return false;
+            }
+        }
+
+        //y si todo lo anterior se da entonces el booleano debería pasar a verdadero
+        return true;
+
+    }//requerimientosiban metodo
+
+
+    // metodo agregar movimientos (contarlos para el array)
+    public void agregarMovimiento(Movimiento m) {
+        if (contadorInternoMovimientos < movimientos.length) {
+            movimientos[contadorInternoMovimientos] = m;
+            contadorInternoMovimientos++;
+        }
+    }
+
+    //metodo para ingresar dinero
+
+    public void ingresar(double cantidad) {
+        if (cantidad > 0) {
+            saldo += cantidad;
+            Movimiento m = new Movimiento("Ingreso", cantidad);
+            agregarMovimiento(m);
+        }
+    }
+
+    //metodo para retirar dinero
+
+    public void retirar(double cantidad) {
+        if (cantidad > 0 && cantidad <= saldo) {
+            saldo -= cantidad;
+            Movimiento m = new Movimiento("Retirada", cantidad);
+            agregarMovimiento(m);
+        }
+    }
+
+    // Metodo mostrar movimientos
+
+    public void mostrarMovimientos() {
+        for (int i = 0; i < contadorInternoMovimientos; i++) {
+            System.out.println(movimientos[i].mostrarInfoMovimiento());
         }
     }
 
 
+    //Método mostrar informacion de la cuenta
 
+    public String mostrarInfoCuenta() {
+        String info = "";
+        info += "IBAN: " + iban + "\n";
+        info += "Titular: " + titular + "\n";
+        info += "Saldo: " + saldo + "\n";
+        info += "Movimientos realizados: " + contadorInternoMovimientos + "\n";
 
-
-
-
-
-
-
-
-
-
-
+        return info;
+    }
 
 
 } //class CuentaBancaria
