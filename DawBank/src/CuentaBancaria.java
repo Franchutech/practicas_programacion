@@ -110,7 +110,6 @@ public class CuentaBancaria {
         }
     }
 
-
     //Método mostrar informacion de la cuenta
 
     public String mostrarInfoCuenta() {
@@ -122,6 +121,9 @@ public class CuentaBancaria {
 
         return info;
     }
+
+    //limitar el nombre del usuario a X cantidad de dígitos
+
 
 
 } //class CuentaBancaria
