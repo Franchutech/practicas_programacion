@@ -1,7 +1,3 @@
-import java.security.PublicKey;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class CuentaBancaria {
 
     //atributos y campos de la clase
@@ -50,8 +46,8 @@ public class CuentaBancaria {
 
         if (iban == null) return false;
 
-        //2. longitud maxima que permite es 22 digitos.
-        if (iban.length() != 22) return false;
+        //2. longitud maxima que permite es 24 digitos.
+        if (iban.length() != 24) return false;
 
 
         //3. Los 2 primeros digitos deben ser letras.
@@ -95,8 +91,9 @@ public class CuentaBancaria {
     //metodo para retirar dinero
 
     public void retirar(double cantidad) {
-        if (cantidad > 0 && cantidad <= saldo) {
-            saldo -= cantidad;
+        if (cantidad <= 0) {
+            return;
+        }
             Movimiento m = new Movimiento("Retirada", cantidad);
             agregarMovimiento(m);
         }
@@ -122,7 +119,27 @@ public class CuentaBancaria {
         return info;
     }
 
-    //limitar el nombre del usuario a X cantidad de dígitos
+    //Metodo validar NombreTitular.
+    //1.no debe ser nulo, por lo que uso un boolean
+    public boolean validacionTitular(String titular) {
+        if (titular == null) return false;
+        titular = titular.trim(); //validar el espacio del nombre quitando espacios en blanco de los bordes
+
+        //2.debe tener cierta longitud para que realmente sea un nombre
+        if (titular.length() == 0) return false;
+
+        //3.debe tener menos de 50 caracteres
+        if(titular.length() > 50) return false;
+
+        //4. titular deberia tener espacios entre nombre y apellido
+
+        if (!titular.contains(" ")) return false;
+
+        //5.Deberia tener minimo un nombre unos 5 caracteres
+        if (titular.length() < 5) return false;
+
+        return true;
+    }//validarNombreTitular
 
 
 
