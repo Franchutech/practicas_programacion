@@ -78,15 +78,26 @@ public class CuentaBancaria {
         }
     }
 
-    //metodo para ingresar dinero
+        //Metodo ingresar dinero
 
     public void ingresar(double cantidad) {
         if (cantidad > 0) {
+
             saldo += cantidad;
+
+            if (saldo < 0) {
+                System.err.println("AVISO: Saldo negativo");
+            }
+
+            if (cantidad > 3000) {
+                System.out.println("AVISO: Notificar a hacienda");
+            }
+
             Movimiento m = new Movimiento("Ingreso", cantidad);
             agregarMovimiento(m);
         }
     }
+
 
     //metodo para retirar dinero
 
@@ -94,9 +105,27 @@ public class CuentaBancaria {
         if (cantidad <= 0) {
             return;
         }
-            Movimiento m = new Movimiento("Retirada", cantidad);
-            agregarMovimiento(m);
+
+        double saldoFuturo = saldo - cantidad;
+
+        if (saldoFuturo < -50) {
+            System.err.println("Saldo por debajo del limite permitido");
+            return;
         }
+
+        // Si la operación se permite:
+        saldo = saldoFuturo;
+
+        if (saldo < 0) {
+            System.err.println("AVISO: Saldo negativo");
+        }
+
+        if (cantidad > 3000) {
+            System.out.println("AVISO: Notificar a hacienda");
+        }
+
+        Movimiento m = new Movimiento("Retirada", cantidad);
+        agregarMovimiento(m);
     }
 
     // Metodo mostrar movimientos
@@ -106,6 +135,7 @@ public class CuentaBancaria {
             System.out.println(movimientos[i].mostrarInfoMovimiento());
         }
     }
+
 
     //Método mostrar informacion de la cuenta
 
