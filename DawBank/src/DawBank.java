@@ -1,16 +1,35 @@
+import javax.sound.midi.MidiUnavailableException;
 import java.lang.runtime.SwitchBootstraps;
 import java.util.Scanner;
 
 public class DawBank {
     public static void main(String[] args) {
+
+
+        CuentaBancaria cuentaBan = new CuentaBancaria("CR1245365896457845253654", "Francella Rojas Castillo",
+                654);
         Scanner sc = new Scanner(System.in);
 
-
-        //Pedir los datos al usuario
-
         System.out.println("A continuación se solicitarán los datos, para la creación de su cuenta bancaria:");
-        System.out.println(" Ingrese su nombre completo: ");
-        String nombreCompleto = sc.nextLine();
+
+        boolean estado = false;
+        do{
+            System.out.println(" Ingrese su nombre completo: ");
+            String titular =  sc.nextLine();
+            estado = cuentaBan.validacionTitular(titular);
+            if (estado){
+                System.out.println("Titular válido");
+            } else {
+                System.out.println("Titular no cumple con los requisitos");
+            }
+        }while(!estado);
+
+        boolean estadoIban = false;
+        do {
+            MiUtils.comprobarPatronRepetidamente("[a-z A-Z]{2}[0-9]{22}", "Introduzca el IBAN");
+            String iban = sc.nextLine();
+        }while(!estadoIban);
+
 
 
 
