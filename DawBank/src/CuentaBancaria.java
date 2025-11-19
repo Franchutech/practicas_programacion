@@ -124,7 +124,7 @@ public class CuentaBancaria {
 
     //METODO VALIDAR NOMBRE DEL TITULAR
         //1.no debe ser nulo, por lo que uso un boolean
-    public boolean validacionTitular(String titular) {
+    public static boolean validacionTitular(String titular) {
         if (titular == null) return false;
         titular = titular.trim(); //valido el espacio del nombre quitando espacios en blanco de los bordes
         //2.debe tener cierta longitud para que realmente sea un nombre
