@@ -34,7 +34,8 @@ public class CuentaBancaria {
 
     //METODOS
 
-    //Validacion IBAN
+    /*Validacion IBAN (al final no use esto, sino mas bien el de MiUtils del profe, pero lo dejo acá porque
+    me costo mucho hacerlo*/
 
     public boolean requerimientosIban() {
         //1. no deberia ser nulo, por lo que uso un booleano.
