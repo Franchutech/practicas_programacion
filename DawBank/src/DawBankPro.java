@@ -7,7 +7,7 @@ public class DawBankPro {
         Scanner sc = new Scanner(System.in);
 
         // ARRAY para almacenar varias cuentas
-        CuentaBancaria[] cuentas = new CuentaBancaria[10];
+        CuentaBancaria[] cuentas = new CuentaBancaria[5];
         int numCuentas = 0;
 
         // Referencia a la cuenta activa
@@ -22,7 +22,7 @@ public class DawBankPro {
             switch (opcion) {
 
                 case 1: // Crear nueva cuenta
-                    if (numCuentas >= 10) {
+                    if (numCuentas >= 5) {
                         System.out.println("No se pueden crear más cuentas.");
                         break;
                     }
@@ -59,7 +59,7 @@ public class DawBankPro {
                         break;
                     }
 
-                    System.out.println("=== LISTA DE CUENTAS ===");
+                    System.out.println(" LISTA DE CUENTAS ");
                     for (int i = 0; i < numCuentas; i++) {
                         System.out.println(i + ". " + cuentas[i].getIban()
                                 + " - " + cuentas[i].mostrarInfoCuenta());
