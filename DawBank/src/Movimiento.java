@@ -21,7 +21,7 @@ public class Movimiento {
 
         this.id = contadorMovimientos;
         contadorMovimientos++;
-        fecha = LocalDateTime.now();  //este pone el momento exacto de cada movimiento
+        this.fecha = LocalDateTime.now();  //este pone el momento exacto de cada movimiento
 
     }
 
@@ -44,9 +44,9 @@ public class Movimiento {
 
     public String mostrarInfoMovimiento(){
         String mostrarinfo = "";
-        mostrarinfo += "Tipo: " + tipo + "\n";
-        mostrarinfo += "Cantidad: " + cantidad + "\n";
-        mostrarinfo += "ID: " + id + "\n";
+        mostrarinfo += "Tipo: " + this.tipo + "\n";
+        mostrarinfo += "Cantidad: " + this.cantidad + "\n";
+        mostrarinfo += "ID: " + this.id + "\n";
         mostrarinfo += "Fecha: " + fecha.format(dtf) + "\n";
         return mostrarinfo;
     }

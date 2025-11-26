@@ -52,9 +52,16 @@ public class Pelicula {
         return isAlquilada;
     }
 
-
-
-
+    //METODO
+    public String mostrarinfoPelicula() {
+    String mostrarinfoPelicula = "";
+    mostrarinfoPelicula = "Codigo: " + Cod;
+    mostrarinfoPelicula = "Titulo: " + Titulo;
+    mostrarinfoPelicula = "Fecha: " + FechaRegistro;
+    mostrarinfoPelicula = "Fecha: " + FechaBaja;
+    mostrarinfoPelicula = "Fecha: " + FechaAlquiler;
+    return mostrarinfoPelicula;
+    }
 
 
     /*Clase Película

@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class DawBank {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);  //RECORDAR SIEMPRE CERRAR EL SCANNER AL FINAL DE PROGRAMA
+
 
         //validacion de la cuenta iban con MiUtils del profe
 
@@ -36,47 +37,47 @@ public class DawBank {
 
         //MENU PARA EL USUARIO
 
-        int opcion = 0;
+        String opcion = "";    //RECORDAR SIEMPRE USAR STRING PARA ESTO.
 
         do {
             mostrarMenu();
-            opcion = Integer.parseInt(sc.nextLine());
+            opcion = sc.nextLine();
 
             switch (opcion) {
 
-                case 1:
+                case "1":
                     System.out.println(cuentaReal.mostrarInfoCuenta());
                     break;
 
-                case 2:
+                case "2":
                     System.out.println("IBAN: " + cuentaReal.getIban());
                     break;
 
-                case 3:
+                case "3":
                     System.out.println("Titular: " + titularComprobado);
                     break;
 
-                case 4:
+                case "4":
                     System.out.println("Saldo actual: " + cuentaReal.getSaldo());
                     break;
 
-                case 5:
+                case "5":
                     System.out.print("Cantidad a ingresar: ");
                     double cantidadIngreso = Double.parseDouble(sc.nextLine());
                     cuentaReal.ingresar(cantidadIngreso);
                     break;
 
-                case 6:
+                case "6":
                     System.out.print("Cantidad a retirar: ");
                     double cantidadRetiro = Double.parseDouble(sc.nextLine());
                     cuentaReal.retirar(cantidadRetiro);
                     break;
 
-                case 7:
+                case "7":
                     cuentaReal.mostrarMovimientos();
                     break;
 
-                case 8:
+                case "8":
                     System.out.println("Saliendo del sistema...");
                     break;
 
@@ -85,7 +86,7 @@ public class DawBank {
                     break;
             }
 
-        } while (opcion != 8);
+        } while (opcion != "8");  //COMILLAS PORQUE ES STRING
         
 
     } //void
