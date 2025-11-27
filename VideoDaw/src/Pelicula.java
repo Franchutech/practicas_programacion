@@ -11,21 +11,23 @@ public class Pelicula {
     private String Titulo;
     private LocalDate FechaRegistro;
     private LocalDate FechaBaja;
-    private LocalDate FechaAlquiler;
+    private LocalDateTime FechaAlquiler;
     private boolean isAlquilada;
     private String Fecha;
+    private Genero Genero;
 
     public static int contadorPelicula = 0;
 
     //CONSTRUCTOR
 
-    public Pelicula(String cod, String titulo, LocalDate fechaRegistro, LocalDate fechaBaja, LocalDate fechaAlquiler,
+    public Pelicula(String cod, String titulo, LocalDate fechaRegistro, Genero Genero,  LocalDate fechaBaja, LocalDateTime fechaAlquiler,
                     String isAlquilada, LocalDate fecha) {
         this.Cod = cod;
         this.Titulo = titulo;
         this.FechaRegistro = fechaRegistro;
         this.FechaBaja = fechaBaja;
         this.FechaAlquiler = fechaAlquiler;
+        this.Genero = Genero;
         this.isAlquilada = true;
         contadorPelicula++;  //esperando que esto me ayude a contar el total de peliculas alquiladas por cliente
 
@@ -45,12 +47,17 @@ public class Pelicula {
     public LocalDate getFechaBaja() {
         return FechaBaja;
     }
-    public LocalDate getFechaAlquiler() {
+    public LocalDateTime getFechaAlquiler() {
         return FechaAlquiler;
     }
     public boolean isAlquilada() {
         return isAlquilada;
     }
+    //SETTERS
+
+
+
+
 
     //METODO
     public String mostrarinfoPelicula() {
