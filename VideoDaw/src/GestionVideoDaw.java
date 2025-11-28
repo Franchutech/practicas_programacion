@@ -1,4 +1,18 @@
+import java.util.Scanner;
+
 public class GestionVideoDaw {
+
+
+    //COMPROBACION DEL DNI
+
+    String dniComprobado = MiUtils.comprobarPatronRepetidamente("[0-9]{8}[a-zA-Z]{1}",
+            "Introduzca su DNI");
+
+
+    //AQUI PEDIR EL NOMBRE DEL CLIENTE, UTILIZANDO EL METODO DE CLIENTE DE validacionNombre.
+
+
+
 
 
     /*La clase GestionVideoDaw pedirá los datos necesarios para realizar las gestiones y mostrará el

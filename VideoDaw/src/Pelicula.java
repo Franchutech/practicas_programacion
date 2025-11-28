@@ -53,11 +53,21 @@ public class Pelicula {
     public boolean isAlquilada() {
         return isAlquilada;
     }
+
+
     //SETTERS
-
-
-
-
+    public void setTitulo(String titulo) {
+        Titulo = titulo;
+    }
+    public void setGenero(Genero genero) {
+        Genero = genero;
+    }
+    public void setAlquilada(boolean alquilada) {
+        isAlquilada = alquilada;
+    }
+    public void setCod(String cod) {
+        Cod = cod;
+    }
 
     //METODO
     public String mostrarinfoPelicula() {
