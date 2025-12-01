@@ -99,7 +99,7 @@ public class Cliente {
     //RESTRICCION DEL DNI, EN GESTIONVIDEODAW  (Que es donde se pide sus datos por  medio del Scanner)
 
     //RESTRINGIR POSIBILIDADES PARA EL NOMBRE (no lo pide el ejercicio, pero ya lo tenia yo hecho de otro)
-    public boolean validacionNombre(String nombre) {
+    public static boolean validacionNombre(String nombre) {
         if (nombre == null) return false;
         nombre = nombre.trim(); //valido el espacio del nombre quitando espacios en blanco de los bordes
         //2.debe tener cierta longitud para que realmente sea un nombre
@@ -123,9 +123,7 @@ public class Cliente {
 
 
     //CREAR METODO PARA RESTRINGIR MINIMO DE EDAD DEL CLIENTE
-
-
-    //aqui tendria que comparar 2 fecha de nacimiento con la local date now.//31557600(segundos mayot de edad)
+    //aqui tendria que comparar 2 fecha de nacimiento con la local date now.//31557600(segundos mayor de edad)
     //PASAR A EPOCH LAS FECHAS
     public boolean minimoEdad(LocalDate fechaNacimiento) {
         if (fechaNacimiento == null) return false;
@@ -141,6 +139,9 @@ public class Cliente {
         long diferencia = ahoraEpoch - nacimientoEpoch;
         return diferencia >= SEGUNDOS_18_ANIOS;
     }
+
+
+
     //CREAR METODO PARA VER SUS ULTIMAS PELICULAS ALQUILADAS, mostrarPeliculasAlquiladas()
 
 
