@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Scanner;
 
 
 public class Cliente {
@@ -96,8 +97,6 @@ public class Cliente {
         return mostrarinfoCliente;
     }
 
-    //RESTRICCION DEL DNI, EN GESTIONVIDEODAW  (Que es donde se pide sus datos por  medio del Scanner)
-
     //RESTRINGIR POSIBILIDADES PARA EL NOMBRE (no lo pide el ejercicio, pero ya lo tenia yo hecho de otro)
     public static boolean validacionNombre(String nombre) {
         if (nombre == null) return false;
@@ -114,6 +113,9 @@ public class Cliente {
 
     }//VALIDAR NOMBRE DEL CLIENTE
 
+    //RESTRICCION DEL DNI, EN GESTIONVIDEODAW  (Que es donde se pide sus datos por  medio del Scanner)
+        String dniComprobado = MiUtils.comprobarPatronRepetidamente("[0-9]{8}[a-zA-Z]{1}",
+            "Introduzca su DNI");
 
     //CREAR METODO PARA RESTRINGIR FORMATO DE NUMSOCIO, con formato S-0001, tengo que revisar si esto va aqui
      //o si deberia ir en GestionVideoDaw
@@ -121,11 +123,51 @@ public class Cliente {
     String numSocioComprobado = MiUtils.comprobarPatronRepetidamente("[a-zA-Z]{1}[-]{1}[0-9]{4}",
             "Introduzca un numero de socio");
 
+            //COMPROBACION DEL NOMBRE DEL CLIENTE
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el nombre del Cliente: ");
+        String nombre = sc.nextLine();  //entrada del usuario tonto
+
+        boolean nombreComprobado = false;
+        do {
+            //Leer la entrada del usuario tontoo
+            nombre = sc.nextLine();
+
+            //llamo el metodo y guardo el resultado en booleano
+            boolean validacionExitosa = Cliente.validacionNombre(nombre);
+
+            if (!validacionExitosa) {
+                System.out.println("Introduzca el titular valido");
+
+            } else {
+                System.out.println("Nombre del titular registrado: " + nombre);
+                nombreComprobado = true;
+            }
+
+        } while (!nombreComprobado);
+    } //PUBLIC VOID ARGS NOMBRE CLIENTE
+
+
+    //DIRECCION RESTRICCION
+        public static boolean validacionDireccion(String direccion) {
+        if (direccion == null) return false;
+        direccion = direccion.trim(); //valido el espacio del nombre quitando espacios en blanco de los bordes
+        //2.debe tener cierta longitud para que realmente sea un nombre
+        if (direccion.length() == 0) return false;
+        //3.debe tener menos de 50 caracteres
+        if (direccion.length() > 50) return false;
+        //4. titular deberia tener espacios entre nombre y apellido
+        if (!direccion.contains(" ")) return false;
+        //5.Deberia tener minimo un nombre unos 5 caracteres
+        if (direccion.length() < 8) return false;
+        return true;
 
     //CREAR METODO PARA RESTRINGIR MINIMO DE EDAD DEL CLIENTE
     //aqui tendria que comparar 2 fecha de nacimiento con la local date now.//31557600(segundos mayor de edad)
     //PASAR A EPOCH LAS FECHAS
-    public boolean minimoEdad(LocalDate fechaNacimiento) {
+            public boolean minimoEdad (fechaNacimiento) {
         if (fechaNacimiento == null) return false;
         // Segundos que equivalen a 18 años
         long SEGUNDOS_18_ANIOS = 31557600L * 18;
@@ -142,6 +184,7 @@ public class Cliente {
 
 
 
+
     //CREAR METODO PARA VER SUS ULTIMAS PELICULAS ALQUILADAS, mostrarPeliculasAlquiladas()
 
 
@@ -149,15 +192,16 @@ public class Cliente {
 
     /*Clase Cliente
 La clase Cliente deberá tener los siguientes atributos:
-1. DNI: deberá cumplir que este bien formado.
-2. Nombre:
-3. NumSocio: código único (ej. S-0001);
-4. Direccion:
+1. DNI: deberá cumplir que este bien formado.//LISTO
+2. Nombre: //LISTO
+3. NumSocio: código único (ej. S-0001);//LISTO
+4. Direccion://
 5. FechaNacimiento: es del tipo LocalDate (debe de ser mayor de edad)
 6. FechaBaja: es del tipo LocalDate
 7. PeliculasAlquiladas (Pelicula [])
 Además de los constructores y propiedades necesarios, deberá tener al menos un método
-mostrarInfoCilente() para mostrar toda la información de general de ese cliente, un método
+mostrarInfoCilente() //LISTO
+para mostrar toda la información de general de ese cliente, un método
 para ver sus últimas películas alquiladas mostrarPeliculasAlquiladas().*/
 
 
