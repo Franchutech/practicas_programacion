@@ -6,91 +6,83 @@ public class Pelicula {
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    //ATRIBUTOS
-    private String Cod;
-    private String Titulo;
-    private LocalDate FechaRegistro;
-    private LocalDate FechaBaja;
-    private LocalDateTime FechaAlquiler;
+    // ATRIBUTOS
+    private String cod;
+    private String titulo;
+    private Genero genero;
+    private LocalDate fechaRegistro;
+    private LocalDate fechaBaja;
+    private LocalDateTime fechaAlquiler;
     private boolean isAlquilada;
-    private String Fecha;
-    private Genero Genero;
 
     public static int contadorPelicula = 0;
 
-    //CONSTRUCTOR
+    // CONSTRUCTOR PRINCIPAL
+    public Pelicula(String titulo, Genero genero) {
+        this.cod = generarCodigoPelicula();
+        this.titulo = titulo;
+        this.genero = genero;
+        this.fechaRegistro = LocalDate.now();
+        this.fechaBaja = null;
+        this.fechaAlquiler = null;
+        this.isAlquilada = false;
+    }
 
-    public Pelicula(String cod, String titulo, LocalDate fechaRegistro, Genero Genero,  LocalDate fechaBaja, LocalDateTime fechaAlquiler,
-                    String isAlquilada, LocalDate fecha) {
-        this.Cod = cod;
-        this.Titulo = titulo;
-        this.FechaRegistro = fechaRegistro;
-        this.FechaBaja = fechaBaja;
-        this.FechaAlquiler = fechaAlquiler;
-        this.Genero = Genero;
-        this.isAlquilada = true;
-        contadorPelicula++;  //esperando que esto me ayude a contar el total de peliculas alquiladas por cliente
+    // GENERADOR DE CÓDIGO ÚNICO
+    private String generarCodigoPelicula() {
+        contadorPelicula++;
+        return String.format("P-%04d", contadorPelicula);
+    }
 
-        fecha = LocalDate.from(LocalDateTime.now()); // esperando que esto me registre la fecha exacta de las consultas que hago
-    }//constructor pelicula
-
-    //GETTERS
+    // GETTERS
     public String getCod() {
-        return Cod;
+        return cod;
     }
     public String getTitulo() {
-        return Titulo;
+        return titulo;
+    }
+    public Genero getGenero() {
+        return genero;
     }
     public LocalDate getFechaRegistro() {
-        return FechaRegistro;
+        return fechaRegistro;
     }
     public LocalDate getFechaBaja() {
-        return FechaBaja;
+        return fechaBaja;
     }
     public LocalDateTime getFechaAlquiler() {
-        return FechaAlquiler;
+        return fechaAlquiler;
     }
     public boolean isAlquilada() {
         return isAlquilada;
     }
 
-
-    //SETTERS
+    // SETTERS
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.titulo = titulo;
     }
     public void setGenero(Genero genero) {
-        Genero = genero;
+        this.genero = genero;
+    }
+    public void setFechaBaja(LocalDate fechaBaja) {
+        this.fechaBaja = fechaBaja;
     }
     public void setAlquilada(boolean alquilada) {
-        isAlquilada = alquilada;
-    }
-    public void setCod(String cod) {
-        Cod = cod;
+        this.isAlquilada = alquilada;
+        this.fechaAlquiler = alquilada ? LocalDateTime.now() : null;
     }
 
-    //METODO
-    public String mostrarinfoPelicula() {
-    String mostrarinfoPelicula = "";
-    mostrarinfoPelicula = "Codigo: " + Cod;
-    mostrarinfoPelicula = "Titulo: " + Titulo;
-    mostrarinfoPelicula = "Fecha: " + FechaRegistro;
-    mostrarinfoPelicula = "Fecha: " + FechaBaja;
-    mostrarinfoPelicula = "Fecha: " + FechaAlquiler;
-    return mostrarinfoPelicula;
+    // MÉTODO MOSTRAR INFO
+    public String mostrarInfoPelicula() {
+        String info = "";
+        info += "Codigo: " + cod + "\n";
+        info += "Titulo: " + titulo + "\n";
+        info += "Genero: " + genero + "\n";
+        info += "Fecha Registro: " + fechaRegistro + "\n";
+        info += "Fecha Baja: " + fechaBaja + "\n";
+        info += "Fecha Alquiler: " + fechaAlquiler + "\n";
+        info += "¿Alquilada?: " + isAlquilada + "\n";
+        return info;
     }
 
-
-    /*Clase Película
-La clase Película deberá tener los siguientes atributos:
-1. Cod: identificador único de la Película (ej. P-0001).
-2. Titulo:
-3. Género: tipo ENUM
-4. FechaRegistro: es del tipo LocalDate
-5. FechaBaja: es del tipo LocalDate
-6. FechaAlquiler: es del tipo LocalDateTime
-7. IsAlquilada: tipo boolean
-Además de los constructores y propiedades necesarios, deberá tener al menos un método
-mostrarInfoPelicula() para mostrar toda la información de esa película.*/
-
-} //CIERRE CLASS PELICULA
+}

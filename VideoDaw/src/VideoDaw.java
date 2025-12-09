@@ -1,99 +1,159 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class VideoDaw {
 
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
-    //atributos
-    private int CIF;
+    // ATRIBUTOS
+    private String CIF;
     private String direccion;
     private LocalDate fechaAlta;
-    private Pregistrada[] pregistradas;
-    private Cregistrado[] cregistrados;
+    private Pelicula[] peliculasRegistradas;
+    private Cliente[] clientesRegistrados;
 
-    private int contadorPRegistradas =0;
-    private int contadorCRegistrados =0;
+    private int contadorPeliculas = 0;
+    private int contadorClientes = 0;
 
-    //CONSTRUCTOR
-
-    public VideoDaw(DateTimeFormatter dtf, int CIF, String direccion, LocalDate fechaAlta, Pregistrada[] pregistradas,
-                    Cregistrado[] cregistrados) {
-        this.dtf = dtf;
+    // CONSTRUCTOR
+    public VideoDaw(String CIF, String direccion, LocalDate fechaAlta) {
         this.CIF = CIF;
         this.direccion = direccion;
         this.fechaAlta = fechaAlta;
-        this.pregistradas = new Pregistrada[100];
-        this.cregistrados = new Cregistrado[100];
-    }
-    //GETTERS
 
-    public DateTimeFormatter getDtf() {
-        return dtf;
+        this.peliculasRegistradas = new Pelicula[100];
+        this.clientesRegistrados = new Cliente[100];
     }
 
-    public int getCIF() {
-        return CIF;
+    // GETTERS
+    public String getCIF() { return CIF; }
+    public String getDireccion() { return direccion; }
+    public LocalDate getFechaAlta() { return fechaAlta; }
+    public Pelicula[] getPeliculasRegistradas() { return peliculasRegistradas; }
+    public Cliente[] getClientesRegistrados() { return clientesRegistrados; }
+
+    // SETTERS
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    // VALIDAR FORMATO CIF
+    public static boolean validarCIF(String CIF) {
+        return CIF.matches("[A-Za-z]{1}[0-9]{8}");
     }
 
-    public String getDireccion() {
-        return direccion;
+    // MOSTRAR INFO DEL VIDEOCLUB
+    public String mostrarInfoVideoClub() {
+        String info = "";
+        info += "CIF: " + CIF + "\n";
+        info += "Direccion: " + direccion + "\n";
+        info += "FechaAlta: " + fechaAlta + "\n";
+        info += "Total Peliculas Registradas: " + contadorPeliculas + "\n";
+        info += "Total Clientes Registrados: " + contadorClientes + "\n";
+        return info;
     }
 
-    public LocalDate getFechaAlta() {
-        return fechaAlta;
+    // MOSTRAR PELÍCULAS REGISTRADAS
+    public String mostrarPeliculasRegistradas() {
+        String listado = "PELÍCULAS REGISTRADAS:\n";
+        for (Pelicula p : peliculasRegistradas) {
+            if (p != null) {
+                listado += p.getCod() + " - " + p.getTitulo() + "\n";
+            }
+        }
+        return listado;
     }
 
-    public Pregistrada[] getPregistradas() {
-        return pregistradas;
+    // MOSTRAR CLIENTES REGISTRADOS
+    public String mostrarClientesRegistrados() {
+        String listado = "CLIENTES REGISTRADOS:\n";
+        for (Cliente c : clientesRegistrados) {
+            if (c != null) {
+                listado += c.getNumSocio() + " - " + c.getNombre() + "\n";
+            }
+        }
+        return listado;
     }
 
-    public Cregistrado[] getCregistrados() {
-        return cregistrados;
+    // REGISTRAR CLIENTE (evitar repetidos)
+    public boolean registrarCliente(Cliente c) {
+
+        // comprobar duplicado por DNI
+        for (Cliente cli : clientesRegistrados) {
+            if (cli != null && cli.getDNI().equals(c.getDNI())) {
+                return false; // ya existe
+            }
+        }
+
+        clientesRegistrados[contadorClientes] = c;
+        contadorClientes++;
+        return true;
     }
 
-
-    //SETTERS
-
-    public void setCregistrados(Cregistrado[] cregistrados) {
-        this.cregistrados = cregistrados;
+    // DAR DE BAJA CLIENTE
+    public boolean darBajaCliente(String dni) {
+        for (int i = 0; i < clientesRegistrados.length; i++) {
+            Cliente c = clientesRegistrados[i];
+            if (c != null && c.getDNI().equals(dni)) {
+                clientesRegistrados[i].setFechaBaja(LocalDate.now());
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void setPregistradas(Pregistrada[] pregistradas) {
-        this.pregistradas = pregistradas;
+    // REGISTRAR PELÍCULA
+    public boolean registrarPelicula(Pelicula p) {
+
+        // evitar repetida por código
+        for (Pelicula peli : peliculasRegistradas) {
+            if (peli != null && peli.getCod().equals(p.getCod())) {
+                return false;
+            }
+        }
+
+        peliculasRegistradas[contadorPeliculas] = p;
+        contadorPeliculas++;
+        return true;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    // DAR DE BAJA PELÍCULA
+    public boolean darBajaPelicula(String cod) {
+        for (int i = 0; i < peliculasRegistradas.length; i++) {
+            Pelicula p = peliculasRegistradas[i];
+            if (p != null && p.getCod().equals(cod)) {
+                peliculasRegistradas[i].setFechaBaja(LocalDate.now());
+                return true;
+            }
+        }
+        return false;
     }
 
+    // ALQUILAR PELÍCULA
+    public boolean alquilarPelicula(Pelicula p, Cliente c) {
 
+        if (p.isAlquilada()) return false; // ya está alquilada
 
+        p.setAlquilada(true);
+        c.addPeliculaAlquilada(p);
 
-    /*Clase VideoDaw
-La clase VideoDaw deberá tener los siguientes atributos:
-1. CIF: deberá cumplir que este bien formado.
-2. Direccion:
-3. FechaAlta: tipo LocalDate
-4. PelículasRegistradas (Pelicula []) // revisar a fondo los errores.
-5. ClientesRegistrados (Cliente [])
-Además de los constructores y propiedades necesarios, deberá tener al menos
-• Un método mostrarInfoVideoClub () para mostrar toda la información de general de
-este VideoClub.
-• Un método para ver sus películas registradas mostrarPeliculasRegistradas().
-• Un método para los clientes registrados mostrarClientesRegistrados(): comprobar que
-no este repetido en el videoclub
-• Un método para alquilar una película alquilarPelicula(Pelicula p, cliente c): comprobar
-que esa película no este ya alquilada.
-2
-MP_0485 - PROGRAMACIÓN
-• Un método para devolver una película devolverPelicula(Pelicula p, cliente c):  deberá
-comprobar que no haya excedido el tiempo máximo de 48 horas, en caso de excederlo
-mostrara un mensaje de advertencia.
-• Un método para dar de baja un cliente darBajaCliente(cliente c)
-• Un método para dar registrar un cliente registrarCliente(cliente c): comprobar que no
-este ya registrado. */
+        return true;
+    }
 
+    // DEVOLVER PELÍCULA
+    public boolean devolverPelicula(Pelicula p, Cliente c) {
 
-} //principalClass VideoDaw
+        if (!p.isAlquilada()) return false; // no está alquilada
+
+        // comprobar 48h
+        LocalDateTime ahora = LocalDateTime.now();
+        LocalDateTime alquiler = p.getFechaAlquiler();
+
+        if (alquiler != null &&
+                alquiler.plusHours(48).isBefore(ahora)) {
+            System.out.println("ATENCIÓN: La película supera las 48 horas de alquiler.");
+        }
+
+        p.setAlquilada(false);
+        c.removePeliculaAlquilada(p);
+
+        return true;
+    }
+
+}
