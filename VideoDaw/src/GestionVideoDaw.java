@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class GestionVideoDaw {
@@ -8,36 +7,35 @@ public class GestionVideoDaw {
 
         Scanner sc = new Scanner(System.in);
 
-        // === REGISTRO INICIAL DEL VIDEOCLUB ===
+        // REGISTRO INICIAL DEL VIDEOCLUB
         System.out.println(" REGISTRO INICIAL DEL VIDEOCLUB ");
 
-        String cif;
-        do {
-            cif = MiUtils.leerTextoPantalla("Introduzca el CIF (formato A12345678): ");
-            if (!VideoDaw.validarCIF(cif)) {
-                System.out.println("CIF incorrecto.");
-            }
-        } while (!VideoDaw.validarCIF(cif));
+        // Usamos solo el patrón del profesor, pero SIN leerTextoPantalla
+        String cif = MiUtils.comprobarPatronRepetidamente(
+                "[a-zA-Z][0-9]{8}",
+                "Introduzca el CIF (formato A12345678): "
+        );
 
-        String direccionVC = MiUtils.leerTextoPantalla("Introduzca la dirección del videoclub: ");
+        System.out.print("Introduzca la dirección del videoclub: ");
+        String direccionVC = sc.nextLine();
+
         LocalDate fechaAltaVC = LocalDate.now();
-
         VideoDaw videoDaw = new VideoDaw(cif, direccionVC, fechaAltaVC);
 
         System.out.println("\n VIDEOCLUB REGISTRADO ");
 
-        // === MENÚ PRINCIPAL ===
         int opcion = 0;
-        do {
 
+        do {
             opcion = mostrarMenu(sc);
 
             switch (opcion) {
 
-                // 1. REGISTRAR PELÍCULA
-                case 1:
+                case 1: // REGISTRAR PELÍCULA
                     System.out.println(" REGISTRO DE PELÍCULA ");
-                    String titulo = MiUtils.leerTextoPantalla("Introduzca el título de la película:");
+
+                    System.out.print("Introduzca el título de la película: ");
+                    String titulo = sc.nextLine();
 
                     System.out.println("Seleccione un género:");
                     for (Genero g : Genero.values()) {
@@ -56,8 +54,7 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 2. REGISTRAR CLIENTE
-                case 2:
+                case 2: // REGISTRAR CLIENTE
                     System.out.println(" REGISTRO DE CLIENTE ");
 
                     String dni = MiUtils.comprobarPatronRepetidamente(
@@ -65,17 +62,20 @@ public class GestionVideoDaw {
                             "Introduzca el DNI (Formato 99999999Z): "
                     );
 
-                    String nombre = MiUtils.leerTextoPantalla("Introduzca el nombre:");
+                    System.out.print("Introduzca el nombre: ");
+                    String nombre = sc.nextLine();
                     while (!Cliente.validacionNombre(nombre)) {
-                        nombre = MiUtils.leerTextoPantalla("Nombre no válido. Introduzca nuevamente:");
+                        System.out.print("Nombre no válido. Introduzca nuevamente: ");
+                        nombre = sc.nextLine();
                     }
 
-                    String direccion = MiUtils.leerTextoPantalla("Introduzca la dirección:");
+                    System.out.print("Introduzca la dirección: ");
+                    String direccion = sc.nextLine();
                     while (!Cliente.validacionDireccion(direccion)) {
-                        direccion = MiUtils.leerTextoPantalla("Dirección no válida. Introduzca nuevamente:");
+                        System.out.print("Dirección no válida. Introduzca nuevamente: ");
+                        direccion = sc.nextLine();
                     }
 
-                    // ➤ AHORA SÍ USAMOS LECTURA SEGURA
                     LocalDate fechaNac = leerFechaValida(sc, "Introduzca fecha de nacimiento (AAAA-MM-DD): ");
                     while (!Cliente.esMayorDeEdad(fechaNac)) {
                         System.out.println("Debe ser mayor de edad. Intente de nuevo:");
@@ -91,8 +91,7 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 3. ALQUILAR PELÍCULA
-                case 3:
+                case 3: // ALQUILAR PELÍCULA
                     System.out.println(" ALQUILAR PELÍCULA ");
 
                     System.out.print("Código de película (P-XXXX): ");
@@ -120,8 +119,7 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 4. DEVOLVER PELÍCULA
-                case 4:
+                case 4: // DEVOLVER PELÍCULA
                     System.out.println(" DEVOLVER PELÍCULA ");
 
                     System.out.print("Código de película: ");
@@ -149,8 +147,7 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 5. DAR DE BAJA CLIENTE
-                case 5:
+                case 5: // DAR DE BAJA CLIENTE
                     System.out.println(" DAR DE BAJA CLIENTE ");
                     System.out.print("DNI del cliente: ");
                     String dniBaja = sc.nextLine();
@@ -162,8 +159,7 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 6. DAR DE BAJA PELÍCULA
-                case 6:
+                case 6: // DAR DE BAJA PELÍCULA
                     System.out.println(" DAR DE BAJA PELÍCULA ");
                     System.out.print("Código de película: ");
                     String codBaja = sc.nextLine();
@@ -175,14 +171,12 @@ public class GestionVideoDaw {
                     }
                     break;
 
-                // 7. MOSTRAR INFORMACIÓN DEL VIDEOCLUB
-                case 7:
+                case 7: // MOSTRAR INFORMACIÓN
                     System.out.println(videoDaw.mostrarInfoVideoClub());
                     System.out.println(videoDaw.mostrarClientesRegistrados());
                     System.out.println(videoDaw.mostrarPeliculasRegistradas());
                     break;
 
-                // 8. SALIR
                 case 8:
                     System.out.println("Saliendo del programa...");
                     break;
@@ -194,9 +188,8 @@ public class GestionVideoDaw {
         } while (opcion != 8);
     }
 
-    // MENÚ SEGURO
+    // MENÚ
     public static int mostrarMenu(Scanner sc) {
-
         System.out.println("\n MENÚ PRINCIPAL ");
         System.out.println("1. Registrar película");
         System.out.println("2. Registrar cliente");
@@ -209,17 +202,14 @@ public class GestionVideoDaw {
         System.out.print("Seleccione una opción: ");
 
         String entrada = sc.nextLine().trim();
-
         while (!entrada.matches("[1-8]")) {
-            System.out.println("Opción no válida. Debe ser un número del 1 al 8.");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Opción no válida. Ingrese 1-8: ");
             entrada = sc.nextLine().trim();
         }
 
         return Integer.parseInt(entrada);
     }
 
-    // BUSCAR PELÍCULA
     public static Pelicula buscarPelicula(VideoDaw v, String cod) {
         for (Pelicula p : v.getPeliculasRegistradas()) {
             if (p != null && p.getCod().equals(cod)) return p;
@@ -227,7 +217,6 @@ public class GestionVideoDaw {
         return null;
     }
 
-    // BUSCAR CLIENTE
     public static Cliente buscarCliente(VideoDaw v, String dni) {
         for (Cliente c : v.getClientesRegistrados()) {
             if (c != null && c.getDNI().equals(dni)) return c;
@@ -235,32 +224,35 @@ public class GestionVideoDaw {
         return null;
     }
 
-    // LECTURA SEGURA DE FECHA
+    // LECTURA SEGURA DE FECHA SIN TRY/CATCH
     public static LocalDate leerFechaValida(Scanner sc, String mensaje) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fecha = null;
+        boolean esValida = false;
 
-        boolean fechaValida = false;
-
-        while (!fechaValida) {
+        while (!esValida) {
             System.out.print(mensaje);
             String entrada = sc.nextLine().trim();
 
             if (!entrada.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                System.out.println("Formato incorrecto. Use AAAA-MM-DD (ej: 1999-11-06).");
+                System.out.println("Formato inválido. Use AAAA-MM-DD (ej: 1999-11-06).");
                 continue;
             }
 
-            try {
-                fecha = LocalDate.parse(entrada, formatter);
-                fechaValida = true;
-            } catch (Exception e) {
-                System.out.println("Fecha inválida. Intente otra vez.");
-            }
+            String[] partes = entrada.split("-");
+            int anio = Integer.parseInt(partes[0]);
+            int mes = Integer.parseInt(partes[1]);
+            int dia = Integer.parseInt(partes[2]);
+
+            if (mes < 1 || mes > 12) continue;
+            if (dia < 1 || dia > 31) continue;
+
+            fecha = LocalDate.of(anio, mes, dia);
+            esValida = true;
         }
 
         return fecha;
     }
 
 }
+

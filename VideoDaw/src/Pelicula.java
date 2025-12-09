@@ -75,13 +75,13 @@ public class Pelicula {
     // MÉTODO MOSTRAR INFO
     public String mostrarInfoPelicula() {
         String info = "";
-        info += "Codigo: " + cod + "\n";
-        info += "Titulo: " + titulo + "\n";
-        info += "Genero: " + genero + "\n";
-        info += "Fecha Registro: " + fechaRegistro + "\n";
-        info += "Fecha Baja: " + fechaBaja + "\n";
-        info += "Fecha Alquiler: " + fechaAlquiler + "\n";
-        info += "¿Alquilada?: " + isAlquilada + "\n";
+        info += "Codigo: " + this.cod + "\n";
+        info += "Titulo: " + this.titulo + "\n";
+        info += "Genero: " + this.genero + "\n";
+        info += "Fecha Registro: " + this.fechaRegistro + "\n";
+        info += "Fecha Baja: " + this.fechaBaja + "\n";
+        info += "Fecha Alquiler: " + this.fechaAlquiler + "\n";
+        info += "¿Alquilada?: " + this.isAlquilada + "\n";
         return info;
     }
 

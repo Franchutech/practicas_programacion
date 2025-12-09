@@ -33,11 +33,6 @@ public class VideoDaw {
     // SETTERS
     public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    // VALIDAR FORMATO CIF
-    public static boolean validarCIF(String CIF) {
-        return CIF.matches("[A-Za-z]{1}[0-9]{8}");
-    }
-
     // MOSTRAR INFO DEL VIDEOCLUB
     public String mostrarInfoVideoClub() {
         String info = "";
@@ -74,10 +69,9 @@ public class VideoDaw {
     // REGISTRAR CLIENTE (evitar repetidos)
     public boolean registrarCliente(Cliente c) {
 
-        // comprobar duplicado por DNI
         for (Cliente cli : clientesRegistrados) {
             if (cli != null && cli.getDNI().equals(c.getDNI())) {
-                return false; // ya existe
+                return false;
             }
         }
 
@@ -101,7 +95,6 @@ public class VideoDaw {
     // REGISTRAR PELÍCULA
     public boolean registrarPelicula(Pelicula p) {
 
-        // evitar repetida por código
         for (Pelicula peli : peliculasRegistradas) {
             if (peli != null && peli.getCod().equals(p.getCod())) {
                 return false;
@@ -128,7 +121,7 @@ public class VideoDaw {
     // ALQUILAR PELÍCULA
     public boolean alquilarPelicula(Pelicula p, Cliente c) {
 
-        if (p.isAlquilada()) return false; // ya está alquilada
+        if (p.isAlquilada()) return false;
 
         p.setAlquilada(true);
         c.addPeliculaAlquilada(p);
@@ -139,14 +132,12 @@ public class VideoDaw {
     // DEVOLVER PELÍCULA
     public boolean devolverPelicula(Pelicula p, Cliente c) {
 
-        if (!p.isAlquilada()) return false; // no está alquilada
+        if (!p.isAlquilada()) return false;
 
-        // comprobar 48h
         LocalDateTime ahora = LocalDateTime.now();
         LocalDateTime alquiler = p.getFechaAlquiler();
 
-        if (alquiler != null &&
-                alquiler.plusHours(48).isBefore(ahora)) {
+        if (alquiler != null && alquiler.plusHours(48).isBefore(ahora)) {
             System.out.println("ATENCIÓN: La película supera las 48 horas de alquiler.");
         }
 
@@ -157,3 +148,4 @@ public class VideoDaw {
     }
 
 }
+

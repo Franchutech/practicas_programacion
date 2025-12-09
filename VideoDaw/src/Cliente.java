@@ -69,12 +69,12 @@ public class Cliente {
     // MOSTRAR INFO
     public String mostrarinfoCliente() {
         String info = "";
-        info += "DNI: " + DNI + "\n";
-        info += "Nombre: " + nombre + "\n";
-        info += "NumSocio: " + numSocio + "\n";
-        info += "Direccion: " + direccion + "\n";
-        info += "FechaNacimiento: " + fechaNacimiento + "\n";
-        info += "FechaBaja: " + fechaBaja + "\n";
+        info += "DNI: " + this.DNI + "\n";
+        info += "Nombre: " + this.nombre + "\n";
+        info += "NumSocio: " + this.numSocio + "\n";
+        info += "Direccion: " + this.direccion + "\n";
+        info += "FechaNacimiento: " + this.fechaNacimiento + "\n";
+        info += "FechaBaja: " + this.fechaBaja + "\n";
         return info;
     }
 
