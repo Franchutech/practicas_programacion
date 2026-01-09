@@ -1,4 +1,6 @@
-public class Producto {
+
+
+public class Producto implements Comparable<Producto>{
     private String nombre;
     private int cantidad;
 
@@ -20,11 +22,13 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    // implements Comparable<Producto>
 
-// @Override
-// public int compareTo(Producto otro) {
-//     return this.nombre.compareTo(otro.nombre);
-// }
+    @Override
+    public int compareTo(Producto otro) {
+        if (otro != null) {
+            return this.nombre.compareTo(otro.nombre);
+        }
+        return 0;
+    }
 
 }//class Producto

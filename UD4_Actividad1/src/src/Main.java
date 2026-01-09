@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-// import java.util.Collections;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Main {
+
     public static void main(String[] args) {
 
         //CREAR LISTA
@@ -44,6 +46,8 @@ public class Main {
 
         System.out.println("LISTA MODIFICADA");
 
+        //VUELVO A HACER ITERATOR CON EL NUEVO PRODUCTO
+
         Iterator<Producto> it2 = productos.iterator();
         while (it2.hasNext()) {
             Producto p = it2.next();
@@ -55,15 +59,47 @@ public class Main {
         productos.clear();
         System.out.println("Lista vacía. Tamaño: " + productos.size());
 
+        //ORDENAR LA COLECCION
 
-        //PUNTO 8
-        // Collections.sort(productos);
-        // System.out.println("LISTA ORDENADA POR NOMBRE");
-        // Iterator<Producto> itOrdenado = productos.iterator();
-        // while (itOrdenado.hasNext()) {
-        //     Producto p = itOrdenado.next();
-        //     System.out.println(p.getNombre() + " - " + p.getCantidad());
-        // }
+        Collections.sort(productos);
+        System.out.println("LISTA ORDENADA POR NOMBRE");
+        Iterator<Producto> itOrdenado = productos.iterator();
+
+        //VISUALIZAR EL ORDEN CON ITERATOR
+        while (itOrdenado.hasNext()) {
+            Producto p = itOrdenado.next();
+            System.out.println(p.getNombre() + " - " + p.getCantidad());
+        }
+
+
+        //Eliminar producto pan
+        //Se puede hacer de 2 formas una con el auxiliar por nombre de producto, y otra con
+        // el index que serìa por la posiciòn en la que se encuentra.
+        // Producto aux = null;
+        //int index = -1;
+        //for(Producto p : productos){
+            //if(p.getNombre().equalsIgnoreCase("pan")){
+                //aux = p;
+                //index = productos.indexOf(p);
+                //break;
+            //}
+       //}
+
+        //if(aux != null){
+            //productos.remove(aux);
+        //}
+
+        //productos.remove(index);
+
+
+        //VISUALIZAR CON FOR EN VEZ DE ITERATOR
+
+        //Collections.sort(prooductos);
+        //System.out.println("Lista Ordenada con For)
+        //for(Producto p: productos){
+        //System.out.println(p);
+    //}
+
 
     }//void main
 }//Main
