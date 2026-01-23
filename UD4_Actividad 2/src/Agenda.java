@@ -64,7 +64,6 @@ public class Agenda {
     public void visualizarAgenda() {
         for (Contacto contacto : listaContactos) {
                 System.out.println(contacto.toString());
-                return;
             }
 
     }//METODO4
