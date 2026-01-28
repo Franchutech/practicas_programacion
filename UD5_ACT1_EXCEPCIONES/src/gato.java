@@ -2,13 +2,13 @@ public class gato {
     private String nombre;
     private int edad;
 
-    // Constructor con parámetros que puede lanzar excepciones
+    // CONSTRUCTOR QUE PUEDA LANZAR EXCEPCIONES DIRECTO DEL SET
     public gato(String nombre, int edad) throws Exception {
-        setNombre(nombre);
-        setEdad(edad);
+        this.setNombre(nombre);
+        this.setEdad(edad);
     }
 
-    // Getters y Setters con validaciones
+    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
