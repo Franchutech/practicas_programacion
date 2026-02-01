@@ -1,92 +1,79 @@
+import java.util.ArrayList;
+
 public class CuentaBancaria {
 
     private String IBAN;
-    private String titular;
     private double saldo;
+    private Cliente cliente;
 
-    private Movimiento[] movimientos;
+    //ACTUALIZO AQUI EN VEZ DE ARRAY, UNA COLECCION
+    private ArrayList<Movimiento> movimiento;
 
-    private int contadorMovimientos;
-
-    public CuentaBancaria(String IBAN, String titular) {
+    public CuentaBancaria(String IBAN, Cliente cliente) {
         this.IBAN = IBAN;
-        this.titular = titular;
-
-        this.movimientos = new Movimiento[100];
+        this.cliente = cliente;
+        this.movimiento = new ArrayList<>(); // CREO UNA COLECCION VACIA YA NO CON LIMITE DE 100
         this.saldo = 0.0;
-
-        this.contadorMovimientos = 0;
     }
 
     public String getIBAN() {
-        return this.IBAN;
+        return IBAN;
     }
-
-    public String getTitular() {
-        return this.titular;
-    }
-
     public double getSaldo() {
-        return this.saldo;
+        return saldo;
+    }
+    public String getCliente() {
+        return cliente;
     }
 
-    public boolean ingresar(double valor) {
-        boolean retorno = false;
+    public void ingresar(double valor) throws AvisarHaciendaException {
         double valorAbsoluto = Math.abs(valor);
         this.saldo += valorAbsoluto;
-        retorno = true;
-        //generar movimiento
         this.generarMovimiento(Tipo.INGRESO, valorAbsoluto);
-        return retorno;
+
+        if (valorAbsoluto >= 3000) {
+            throw new AvisarHaciendaException(cliente, IBAN, Tipo.INGRESO);
+        }
     }
 
-    public boolean retirar(double valor) {
-        boolean retorno = false;
+    public void retirar(double valor) throws CuentaException, AvisarHaciendaException {
         double valorAbsoluto = Math.abs(valor);
-        if((this.saldo - valorAbsoluto) >= -50) {
-            this.saldo -= valorAbsoluto;
-            this.generarMovimiento(Tipo.RETIRADA, valorAbsoluto);
-            retorno = true;
+
+        if ((this.saldo - valorAbsoluto) < -50) {
+            throw new CuentaException("Error: Saldo insuficiente. El descubierto máximo es de -50€."); [cite: 30]
         }
-        return retorno;
+        this.saldo -= valorAbsoluto;
+        this.generarMovimiento(Tipo.RETIRADA, valorAbsoluto);
+
+        if (valorAbsoluto >= 3000) {
+            throw new AvisarHaciendaException(cliente, IBAN, Tipo.RETIRADA);
+        }
     }
 
     public void generarMovimiento(Tipo tipo, double cantidad) {
-        if(this.contadorMovimientos < this.movimientos.length) {
-            this.movimientos[this.contadorMovimientos] = new Movimiento(tipo, cantidad);
-        }
-        else if(this.contadorMovimientos >= this.movimientos.length) {
-            this.ampliarDimensionMovimientos();
-            this.movimientos[this.contadorMovimientos] = new Movimiento(tipo, cantidad);
-        }
-        this.contadorMovimientos++;
+        this.movimiento.add(new Movimiento(tipo, cantidad));
     }
 
-    private void ampliarDimensionMovimientos(){
-        Movimiento[] movimientosAux = new Movimiento[this.movimientos.length + 10];
-        for(int i = 0; i < this.movimientos.length; i++){
-            movimientosAux[i] = this.movimientos[i];
-        }
-        this.movimientos = movimientosAux;
-    }
-
-    public String infoCuentaBancaria() {
-        String info = "";
-        info += "Titular: " + this.titular + "\n";
-        info += "IBAN: " + this.IBAN + "\n";
-        info += "Saldo: " + this.saldo + "\n";
-        return info;
+    //LO CAMBIO A TO STRING como hice en movimiento (aunque no lo pide la practica)
+    @Override
+    public String toString() {
+        return " DATOS DE LA CUENTA \n" +
+                "Titular: " + this.cliente + "\n" +
+                "IBAN: " + this.IBAN + "\n" +
+                "Saldo actual: " + this.saldo + "€\n" +
+                "--";
     }
 
     public String infoMovimientos() {
         String info = "";
-        if(this.contadorMovimientos > 0) {
-            for(int i = 0; i < this.contadorMovimientos; i++){
-                info += this.movimientos[i].mostrarInfoMovimiento() + "\n";
-            }
-        }else{
+        if (this.movimiento.isEmpty()) { // reviso si la lista esta vacia
             info = "No hay movimientos";
+        } else {
+            for (Movimiento m : this.movimiento) { // recorro cada movimiento m en la lista
+                info += m.toString() + "\n";
+            }
         }
         return info;
     }
-}
+
+}//CLASE CUENTABANCARIA
