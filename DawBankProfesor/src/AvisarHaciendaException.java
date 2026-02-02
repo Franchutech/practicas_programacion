@@ -1,5 +1,7 @@
 public class AvisarHaciendaException extends Exception {
-    public AvisarHaciendaException(String mensaje) {
-        super(mensaje);
+
+    public AvisarHaciendaException(Cliente cliente, String iban, Tipo tipo) {
+        super("Aviso a Hacienda: El cliente " + cliente.getNombre() +
+                " con IBAN " + iban + " ha realizado una operación de tipo " + tipo);
     }
 }

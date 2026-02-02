@@ -4,7 +4,7 @@ public class CuentaBancaria {
 
     private String IBAN;
     private double saldo;
-    private Cliente cliente;
+    public Cliente cliente;
 
     //ACTUALIZO AQUI EN VEZ DE ARRAY, UNA COLECCION
     private ArrayList<Movimiento> movimiento;
@@ -22,7 +22,7 @@ public class CuentaBancaria {
     public double getSaldo() {
         return saldo;
     }
-    public String getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
@@ -40,7 +40,7 @@ public class CuentaBancaria {
         double valorAbsoluto = Math.abs(valor);
 
         if ((this.saldo - valorAbsoluto) < -50) {
-            throw new CuentaException("Error: Saldo insuficiente. El descubierto máximo es de -50€."); [cite: 30]
+            throw new CuentaException("Error: Saldo insuficiente. El descubierto máximo es de -50€.");
         }
         this.saldo -= valorAbsoluto;
         this.generarMovimiento(Tipo.RETIRADA, valorAbsoluto);
@@ -66,10 +66,10 @@ public class CuentaBancaria {
 
     public String infoMovimientos() {
         String info = "";
-        if (this.movimiento.isEmpty()) { // reviso si la lista esta vacia
+        if (this.movimiento.isEmpty()) {
             info = "No hay movimientos";
         } else {
-            for (Movimiento m : this.movimiento) { // recorro cada movimiento m en la lista
+            for (Movimiento m : this.movimiento) {
                 info += m.toString() + "\n";
             }
         }
