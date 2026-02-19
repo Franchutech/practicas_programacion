@@ -23,6 +23,7 @@ public class Principal {
         private static void menuPrincipal(){
             int opcion = 0;
             do{
+                System.out.println("\n Selecciona una opcion del menú :\n");
                 System.out.println("\n--- MENU BIBLIOTECA ---");
                 System.out.println("1. Crear Libro");
                 System.out.println("2. Mostrar Libro");
@@ -185,7 +186,7 @@ public class Principal {
         catch (IOException | ClassNotFoundException e){
             System.out.println("Error al cargar datos de la Biblioteca: " + e.getMessage());
         }
-    }
+    }//CIERRO METODO DE CARGAR DATOS
 
 
 }//MAIN
