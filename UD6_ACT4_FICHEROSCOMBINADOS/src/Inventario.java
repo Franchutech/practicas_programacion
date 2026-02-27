@@ -15,8 +15,17 @@ public class Inventario {
         private static LinkedList<Producto> listaProductos = new LinkedList<Producto>();
 
     public static void main(String[] args) {
-        cargarDatosCSV();
+
+    // 1. Verifico si existe el archivo binario antes de hacer nada
+    File ficheroBinario = new File(PATH + FILE_DAT);
+
+    if (ficheroBinario.exists()) {
+        // Si existe el binario, paso del CSV y cargo la versión guardada
         cargarDatosBinarios();
+    } else {
+        // Si no existe (es la primera vez que se abre), cargo el CSV
+        cargarDatosCSV();
+    }
 
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
@@ -29,9 +38,12 @@ public class Inventario {
                     mostrarProductos();
                     break;
                 case 2:
-                    eliminarProductos(sc);
+                    registrarProducto(sc);
                     break;
                 case 3:
+                    eliminarProductos(sc);
+                    break;
+                case 4:
                     guardarySalir();
                     System.out.println("Saliendo del programa MERCADAW");
                     break;
@@ -88,7 +100,7 @@ public class Inventario {
         }//CIERRE CARGAR DATOS CSV METODO
 
         private static void cargarDatosBinarios () {
-            File fichero  = new File(FILE_DAT);
+            File fichero  = new File(PATH + FILE_DAT);
 
             //primero verifico si existe, porque como yo hago el proyecto de cero, la primera vez no va a existir.
             if (!fichero.exists()){
@@ -119,10 +131,11 @@ public class Inventario {
 
         private static void mostrarMenu() {
             System.out.println("\n MENÚ MERCADAW");
-            System.out.print("Elige una de las siguientes opciones: ");
+            System.out.println("Elige una de las siguientes opciones: ");
             System.out.println("1. Mostrar productos");
-            System.out.println("2. Eliminar producto por referencia");
-            System.out.println("3. Guardar y Salir");
+            System.out.println("2. Registrar productos");
+            System.out.println("3. Eliminar producto por referencia");
+            System.out.println("4. Guardar y Salir");
 
         }//CIERRE DEL METODO DEL MENU
 
@@ -181,6 +194,9 @@ public class Inventario {
                     break; // Detengo el bucle
                 }//CIERRE DEL IF
             }//CIERRE DEL FOR
+            if (!encontrado) {
+                System.out.println("\n[Aviso] No se localizó ningún producto con la referencia: " + refObjetivo);
+            }
 
         }//CIERRE METODO ELIMINAR PRODUCTOS
 
@@ -201,6 +217,55 @@ public class Inventario {
             }
 
         }//CIERRE DE METODO GUARDAR Y SALIR
+
+        private static boolean existeReferencia(String ref) {
+            for (Producto p : listaProductos) {
+                if (p.getReferencia().equalsIgnoreCase(ref)) {
+                    return true;
+            }
+        }
+        return false;
+        }//CIERRE DEL METODO EXISTE REFERENCIA
+
+        private static void registrarProducto(Scanner sc) {
+        System.out.println("\n ALTA DE NUEVO PRODUCTO ");
+        System.out.print("> Ingrese la referencia: ");
+        String ref = sc.nextLine().trim();
+
+            // Verifico que no me intenten colar una referencia que ya tengo
+            if (existeReferencia(ref)) {
+                System.out.println("[Error] La referencia " + ref + " ya existe en el sistema.");
+                return;
+            }
+
+            // Si la referencia es nueva, sigo pidiendo el resto de datos
+            System.out.print("> Descripción: ");
+            String desc = sc.nextLine().trim();
+            System.out.print("> Tipo de producto: ");
+            String tipo = sc.nextLine().trim();
+
+            // Para los números uso el truco del Double para que no explote el
+            // //Scanner si el usuario tonto me mete un punto
+            System.out.print("> Cantidad: ");
+            int cant = (int) Double.parseDouble(sc.nextLine().trim());
+            System.out.print("> Precio: ");
+            double prec = Double.parseDouble(sc.nextLine().trim());
+            System.out.print("> Descuento (%): ");
+            int descue = (int) Double.parseDouble(sc.nextLine().trim());
+            System.out.print("> IVA: ");
+            int iva = (int) Double.parseDouble(sc.nextLine().trim());
+            System.out.print("> ¿Aplica descuento? (true/false): ");
+            boolean dto = Boolean.parseBoolean(sc.nextLine().trim());
+
+            // Creo el objeto y lo mando a la lista global
+            Producto nuevo = new Producto(ref, desc, tipo, cant, prec, descue, iva, dto);
+            listaProductos.add(nuevo);
+
+            System.out.println("\n[Éxito] El producto '" + desc + "' ha sido registrado.");
+        }
+
+
+
 
 
 }//CIERRE CLASE INVENTARIO
