@@ -2,10 +2,7 @@ import java.io.Serializable;
 
 public class Producto implements Serializable {
 
-
-
 //CREO LOS ATRIBUTOS
-
 
     private String referencia;
     private String descripcion;
