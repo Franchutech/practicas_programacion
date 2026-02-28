@@ -1,31 +1,75 @@
+import java.io.Serial;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class Pelicula {
+public class Pelicula extends Articulo implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5452698551965501642L;
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
+
     // ATRIBUTOS
-    private String cod;
-    private String titulo;
+
     private Genero genero;
-    private LocalDate fechaRegistro;
-    private LocalDate fechaBaja;
     private LocalDateTime fechaAlquiler;
     private boolean isAlquilada;
 
+    //CONTADOR
+
     public static int contadorPelicula = 0;
 
-    // CONSTRUCTOR PRINCIPAL
-    public Pelicula(String titulo, Genero genero) {
-        this.cod = generarCodigoPelicula();
-        this.titulo = titulo;
+
+    //CONSTRUCTOR
+
+    public Pelicula(String cod, String titulo, Genero genero) {
+        super(cod, titulo);
         this.genero = genero;
-        this.fechaRegistro = LocalDate.now();
-        this.fechaBaja = null;
         this.fechaAlquiler = null;
         this.isAlquilada = false;
+    }
+
+
+
+    //GETTERS
+
+
+    public DateTimeFormatter getDtf() {
+        return dtf;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public LocalDateTime getFechaAlquiler() {
+        return fechaAlquiler;
+    }
+
+    public boolean isAlquilada() {
+        return isAlquilada;
+    }
+
+    public static int getContadorPelicula() {
+        return contadorPelicula;
+    }
+
+    //SETTERS
+
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public void setFechaAlquiler(LocalDateTime fechaAlquiler) {
+        this.fechaAlquiler = fechaAlquiler;
+    }
+
+    public void setAlquilada(boolean alquilada) {
+        isAlquilada = alquilada;
     }
 
     // GENERADOR DE CÓDIGO ÚNICO
@@ -34,54 +78,30 @@ public class Pelicula {
         return String.format("P-%04d", contadorPelicula);
     }
 
-    // GETTERS
-    public String getCod() {
-        return cod;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public Genero getGenero() {
-        return genero;
-    }
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
-    }
-    public LocalDate getFechaBaja() {
-        return fechaBaja;
-    }
-    public LocalDateTime getFechaAlquiler() {
-        return fechaAlquiler;
-    }
-    public boolean isAlquilada() {
-        return isAlquilada;
+    //TO STRING
+
+
+    @Override
+    public String toString() {
+        return super.toString() + "Pelicula" +
+                "dtf=" + dtf +
+                ", genero=" + genero +
+                ", fechaAlquiler=" + fechaAlquiler +
+                ", isAlquilada=" + isAlquilada +
+                '}';
     }
 
-    // SETTERS
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public void setGenero(Genero genero) {
-        this.genero = genero;
-    }
-    public void setFechaBaja(LocalDate fechaBaja) {
-        this.fechaBaja = fechaBaja;
-    }
-    public void setAlquilada(boolean alquilada) {
-        this.isAlquilada = alquilada;
-        this.fechaAlquiler = alquilada ? LocalDateTime.now() : null;
-    }
+    //METODO MOSTRAR INFO
 
-    // MÉTODO MOSTRAR INFO
     public String mostrarInfoPelicula() {
         String info = "";
-        info += "Codigo: " + this.cod + "\n";
-        info += "Titulo: " + this.titulo + "\n";
-        info += "Genero: " + this.genero + "\n";
-        info += "Fecha Registro: " + this.fechaRegistro + "\n";
-        info += "Fecha Baja: " + this.fechaBaja + "\n";
-        info += "Fecha Alquiler: " + this.fechaAlquiler + "\n";
-        info += "¿Alquilada?: " + this.isAlquilada + "\n";
+        info += "Cod: " + getCod() + "\n";
+        info += "Titulo: " + getTitulo() + "\n";
+        info += "Genero: " + getGenero() + "\n";
+        info += "Fecha Registro: " + getFechaRegistro() + "\n";
+        info += "Fecha Baja: " + getFechaBaja() + "\n";
+        info += "Fecha Alquiler: " + getFechaAlquiler() + "\n";
+        info += "¿Alquilada?: " + isAlquilada + "\n"; //COMO ES BOOLEANO SE USA ISALQUILADA EN LUGAR DE GET
         return info;
     }
 

@@ -1,0 +1,15 @@
+public enum GeneroVideoJuego {
+    ACCION,
+    LUCHA,
+    ROL,
+    SHOOTER,
+    PLATAFORMAS,
+    SIMULACION,
+    ESTRATEGIA,
+    AVENTURA,
+    TERROR,
+    SIMULACION_DE_VIDA,
+    SIMULACION_DE_GUERRA,
+    SIMULACION_DE_VIDA_Y_DEPORTES,
+
+}

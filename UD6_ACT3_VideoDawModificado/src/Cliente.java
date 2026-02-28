@@ -1,29 +1,60 @@
+import java.io.Serial;
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.util.ArrayList;
+
+
+//CLASE HIJA DE PERSONA
 
 public class Cliente extends Persona implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 5763763823792632766L;
+
+
     // ATRIBUTOS
-    private String DNI;
-    private String nombre;
+
     private String numSocio;
-    private String direccion;
-    private LocalDate fechaNacimiento;
     private LocalDate fechaBaja;
-    private Pelicula[] peliculasAlquiladas;
+    private ArrayList<Articulo> articulosAlquilados;
 
     public static int contadorSocios = 0;
 
     // CONSTRUCTOR
-    public Cliente(String DNI, String nombre, String direccion, LocalDate fechaNacimiento) {
-        this.DNI = DNI;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.fechaNacimiento = fechaNacimiento;
+
+    public Cliente(String DNI, String nombre, String direccion,
+                   LocalDate fechaNacimiento) {
+        super(DNI, nombre, direccion, fechaNacimiento);
         this.fechaBaja = null;
         this.numSocio = generarNumSocio();
-        this.peliculasAlquiladas = new Pelicula[10];
+        this.articulosAlquilados = new ArrayList<>();
+
     }
+    //GETTERS
+
+
+    public String getNumSocio() {
+        return numSocio;
+    }
+
+    public LocalDate getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public ArrayList<Articulo> getArticulosAlquilados() {
+        return articulosAlquilados;
+    }
+
+    //SETTERS
+
+    public void setArticulosAlquilados(ArrayList<Articulo> articulosAlquilados) {
+        this.articulosAlquilados = articulosAlquilados;
+    }
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        this.fechaBaja = fechaBaja;
+    }
+
 
     // GENERAR SOCIO ÚNICO TIPO S-0001
     private String generarNumSocio() {
@@ -31,18 +62,6 @@ public class Cliente extends Persona implements Serializable {
         return String.format("S-%04d", contadorSocios);
     }
 
-    // GETTERS
-    public String getDNI() { return DNI; }
-    public String getNombre() { return nombre; }
-    public String getNumSocio() { return numSocio; }
-    public String getDireccion() { return direccion; }
-    public LocalDate getFechaNacimiento() { return fechaNacimiento; }
-    public LocalDate getFechaBaja() { return fechaBaja; }
-    public Pelicula[] getPeliculasAlquiladas() { return peliculasAlquiladas; }
-
-    // SETTERS
-    public void setDireccion(String direccion) { this.direccion = direccion; }
-    public void setFechaBaja(LocalDate fechaBaja) { this.fechaBaja = fechaBaja; }
 
     // VALIDACIÓN DE NOMBRE
     public static boolean validacionNombre(String nombre) {
@@ -70,46 +89,55 @@ public class Cliente extends Persona implements Serializable {
     // MOSTRAR INFO
     public String mostrarinfoCliente() {
         String info = "";
-        info += "DNI: " + this.DNI + "\n";
-        info += "Nombre: " + this.nombre + "\n";
-        info += "NumSocio: " + this.numSocio + "\n";
-        info += "Direccion: " + this.direccion + "\n";
-        info += "FechaNacimiento: " + this.fechaNacimiento + "\n";
-        info += "FechaBaja: " + this.fechaBaja + "\n";
+        info += "DNI: " + getDNI() + "\n";
+        info += "Nombre: " + getNombre() + "\n";
+        info += "Direccion: " + getDireccion() + "\n";
+        info += "Fecha baja: " + getFechaBaja() + "\n";
+        info += "NumSocio: " + getNumSocio() + "\n";
+        info += "FechaNacimiento: " + getFechaNacimiento()+ "\n";
+
         return info;
     }
 
-    // MOSTRAR PELÍCULAS ALQUILADAS
-    public String mostrarPeliculasAlquiladas() {
-        String listado = "Películas alquiladas por " + nombre + ":\n";
-        for (Pelicula p : peliculasAlquiladas) {
-            if (p != null) {
-                listado += "- " + p.getTitulo() + " (" + p.getCod() + ")\n";
-            }
+    // MOSTRAR ARTÍCULOS ALQUILADOS
+    public String mostrarArticulosAlquilados() {
+        String listado = "Artículos alquilados por " + getNombre() + ":\n";
+
+        // for-each para recorrer la lista dinámica
+        for (Articulo a : articulosAlquilados) {
+            listado += "- " + a.getTitulo() + " (" + a.getCod() + ")\n";
         }
+
+        // Si la lista está vacía
+        if (articulosAlquilados.isEmpty()) {
+            listado += "No tiene artículos alquilados en este momento.";
+        }
+
         return listado;
     }
 
-    // MÉTODO PARA QUE EL CLIENTE PUEDA AÑADIR UNA PELÍCULA A SU LISTA
-    public boolean addPeliculaAlquilada(Pelicula p) {
-        for (int i = 0; i < peliculasAlquiladas.length; i++) {
-            if (peliculasAlquiladas[i] == null) {
-                peliculasAlquiladas[i] = p;
-                return true;
-            }
-        }
-        return false; // No hay espacio
+    //METODO PARA AÑADIR ARTICULOS
+    public void addArticuloAlquilado(Articulo a) {
+        articulosAlquilados.add(a);
     }
 
-    // MÉTODO PARA QUITAR UNA PELÍCULA AL DEVOLVERLA
-    public boolean removePeliculaAlquilada(Pelicula p) {
-        for (int i = 0; i < peliculasAlquiladas.length; i++) {
-            if (peliculasAlquiladas[i] != null && peliculasAlquiladas[i].getCod().equals(p.getCod())) {
-                peliculasAlquiladas[i] = null;
-                return true;
-            }
-        }
-        return false;
+    //METODO PARA ELIMINAR ARTICULOS
+    public boolean removeArticuloAlquilado(Articulo a) {
+        return articulosAlquilados.remove(a);
+
     }
+
+
+    @Override
+
+    //CON SUPER.TOSTRING me traigo lo de la clase madre mas lo nuevo.
+    public String toString() {
+        return super.toString() + " [Cliente: " +
+                "numSocio='" + numSocio + '\'' +
+                ", fechaBaja=" + fechaBaja +
+                ", articulosAlquilados=" + articulosAlquilados +
+                ']';
+    }
+
 
 }//CIERRE CLASE CLIENTE

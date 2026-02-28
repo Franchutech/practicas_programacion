@@ -64,4 +64,5 @@ public class Articulo implements Serializable {
                 ", fechaBaja=" + fechaBaja +
                 '}';
     }
+
 } //CIERRE CLASE ARTICULO
