@@ -1,151 +1,205 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.io.*;
+import java.io.Serializable;
+import exceptions.ArticuloYaRegistradoException;
+import exceptions.ClienteYaRegistradoException;
 
-public class VideoDaw {
+public class VideoDaw implements Serializable {
+
+    private static final long serialVersionUID = 1210630457771155714L;
+
 
     // ATRIBUTOS
     private String CIF;
     private String direccion;
     private LocalDate fechaAlta;
-    private Pelicula[] peliculasRegistradas;
-    private Cliente[] clientesRegistrados;
+    private ArrayList<Articulo> articulosRegistrados;
+    private ArrayList<Cliente> clientesRegistrados;
 
-    private int contadorPeliculas = 0;
-    private int contadorClientes = 0;
 
-    // CONSTRUCTOR
+    //CONSTRUCTOR
+
     public VideoDaw(String CIF, String direccion, LocalDate fechaAlta) {
         this.CIF = CIF;
         this.direccion = direccion;
         this.fechaAlta = fechaAlta;
+        this.articulosRegistrados = new ArrayList<>();
+        this.clientesRegistrados = new ArrayList<>();
 
-        this.peliculasRegistradas = new Pelicula[100];
-        this.clientesRegistrados = new Cliente[100];
     }
 
     // GETTERS
-    public String getCIF() { return CIF; }
-    public String getDireccion() { return direccion; }
-    public LocalDate getFechaAlta() { return fechaAlta; }
-    public Pelicula[] getPeliculasRegistradas() { return peliculasRegistradas; }
-    public Cliente[] getClientesRegistrados() { return clientesRegistrados; }
+
+    public String getCIF() {
+        return CIF;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public LocalDate getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public ArrayList<Articulo> getArticulosRegistrados() {
+        return articulosRegistrados;
+    }
+
+    public ArrayList<Cliente> getClientesRegistrados() {
+        return clientesRegistrados;
+    }
 
     // SETTERS
-    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    public void setCIF(String CIF) {
+        this.CIF = CIF;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setFechaAlta(LocalDate fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
 
     // MOSTRAR INFO DEL VIDEOCLUB
+
     public String mostrarInfoVideoClub() {
         String info = "";
         info += "CIF: " + CIF + "\n";
         info += "Direccion: " + direccion + "\n";
         info += "FechaAlta: " + fechaAlta + "\n";
-        info += "Total Peliculas Registradas: " + contadorPeliculas + "\n";
-        info += "Total Clientes Registrados: " + contadorClientes + "\n";
+        info += "Total Articulos Registrados: " + articulosRegistrados.size() + "\n";
+        info += "Total Clientes Registrados: " + clientesRegistrados.size() + "\n";
         return info;
     }
 
-    // MOSTRAR PELÍCULAS REGISTRADAS
-    public String mostrarPeliculasRegistradas() {
-        String listado = "PELÍCULAS REGISTRADAS:\n";
-        for (Pelicula p : peliculasRegistradas) {
-            if (p != null) {
-                listado += p.getCod() + " - " + p.getTitulo() + "\n";
+    // MOSTRAR ARTICULOS REGISTRADAS
+
+    public String mostrararticulosRegistrados() {
+        String listado = "ARTICULOS REGISTRADOS:\n";
+        if (articulosRegistrados.isEmpty()) {
+            listado += "No hay articulos registrados\n";
+        } else {
+            for (Articulo a : articulosRegistrados) {
+                listado += a.toString() + "\n";
             }
         }
         return listado;
     }
+
 
     // MOSTRAR CLIENTES REGISTRADOS
+
     public String mostrarClientesRegistrados() {
         String listado = "CLIENTES REGISTRADOS:\n";
-        for (Cliente c : clientesRegistrados) {
-            if (c != null) {
-                listado += c.getNumSocio() + " - " + c.getNombre() + "\n";
+        if (clientesRegistrados.isEmpty()) {
+            listado += "No hay clientes registrados\n";
+        }else  {
+            for (Cliente c : clientesRegistrados) {
+                listado += "- " + c.getNombre() + " (Socio: " + c.getNumSocio() + ")\n";
             }
         }
         return listado;
     }
 
-    // REGISTRAR CLIENTE (evitar repetidos)
-    public boolean registrarCliente(Cliente c) {
+    // REGISTRAR CLIENTE +EXCEPCION
 
-        for (Cliente cli : clientesRegistrados) {
-            if (cli != null && cli.getDNI().equals(c.getDNI())) {
-                return false;
-            }
+    public boolean registrarCliente(Cliente c) throws ClienteYaRegistradoException {
+    for (Cliente cli : clientesRegistrados) {
+        if (cli.getDNI().equalsIgnoreCase(c.getDNI())) {
+            throw new ClienteYaRegistradoException("El cliente con DNI " + c.getDNI() + " ya existe.");
         }
-
-        clientesRegistrados[contadorClientes] = c;
-        contadorClientes++;
-        return true;
     }
+    return clientesRegistrados.add(c);
+}
 
     // DAR DE BAJA CLIENTE
     public boolean darBajaCliente(String dni) {
-        for (int i = 0; i < clientesRegistrados.length; i++) {
-            Cliente c = clientesRegistrados[i];
-            if (c != null && c.getDNI().equals(dni)) {
-                clientesRegistrados[i].setFechaBaja(LocalDate.now());
-                return true;
+    for (Cliente c : clientesRegistrados) {
+        if (c.getDNI().equalsIgnoreCase(dni)) {
+            c.setFechaBaja(LocalDate.now());
+            return true;
+        }
+    }
+    return false;
+}
+
+
+    // REGISTRAR ARTICULO
+
+    public boolean registrarArticulo(Articulo a) throws ArticuloYaRegistradoException {
+        for (Articulo art : articulosRegistrados) {
+            if (art.getCod().equalsIgnoreCase(a.getCod())) {
+                throw new ArticuloYaRegistradoException("El artículo con código " + a.getCod() + " ya existe.");
             }
         }
-        return false;
+        return articulosRegistrados.add(a);
     }
 
-    // REGISTRAR PELÍCULA
-    public boolean registrarPelicula(Pelicula p) {
-
-        for (Pelicula peli : peliculasRegistradas) {
-            if (peli != null && peli.getCod().equals(p.getCod())) {
-                return false;
-            }
+    // DAR DE BAJA ARTICULO
+    public boolean darBajaArticulo(String cod) {
+    for (Articulo a : articulosRegistrados) {
+        if (a.getCod().equalsIgnoreCase(cod)) {
+            a.setFechaBaja(LocalDate.now());
+            return true;
         }
-
-        peliculasRegistradas[contadorPeliculas] = p;
-        contadorPeliculas++;
-        return true;
     }
-
-    // DAR DE BAJA PELÍCULA
-    public boolean darBajaPelicula(String cod) {
-        for (int i = 0; i < peliculasRegistradas.length; i++) {
-            Pelicula p = peliculasRegistradas[i];
-            if (p != null && p.getCod().equals(cod)) {
-                peliculasRegistradas[i].setFechaBaja(LocalDate.now());
-                return true;
-            }
-        }
-        return false;
-    }
+    return false;
+}
 
     // ALQUILAR PELÍCULA
-    public boolean alquilarPelicula(Pelicula p, Cliente c) {
-
-        if (p.isAlquilada()) return false;
-
-        p.setAlquilada(true);
-        c.addPeliculaAlquilada(p);
-
-        return true;
+    public boolean alquilarArticulo(Articulo a, Cliente c) {
+    if (a.isAlquilado()) {
+        return false;
     }
 
-    // DEVOLVER PELÍCULA
-    public boolean devolverPelicula(Pelicula p, Cliente c) {
+    // Marco como alquilado y ponemos la fecha actual
+    a.setAlquilado(true);
+    a.setFechaAlquiler(LocalDateTime.now());
 
-        if (!p.isAlquilada()) return false;
+    // Lo añado la lista del cliente (el método que ya hicimos en Cliente)
+    c.addArticuloAlquilado(a);
 
-        LocalDateTime ahora = LocalDateTime.now();
-        LocalDateTime alquiler = p.getFechaAlquiler();
-
-        if (alquiler != null && alquiler.plusHours(48).isBefore(ahora)) {
-            System.out.println("ATENCIÓN: La película supera las 48 horas de alquiler.");
-        }
-
-        p.setAlquilada(false);
-        c.removePeliculaAlquilada(p);
-
-        return true;
-    }
-
+    return true;
 }
+
+    // DEVOLVER ARTICULO
+    public boolean devolverArticulo(Articulo a, Cliente c) {
+
+    // COMPRUEBO SI EL ARTICULO ESTA ALQUILADO
+    if (!a.isAlquilado()) {
+        return false;
+    }
+
+    // RESETEAR EL ESTADO DEL ARTICULO AHORA ESTA DISPONIBLE DE NUEVO
+    a.setAlquilado(false);
+    a.setFechaAlquiler(null);
+
+    // 3. Lo quitO de la lista del cliente
+    // Como use ArrayList,
+    return c.removeArticuloAlquilado(a);
+}
+
+    // MÉTODO PARA GUARDAR TODO EL VIDEOCLUB EN UN ARCHIVO
+
+    public void guardarDatos(String nombreFichero) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFichero))) {
+            oos.writeObject(this); // Se guarda a sí mismo con todo lo que tiene dentro
+        }
+    }
+
+// MÉTODO PARA CARGAR DATOS (Este es estático porque crea un objeto nuevo)
+    public static VideoDaw cargarDatos(String nombreFichero) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFichero))) {
+            return (VideoDaw) ois.readObject();
+        }
+    }
+
+}//CIERRE CLASE VIDEODAW
 

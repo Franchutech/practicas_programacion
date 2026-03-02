@@ -6,15 +6,24 @@ public class GestionVideoDaw {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        VideoDaw videodaw = null;
+        String archivo = "videodaw.dat";
 
-        // REGISTRO INICIAL DEL VIDEOCLUB
-        System.out.println(" REGISTRO INICIAL DEL VIDEOCLUB ");
 
-        // Usamos solo el patrón del profesor, pero SIN leerTextoPantalla
-        String cif = MiUtils.comprobarPatronRepetidamente(
-                "[a-zA-Z][0-9]{8}",
-                "Introduzca el CIF (formato A12345678): "
-        );
+        try {
+            videodaw = VideoDaw.cargarDatos(archivo);
+            System.out.println("DATOS CARGADOS CORRECTAMENTE");
+        }catch (Exception e) {
+            System.out.println("NO SE ENCONTRARON DATOS PREVIOS. INICIANDO UNA CARGA NUEVA");
+
+            System.out.println("REGISTRO INICIAL DEL VIDEOCLUB");
+            String cif = MiUtils.comprobarPatronRepetidamente(
+                    "[a-zA-Z][0-9]{8}",
+                    "Introduzca el CIF (formato A12345678): "
+            );
+        }
+
+
 
         System.out.print("Introduzca la dirección del videoclub: ");
         String direccionVC = sc.nextLine();
