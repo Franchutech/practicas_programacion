@@ -1,5 +1,4 @@
 import java.io.Serial;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.Serializable;
@@ -26,10 +25,10 @@ public class Pelicula extends Articulo implements Serializable {
     //CONSTRUCTOR
 
     public Pelicula(String cod, String titulo, Genero genero) {
-        super(cod, titulo);
+        super(cod, titulo); // Pasamos el código y el título a la clase Articulo
         this.genero = genero;
+        this.isAlquilado = false; // Usa el nombre que pusimos en Articulo
         this.fechaAlquiler = null;
-        this.isAlquilada = false;
     }
 
 

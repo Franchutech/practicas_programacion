@@ -27,12 +27,12 @@ public class Videojuego extends Articulo implements Serializable{
 
     //CONSTRUCTOR
 
-    public Videojuego(String cod, String titulo, GeneroVideoJuego generovjuego, PLATAFORMAVJ plataformavj) {
-        super(cod, titulo);
-        this.generovjuego = generovjuego;
-        this.plataformavj = plataformavj;
-        this.fechaAlquiler = null;
+    public Videojuego(String cod, String titulo, GeneroVideoJuego genero, PLATAFORMAVJ plataforma) {
+        super(cod, titulo); // Enviamos ambos a la clase Articulo
+        this.generovjuego = genero;
+        this.plataformavj = plataforma;
         this.isAlquilado = false;
+        this.fechaAlquiler = null;
     }
 
 
