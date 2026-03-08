@@ -177,9 +177,25 @@ public class Academia implements Serializable {
 
     public void registrarEquipo(Equipo nuevoEquipo) {
         String dniNuevo = nuevoEquipo.getCapitan().getDNI();
+        boolean yaExiste = false;
+        for (Equipo e : listaEquipo) {
+            if (e.getCapitan().getDNI().equals(dniNuevo)) {
+                yaExiste = true;
+                break;
+            }
+        }
+        if (!yaExiste) {
+            System.out.println("El Capitan con numero de DNI" + dniNuevo + "ya se encuentra registrado");
 
-    }
+        } else {
+            this.listaEquipo.add(nuevoEquipo);
+            System.out.println("Equipo registrado correctamente.");
+
+        }
+
+    }//CIERRE REGISTRAR EQUIPO
 
 
+    }//CIERRE CLASE PRINCIPAL ACADEMIA
 
-}//CIERRE CLASE PRINCIPAL ACADEMIA
+
