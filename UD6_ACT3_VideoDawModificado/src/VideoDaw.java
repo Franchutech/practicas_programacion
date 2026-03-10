@@ -7,7 +7,7 @@ import exceptions.ArticuloYaRegistradoException;
 import exceptions.ClienteYaRegistradoException;
 
 public class VideoDaw implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1210630457771155714L;
 
 
@@ -15,8 +15,8 @@ public class VideoDaw implements Serializable {
     private String CIF;
     private String direccion;
     private LocalDate fechaAlta;
-    private ArrayList<Articulo> articulosRegistrados;
-    private ArrayList<Cliente> clientesRegistrados;
+    private ArrayList<Articulo> articulosRegistrados;//ANUAR RECOMIENDA TRABAJAR ESTO CON MAPA, PARA EVITAR REPETIDOS
+    private ArrayList<Cliente> clientesRegistrados;//ANUAR RECOMIENDA TRABAJAR ESTO CON MAPA, PARA EVITAR REPETIDOS
 
 
     //CONSTRUCTOR
@@ -31,10 +31,6 @@ public class VideoDaw implements Serializable {
     }
 
     // GETTERS
-
-    public String getCIF() {
-        return CIF;
-    }
 
     public String getDireccion() {
         return direccion;
