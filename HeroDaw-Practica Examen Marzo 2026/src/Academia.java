@@ -1,3 +1,6 @@
+import exceptions.CapacidadExcedidaException;
+import exceptions.HeroeYaRegistradoException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serial;
@@ -112,7 +115,7 @@ public class Academia implements Serializable {
                     //TROCEO EL CSV EN PARTES POR CADA PUNTO Y COMA
                     String[] partes = linea.split(";");
 
-                    //aqui convierto cada "parte" en una variable del tipo que tengo en la clase producto.
+                    //aqui convierto cada "parte" en una variable del tipo que tengo en la clase persona
 
                     String nombre = partes[0].trim();
                     String dni = partes[1].trim();
@@ -184,7 +187,7 @@ public class Academia implements Serializable {
                 break;
             }
         }
-        if (!yaExiste) {
+        if (yaExiste) {
             System.out.println("El Capitan con numero de DNI" + dniNuevo + "ya se encuentra registrado");
 
         } else {
@@ -194,6 +197,12 @@ public class Academia implements Serializable {
         }
 
     }//CIERRE REGISTRAR EQUIPO
+
+    //METODO ASIGNAR HEROE A EQUIPO
+
+    public void asignarHeroeAEquipo(Heroe h, Equipo e)throws HeroeYaRegistradoException, CapacidadExcedidaException {
+
+    }
 
 
     }//CIERRE CLASE PRINCIPAL ACADEMIA
