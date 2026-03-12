@@ -6,6 +6,11 @@ import java.sql.SQLException;
 
 public class SQLDataBaseManager {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "root";
+    private static final String USER = "root";
+    private static final String PASSWORD = "123";
 
     public static Connection getConnection(String url, String usuario, String clave){
         Connection connection = null;
