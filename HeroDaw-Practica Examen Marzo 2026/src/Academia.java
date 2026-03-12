@@ -33,10 +33,14 @@ public class Academia implements Serializable {
 
     public Academia(String nombre, String CIF, LocalDate fechaFundacion) {
         this.nombre = nombre;
-        setCIF(CIF);
+        this.setCIF(CIF);
         this.fechaFundacion = fechaFundacion;
         this.listaEquipo = new ArrayList<>();
         this.listaPersonas = new ArrayList<>();
+
+        // LLAMO A LOS MÉTODOS AQUÍ DENTRO
+        cargarDatosCSV();
+        cargarDatosDAT();
     }
 
     //GETTERS
@@ -104,7 +108,7 @@ public class Academia implements Serializable {
 
     //AQUI INTENTO ABRIR EL ARCHIVO CON LA RUTA QUE ESTABLECI PREVIAMENTE
 
-    private void cargarDatosCSV () {
+    private void cargarDatosCSV() {
 
         try(FileReader fr = new FileReader(PATH + FILE_CSV);
             BufferedReader br = new BufferedReader(fr)){
@@ -200,11 +204,71 @@ public class Academia implements Serializable {
 
     //METODO ASIGNAR HEROE A EQUIPO
 
-    public void asignarHeroeAEquipo(Heroe h, Equipo e)throws HeroeYaRegistradoException, CapacidadExcedidaException {
+    public void asignarHeroeAEquipo(Heroe h, Equipo e) throws HeroeYaRegistradoException, CapacidadExcedidaException {
+        if (e.getListaHeroes().size() >= e.getMaxHeroes()) {
+            throw new CapacidadExcedidaException("El equipo " + e.getNombreEquipo() + " está lleno.");
+        }
 
-    }
+        // AQUÍ FALTABA EL IF
+        for (Heroe heroeExistente : e.getListaHeroes()) {
+            if (heroeExistente.getDNI().equals(h.getDNI())) {
+                throw new HeroeYaRegistradoException("El heroe " + h.getNombre() + " ya se encuentra en este equipo.");
+            }
+        }
+
+        String contrato = "HERO-" + e.getCodEquipo();
+        h.setnContrato(contrato);
+        e.getListaHeroes().add(h);
+        System.out.println("Heroe registrado correctamente con contrato: " + contrato);
+
+    }//CIERRE ASIGNAR HEROE A EQUIPO
+
+    //METODO CALCULO DE ESTADISTICAS
+
+    public void calcularEstadistica() {
+
+        //VALIDO SI EXISTEN O NO EQUIPOS
+        if (listaEquipo.isEmpty()) {
+            System.out.println("No hay equipos suficientes para calcular una estadística");
+            return;
+        }
+        //VARIABLES
+        double sumaAtaqueTotal = 0;
+        int totalHeroes = 0;
+
+        //VARIABLES PARA BUSCAR AL MEJOR
+
+        Equipo mejorEquipo = listaEquipo.get(0); //ASUMO QUE EL PRIMERO O UNICO SERÁ EL MEJOR SIEMPRE
+        double maxAtaque = -1;//COMO DEBE SER MAYOR QUE CERO PONGO LA META EN -1 PARA QUE SIEMPRE SE CUMPLA QUE ALGUIEN ES MEJOR QUE ESO
+
+        System.out.println("REPORTE DE ESTADÍSTICAS ACADEMIA");
+        System.out.println("Equipos evaluados:");
+
+        for (Equipo e : listaEquipo) {
+            double ataqueDelEquipo = e.getAtaqueTotal();
+            System.out.println("- " + e.getNombreEquipo() + " | Poder: " + ataqueDelEquipo);
+            
+            sumaAtaqueTotal += e.getAtaqueTotal();
+
+            //EQUIPO MAS FUERTE
+            if (ataqueDelEquipo > maxAtaque) {
+                maxAtaque = ataqueDelEquipo;
+                mejorEquipo = e;
+            }
+        }
+        //PROMEDIO DE TODOS
+        double promedio  = sumaAtaqueTotal / listaEquipo.size();
+
+        System.out.println("ESTADÍSTICAS DE LA ACADEMIA");
+        System.out.println("Total de equipos: " + listaEquipo.size());
+        System.out.println("Total de héroes activos: " + totalHeroes);
+        System.out.println("Promedio de ataque por equipo: " + promedio);
+        System.out.println("EQUIPO DESTACADO: " + mejorEquipo.getNombreEquipo() + " con " + maxAtaque + " pts.");
 
 
-    }//CIERRE CLASE PRINCIPAL ACADEMIA
+    }//CIERRE METODO CALCULAR ESTADISTICA
+
+
+}//CIERRE CLASE PRINCIPAL ACADEMIA
 
 

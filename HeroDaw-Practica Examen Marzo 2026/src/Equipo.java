@@ -104,4 +104,15 @@ public class Equipo implements Serializable {
     } //FIN METODO ELIMINAR HEROE POR DNI Y DEJARLO SIN EQUIPO
 
 
+    //METODO PARA CONTAR EL ATAQUE DENTRO DE CADA EQUIPO
+
+    public double getAtaqueTotal() {
+        double suma = 0;
+        for (Heroe h : listaHeroes) {
+            suma += h.getAtaque(); // Suponiendo que el héroe tiene un atributo ataque
+        }
+        return suma;
+    }//FIN METODO PARA CONTAR ATAQUE
+
+
 } //CIERRE CLASE EQUIPO
