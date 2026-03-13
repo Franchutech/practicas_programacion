@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class Heroe extends Persona implements Serializable {
 
 
+
     @Serial
     private static final long serialVersionUID = 4185660051459301052L;
 
