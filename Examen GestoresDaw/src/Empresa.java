@@ -8,7 +8,7 @@ import java.util.Set;
 import java.io.*;
 
 
-public abstract class Empresa extends Trabajador implements Serializable {
+public class Empresa extends Trabajador implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6746873446663566364L;

@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import static java.util.regex.Pattern.matches;
 
 
-public abstract class Trabajador extends Persona implements Serializable {
+public class Trabajador extends Persona implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6746873446663566363L;

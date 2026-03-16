@@ -2,7 +2,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-abstract class Persona implements Serializable {
+public abstract class Persona implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6746873446663566362L;
@@ -81,6 +81,5 @@ abstract class Persona implements Serializable {
     }
 
 
-    protected abstract void add(String numeroSS);
 
 }//CIERRE CLASE ABSTRACTA PERSONA

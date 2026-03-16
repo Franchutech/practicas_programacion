@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import static java.util.regex.Pattern.matches;
 
-public abstract class GerenteDep extends Trabajador implements Serializable {
+public class GerenteDep extends Trabajador implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6746873446663566364L;
