@@ -39,4 +39,4 @@ build/
 .DS_Store
 
 ### ARCHIVOS DAT ###
-application.dat
+src/resources/application.dat

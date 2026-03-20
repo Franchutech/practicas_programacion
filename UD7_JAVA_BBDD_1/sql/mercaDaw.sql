@@ -40,3 +40,5 @@ VALUES
 ('REF008', 'Cable HDMI 2.1', 'Longitud 2 metros 8K', 6, 30, 14.99),
 ('REF009', 'Spray Aire Comprimido', 'Limpieza de teclados', 7, 10, 8.50),
 ('REF010', 'Placa Base B550', 'Socket AM4 ATX', 5, 2, 125.00);
+
+
