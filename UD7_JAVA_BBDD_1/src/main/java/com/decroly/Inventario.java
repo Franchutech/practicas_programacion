@@ -9,10 +9,26 @@ public class Inventario {
 
         System.out.println("Iniciando sistema MercaDaw...");
 
+        java.sql.Connection conn = SQLDataBaseManager.getConnection();
+
+        if (conn != null) {
+            System.out.println("Conexión a la base de datos de MercaDaw establecida correctamente...");
             Scanner input = new Scanner(System.in);
 
-            //MENU
-            mostrarMenu(input);
+            int opcion = 0;
+            do {
+            opcion = mostrarMenu(input);
+            switch (opcion) {
+                case 1:
+                    break;
+
+            }
+        }while (opcion!=9);
+
+    }else {
+        System.out.println("ERROR: No se puede conectar a la base de datos");
+    }
+
 
 
     }// CIERRE VOID MAIN
