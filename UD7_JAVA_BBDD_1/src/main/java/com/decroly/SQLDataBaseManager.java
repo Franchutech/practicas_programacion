@@ -19,10 +19,10 @@ public class SQLDataBaseManager {
 
     //METODO LECTURA.DAT
     private static void lecturaDat() {
-        String ruta = "src/main/resources/application.dat";
+        String ruta = "src/resources/application.dat";
 
         try (java.io.BufferedReader br= new BufferedReader
-                (new java.io.FileReader("src/main/resources/application.dat"))){
+                (new java.io.FileReader("src/resources/application.dat"))){
             URL = br.readLine();
             SCHEMA = br.readLine();
             USER = br.readLine();

@@ -1,6 +1,7 @@
 package com.decroly;
 
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -16,10 +17,54 @@ public class Inventario {
             Scanner input = new Scanner(System.in);
 
             int opcion = 0;
+            SQLAccessProducts acceso = new SQLAccessProducts();
+            //LO DECLARO FUERA PARA USARLO EN TODAS LAS CLASES
+
             do {
             opcion = mostrarMenu(input);
             switch (opcion) {
                 case 1:
+                    System.out.println("MOSTRANDO TODOS LOS PRODUCTOS DEL INVENTARIO");
+                    //LLAMO EL INSTANCIADO
+                    List<Producto> productos = acceso.getProducto();
+                    //3.FOR-EACH-RECORRIDO
+                    for (Producto p: productos) {
+                        System.out.println(p);
+                    }
+                    break;
+                case 2:
+                    System.out.println("BUSCAR PRODUCTO POR REFERENCIA");
+                    System.out.println("Introduce el número de referencia (formato REF000)");
+                    String ref = input.nextLine().trim();
+                    //LLAMO EL INSTANCIADO
+                    Producto encontrado = acceso.getProductsbyreference(ref);
+                    if (encontrado != null) {
+                        System.out.println("PRODUCTO ENCONTRADO");
+                        System.out.println(encontrado);//llama al to string
+                    }else {
+                        System.out.println("No existe ningun producto con la referencia:" + ref);
+                    }
+                    break;
+                case 3:
+                    System.out.println("BUSCAR PRODUCTO POOR TIPO");
+                    break;
+                case 4:
+                    System.out.println("BUSCAR PRODUCTO POR CANTIDAD");
+                    break;
+                case 5:
+                    System.out.println("INSERTAR UN NUEVO PRODUCTO");
+                    break;
+                case 6:
+                    System.out.println("ELIMINAR PRODUCTO POR REFERENCIA");
+                    break;
+                case 7:
+                    System.out.println("ACTUALIZAR PRODUCTO");
+                    break;
+                case 8:
+                    System.out.println("INSERTAR UN NUEVO TIPO DE PRODUCTO");
+                    break;
+                case 9:
+                    System.out.println("SALIENDO DE MERCADAW...");
                     break;
 
             }
