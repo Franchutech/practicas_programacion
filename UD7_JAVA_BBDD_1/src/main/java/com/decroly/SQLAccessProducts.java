@@ -119,4 +119,74 @@ public class SQLAccessProducts {
         return listaPorTipo;
     }//CIERRE METODO OBTENER PRODUCTOS POR TIPO
 
+
+    //INICIO METODO PARA BUSCAR POR CANTIDAD IGUAL O MENOR A LA INTRODUCIDA POR EL USUARIO
+
+    public List<Producto>getProductsbyCantidad(int cantidadMax) {
+        List<Producto>listaPorCantidad=new LinkedList<>();
+
+        String sql = "SELECT * FROM productos WHERE cantidad = ?";
+
+        try (Connection connection = SQLDataBaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1,cantidadMax);
+            try (ResultSet dataset = statement.executeQuery()){
+                while (dataset.next()){
+                    Producto p = new Producto(
+                            dataset.getInt("id"),
+                            dataset.getString("referencia"),
+                            dataset.getString("nombre"),
+                            dataset.getString("descripcion"),
+                            dataset.getInt("tipo_id"),
+                            dataset.getInt("cantidad"),
+                            dataset.getDouble("precio"),
+                            dataset.getInt("descuento"),
+                            dataset.getInt("iva"),
+                            dataset.getBoolean("aplicar_dto")
+                    );
+                    listaPorCantidad.add(p);
+                }
+            }
+
+        }catch (Exception e){
+            System.out.println("Error al buscar por cantidad" + e.getMessage());
+        }
+
+        return listaPorCantidad;
+
+    }//CIERRE METODO BUSQUEDA POR CANTIDAD
+
+
+    //CREAR METODO PARA INSERTAR NUEVOS PRODUCTOS
+
+    public int insertarProductos(Producto p) {
+        int response = -1;
+
+        String sql = "INSERT INTO productos (referencia, nombre, descripcion," +
+                " tipo_id, cantidad, precio, descuento, iva, aplicar_dto)" + "VALUES (?, ?, ?," +
+                " ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = SQLDataBaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+        ){
+            statement.setString(1,p.getReferencia());
+            statement.setString(2,p.getNombre());
+            statement.setString(3,p.getDescripcion());
+            statement.setInt(4,p.getTipoId());
+            statement.setInt(5,p.getCantidad());
+            statement.setDouble(6,p.getPrecio());
+            statement.setDouble(7,p.getDescuento());
+            statement.setInt(8,p.getIva());
+            statement.setBoolean(9,p.isAplicarDto());
+
+            response=statement.executeUpdate();
+
+        }catch (Exception e){
+            System.out.println("Error al insertar producto" + e.getMessage());
+        }
+    return response;
+
+    }//CIERRE CLASE INSERTAR PRODUCTO
+
+
 }//CIERRE CLASE ACCESS PRODUCTS

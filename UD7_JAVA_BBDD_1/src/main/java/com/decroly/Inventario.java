@@ -16,7 +16,7 @@ public class Inventario {
             System.out.println("Conexión a la base de datos de MercaDaw establecida correctamente...");
             Scanner input = new Scanner(System.in);
 
-            int opcion = 0;
+            int opcion;
             SQLAccessProducts acceso = new SQLAccessProducts();
             //LO DECLARO FUERA PARA USARLO EN TODAS LAS CLASES
 
@@ -63,9 +63,75 @@ public class Inventario {
                     break;
                 case 4:
                     System.out.println("BUSCAR PRODUCTO POR CANTIDAD");
+                    System.out.println("Introduzca la cantidad de inventario que desea buscar (sin comas ni puntos): ");
+                    int stockLimite = input.nextInt();
+                    input.nextLine();
+
+                    List<Producto>listaPorCantidad = acceso.getProductsbyCantidad(stockLimite);
+                    if (!listaPorCantidad.isEmpty()) {
+                        System.out.println("PRODUCTO POR CANTIDAD ENCONTRADO");
+                        for (Producto p: listaPorCantidad) {
+                            System.out.println(p);
+                        }
+                    }else {
+                        System.out.println("No hay en inventario ningún producto con esa Cantidad: " +
+                                stockLimite);
+                    }
                     break;
                 case 5:
-                    System.out.println("INSERTAR UN NUEVO PRODUCTO");
+                    System.out.println("INSERTAR UN NUEVO PRODUCTO (No se permiten referencias repetidas)");
+                    System.out.println("Introduce la referencia del nuevo producto (formato REF000)");
+                    String nuevaReferencia = input.nextLine().trim();
+                    input.nextLine();
+
+                    Producto productoExistente = acceso.getProductsbyreference(nuevaReferencia);
+                    if (productoExistente != null) {
+                        System.out.println("ERROR: La referencia: " + nuevaReferencia +
+                                " ya existe en la base de datos");
+                        System.out.println("No es permitido insertar un producto ya existente, pruebe con otra referencia");
+                    }else {
+                        System.out.println("La Referencia introducida se encuentra disponible para su uso.");
+
+                        try{
+                            System.out.println("Introduzca el nombre del producto: ");
+                            String nuevoNom = input.nextLine().trim();
+                            System.out.println("Introduzca la descripcion del producto: ");
+                            String nuevoDescripcion = input.nextLine().trim();
+                            System.out.println("Introduzca el tipo de producto: ");
+                            int nuevoTipo = input.nextInt();
+                            System.out.println("Introduzca la cantidad del producto: ");
+                            int nuevoCantidad = input.nextInt();
+                            System.out.println("Introduzca el precio del producto: ");
+                            double nuevoPrecio = input.nextDouble();
+                            System.out.println("Introduzca el descuento del producto: ");
+                            int nuevoDesc = input.nextInt();
+                            System.out.println("Introduzca el impuesto del producto: ");
+                            int nuevoImpuesto = input.nextInt();
+                            System.out.println("¿Aplica descuento? (1=SÍ / 0=NO): ");
+                            int opcDto = input.nextInt();
+                            boolean aplica = (opcDto == 1);
+                            input.nextLine();
+
+                        //Con esa informacioon armo el objeto nuevo
+
+                        Producto nuevo = new Producto(0, nuevaReferencia, nuevoNom, nuevoDescripcion, nuevoTipo,
+                                nuevoCantidad, nuevoPrecio, nuevoDesc, nuevoImpuesto, aplica);
+
+                        int resultado = acceso.insertarProductos(nuevo);
+                        if (resultado > 0){
+                            System.out.println("PRODUCTO INSERTADO CON ÈXITO EN LA BBDD");
+                        }else {
+                            System.out.println("PRODUCTO NO HA PODIDO INSERTARSE EN LA BBDD");
+                        }
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("ERROR: Formato de número no válido (revisa puntos y comas).");
+                        input.nextLine();
+                    } catch (Exception e) {
+                        System.out.println("Error inesperado: " + e.getMessage());
+                        input.nextLine();
+        }
+    }//CIERRE DEL ELSE
+
                     break;
                 case 6:
                     System.out.println("ELIMINAR PRODUCTO POR REFERENCIA");
