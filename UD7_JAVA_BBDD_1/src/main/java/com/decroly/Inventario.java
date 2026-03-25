@@ -46,7 +46,20 @@ public class Inventario {
                     }
                     break;
                 case 3:
-                    System.out.println("BUSCAR PRODUCTO POOR TIPO");
+                    System.out.println("BUSCAR PRODUCTO POR TIPO");
+                    System.out.println("Introduce el numero del Tipo (número del 1 al 9)");
+                    int tipo = input.nextInt();
+                    input.nextLine();
+
+                    List<Producto>productosporTipo = acceso.getProductsbyTipo(tipo);
+                    if (!productosporTipo.isEmpty()) {
+                        System.out.println("PRODUCTO POR TIPO ENCONTRADO");
+                        for (Producto p: productosporTipo) {
+                            System.out.println(p);
+                        }
+                    }else {
+                        System.out.println("No existe ningun producto con la Tipo:" + tipo);
+                    }
                     break;
                 case 4:
                     System.out.println("BUSCAR PRODUCTO POR CANTIDAD");

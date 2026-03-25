@@ -84,6 +84,39 @@ public class SQLAccessProducts {
 
     }//CIERRE METODO GET PRODUCTOS BY REFERENCE
 
+    //CREO METODO PARA LLAMAR POR TIPO
 
+    public List<Producto> getProductsbyTipo(int tipo_id) {
+        List<Producto>listaPorTipo=new LinkedList<>();
+
+        String sql = "SELECT * FROM productos WHERE tipo_id = ?";
+
+        try (Connection connection = SQLDataBaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)){
+
+            statement.setInt(1,tipo_id);
+            try (ResultSet dataset = statement.executeQuery()){
+                while (dataset.next()){
+                    Producto p = new Producto(
+                            dataset.getInt("id"),
+                            dataset.getString("referencia"),
+                            dataset.getString("nombre"),
+                            dataset.getString("descripcion"),
+                            dataset.getInt("tipo_id"),
+                            dataset.getInt("cantidad"),
+                            dataset.getDouble("precio"),
+                            dataset.getInt("descuento"),
+                            dataset.getInt("iva"),
+                            dataset.getBoolean("aplicar_dto")
+                    );
+                    listaPorTipo.add(p);
+                }
+            }
+
+        }catch (Exception e){
+            System.out.println("Error al buscar por tipo" + e.getMessage());
+        }
+        return listaPorTipo;
+    }//CIERRE METODO OBTENER PRODUCTOS POR TIPO
 
 }//CIERRE CLASE ACCESS PRODUCTS
