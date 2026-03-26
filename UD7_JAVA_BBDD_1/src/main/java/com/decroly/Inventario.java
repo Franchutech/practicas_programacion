@@ -49,8 +49,6 @@ public class Inventario {
                     System.out.println("BUSCAR PRODUCTO POR TIPO");
                     System.out.println("Introduce el numero del Tipo (número del 1 al 9)");
                     int tipo = input.nextInt();
-                    input.nextLine();
-
                     List<Producto>productosporTipo = acceso.getProductsbyTipo(tipo);
                     if (!productosporTipo.isEmpty()) {
                         System.out.println("PRODUCTO POR TIPO ENCONTRADO");
@@ -65,8 +63,6 @@ public class Inventario {
                     System.out.println("BUSCAR PRODUCTO POR CANTIDAD");
                     System.out.println("Introduzca la cantidad de inventario que desea buscar (sin comas ni puntos): ");
                     int stockLimite = input.nextInt();
-                    input.nextLine();
-
                     List<Producto>listaPorCantidad = acceso.getProductsbyCantidad(stockLimite);
                     if (!listaPorCantidad.isEmpty()) {
                         System.out.println("PRODUCTO POR CANTIDAD ENCONTRADO");
@@ -82,7 +78,6 @@ public class Inventario {
                     System.out.println("INSERTAR UN NUEVO PRODUCTO (No se permiten referencias repetidas)");
                     System.out.println("Introduce la referencia del nuevo producto (formato REF000)");
                     String nuevaReferencia = input.nextLine().trim();
-                    input.nextLine();
 
                     Producto productoExistente = acceso.getProductsbyreference(nuevaReferencia);
                     if (productoExistente != null) {
@@ -135,25 +130,108 @@ public class Inventario {
                     break;
                 case 6:
                     System.out.println("ELIMINAR PRODUCTO POR REFERENCIA");
+                    System.out.println("Introduzca la referencia del producto que desea eliminar: (formato REF000) ");
+                    String eliminarReferencia = input.nextLine().trim();
+                    Producto eliminarProducto =  acceso.getProductsbyreference(eliminarReferencia);
+                    if (eliminarProducto == null) {
+                        System.out.println("ERROR: La referencia " + eliminarReferencia + " no existe.");
+                    } else {
+                        System.out.println("La referencia " + eliminarReferencia + " existe.");
+                        System.out.print("¿Estás seguro? (1=SÍ / 0=NO): ");
+                        int confirmacion = input.nextInt();
+                        input.nextLine();
+
+                        if (confirmacion == 1) {
+                            int resultado = acceso.eliminarProductos(eliminarProducto);
+                            if (resultado > 0) {
+                                System.out.println("Producto eliminado de manera exitosa");
+                            } else {
+                                System.out.println("ERROR: No se pudo eliminar el producto");
+                            }
+                        }
+                        else if (confirmacion == 0) {
+                            System.out.println("Operación cancelada por el usuario");
+                        }
+                        else {
+                            System.out.println("La confirmación: " + confirmacion + " no es una opción válida");
+                        }
+                    }
                     break;
                 case 7:
                     System.out.println("ACTUALIZAR PRODUCTO");
+                    System.out.println("Introduzca la referencia del producto que desea actualizar: (formato REF000) ");
+                    String refEdit = input.nextLine().trim();
+
+                    Producto pEncontrado =  acceso.getProductsbyreference(refEdit);
+
+                    if (pEncontrado == null) {
+                        System.out.println("ERROR: La referencia " + refEdit + " no existe.");
+                    }else {
+                        System.out.println("Editando la referencia: " + pEncontrado.getNombre() + " a continuación" +
+                                " se le solicitarán los datos");
+
+                        try {
+                            System.out.print("Nueva Descripción: ");
+                            String nDesc = input.nextLine().trim();
+
+                            System.out.print("Nueva Cantidad: ");
+                            int nCant = input.nextInt();
+
+                            System.out.print("Nuevo Precio (usa punto para decimales): ");
+                            double nPrecio = input.nextDouble();
+
+                            System.out.print("Nuevo Descuento (entero): ");
+                            int nDto = input.nextInt();
+
+                            System.out.print("¿Aplica descuento? (1=SÍ / 0=NO): ");
+                            int opc = input.nextInt();
+                            boolean nAplica = (opc == 1);
+                            input.nextLine();
+
+                            int filas = acceso.actualizarProductos(refEdit, nDesc, nCant, nPrecio, nDto, nAplica);
+
+                            if (filas > 0) {
+                                System.out.println("¡Producto actualizado con éxito!");
+                            } else {
+                                System.out.println("No se pudieron guardar los cambios.");
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("ERROR: Datos introducidos no válidos.");
+                            input.nextLine();
+                        }
+                    }
                     break;
                 case 8:
-                    System.out.println("INSERTAR UN NUEVO TIPO DE PRODUCTO");
+                    System.out.println("\n--- REGISTRAR NUEVO TIPO DE PRODUCTO ---");
+                    System.out.print("Introduce el nombre de la nueva categoría (ej: Lácteos, Limpieza...): ");
+                    String nombreNuevoTipo = input.nextLine().trim();
+
+                    if (nombreNuevoTipo.isEmpty()) {
+                        System.out.println("El nombre del tipo no puede estar vacío.");
+                    } else {
+                        int resultado = acceso.insertarNuevoTipo(nombreNuevoTipo);
+
+                        if (resultado > 0) {
+                            System.out.println("Nueva categoría '" + nombreNuevoTipo + "' añadida con éxito.");
+                            System.out.println("Ahora ya puedes usar este tipo al insertar productos (Caso 5).");
+                        } else {
+                            System.out.println("No se pudo registrar la nueva categoría.");
+                        }
+                    }
                     break;
                 case 9:
                     System.out.println("SALIENDO DE MERCADAW...");
                     break;
-
+                    default:
+                    System.out.println("Opción no válida. Por favor, elige entre 1 y 9.");
+                break;
             }
         }while (opcion!=9);
 
     }else {
         System.out.println("ERROR: No se puede conectar a la base de datos");
     }
-
-
 
     }// CIERRE VOID MAIN
 

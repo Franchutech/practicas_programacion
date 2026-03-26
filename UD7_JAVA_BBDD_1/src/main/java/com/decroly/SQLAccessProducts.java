@@ -189,4 +189,72 @@ public class SQLAccessProducts {
     }//CIERRE CLASE INSERTAR PRODUCTO
 
 
+    //METODO PARA ELIMINAR PRODUCTOS POR REFERENCIA
+
+    public int eliminarProductos(Producto p) {
+        int filasAfectadas= -1;
+        String sql = "DELETE FROM productos WHERE referencia = ?";
+
+        try (Connection connection = SQLDataBaseManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ){
+            statement.setString(1,p.getReferencia());
+            filasAfectadas=statement.executeUpdate();
+
+        }catch (Exception e){
+            System.out.println("Error al eliminar producto" + e.getMessage());
+        }
+
+    return filasAfectadas;
+
+    }//CIERRE METODO ELIMINAR PRODUCTOS
+
+
+    //METODO ACTUALIZAR PRODUCTO
+
+    public int actualizarProductos(String ref, String descr, int cant, double precio,
+                                   int desc, boolean aplica  ) {
+        int response = -1;
+        String sql = "UPDATE productos SET descripcion = ?, cantidad = ?, precio = ?, descuento = ?, boolean = ? WHERE referencia = ? ";
+
+        try (Connection connection = SQLDataBaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+        ){
+            statement.setString(1,descr);
+            statement.setInt(2,cant);
+            statement.setDouble(3,precio);
+            statement.setInt(4,desc);
+            statement.setBoolean(5,aplica);
+            statement.setString(6,ref);
+
+            response=statement.executeUpdate();
+
+        }catch (Exception e){
+            System.out.println("Error al actualizar producto" + e.getMessage());
+        }
+    return response;
+    }//CIERRE METODO ACTUALIZAR PRODUCTOS
+
+
+    //METODO PARA INSERTAR NUEVO TIPO
+
+    public int insertarNuevoTipo(String nombreTipo) {
+    int response = -1;
+    // SQL simple: el ID se genera solo
+    String sql = "INSERT INTO tipos (nombre) VALUES (?)";
+
+    try (Connection connection = SQLDataBaseManager.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+        statement.setString(1, nombreTipo);
+        response = statement.executeUpdate();
+
+    } catch (Exception e) {
+        System.out.println("Error al insertar tipo: " + e.getMessage());
+    }
+    return response;
+}//CIERRE METODO INSERTAR NUEVO TIPO
+
+
+
 }//CIERRE CLASE ACCESS PRODUCTS
