@@ -1,10 +1,9 @@
-package es.frojas.magic;
+package es.frojas.magic.dbconfg;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.*;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class SQLDataBaseManager {

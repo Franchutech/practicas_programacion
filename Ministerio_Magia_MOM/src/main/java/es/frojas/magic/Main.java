@@ -1,6 +1,8 @@
 package es.frojas.magic;
 
 
+import es.frojas.magic.dbconfg.SQLDataBaseManager;
+
 import java.sql.Connection;
 
 public class Main {

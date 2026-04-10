@@ -24,7 +24,7 @@ public class Muggle extends SerVivo implements Serializable {
     @Override
     public String obtenerFicha() {
         return String.format("""
-            --- FICHA DE MUGGLE ---
+            -- FICHA DE MUGGLE --
             ID: %d
             Nombre: %s
             Nacionalidad: %s
