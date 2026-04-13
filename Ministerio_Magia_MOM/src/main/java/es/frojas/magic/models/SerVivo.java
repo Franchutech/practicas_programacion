@@ -22,7 +22,7 @@ public abstract class SerVivo implements Serializable {
     protected TipoSer tipoSerVivo;
 
     //CONSTRUCTOR
-    public SerVivo(int idSerVivo, String nombreSerVivo, Nacionalidades nacionalidadSerVivo, TipoSer tipoSerVivo) {
+    protected SerVivo(int idSerVivo, String nombreSerVivo, Nacionalidades nacionalidadSerVivo, TipoSer tipoSerVivo) {
         this.idSerVivo = idSerVivo;
         this.nombreSerVivo = nombreSerVivo;
         this.nacionalidadSerVivo = nacionalidadSerVivo;

@@ -1,0 +1,21 @@
+==========================================================
+        ESTRUCTURA DE NAVEGACIÓN - MINISTERIO DE MAGIA
+==========================================================
+
+MENU PRINCIPAL: MINISTERIO DE MAGIA (Switch 1)
+│
+├── [1] GESTIÓN DE SERES VIVOS (Censo) -- (Entra al Switch 2)
+    ├── [1] REGISTRAR NUEVO (Mago, Muggle, Criatura)
+    ├── [2] Ver Censo Completo
+    ├── [3] Buscar por Nombre
+    ├── [4] Buscar por Tipo
+    ├── [5] Buscar por ID único
+    ├── [6] Expulsar Ser Vivo (Eliminar)
+    ├── [7] Actualizar Datos Básicos (Nombre/Origen)
+    └── [0] VOLVER AL MENÚ PRINCIPAL
+├── [2] LABORATORIO DE POCIONES -- (Entra al Switch 2)
+├── [3] INVERNADERO DE HERBOLOGÍA -- (Entra al Switch 2)
+├── [4] DEPARTAMENTO DE DEPORTES (Quidditch) -- (Entra al Switch 2)
+└── [0] SALIR DE LA APLICACIÓN (Cierra el programa)
+
+==========================================================

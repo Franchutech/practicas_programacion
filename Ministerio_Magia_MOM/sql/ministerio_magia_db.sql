@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS ser_vivo (
 
 -- INSERTO DATOS DE PRUEBA
 INSERT INTO casas (nombre, escuela, cualidad_requerida) 
-VALUES ('Gryffindor', 'Hogwarts', 'Valor'), ('Slytherin', 'Hogwarts', 'Ambición');
+VALUES ('Gryffindor', 'Hogwarts', 'Valor'),
+       ('Slytherin', 'Hogwarts', 'Ambición');
 
 INSERT INTO casas (nombre, escuela, cualidad_requerida) VALUES 
 ('Ravenclaw', 'Hogwarts', 'Sabiduría'),
