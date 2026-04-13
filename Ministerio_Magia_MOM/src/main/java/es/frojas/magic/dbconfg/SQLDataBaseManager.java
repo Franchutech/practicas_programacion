@@ -44,7 +44,6 @@ public class SQLDataBaseManager {
         try{
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL+SCHEMA,USER,PASSWORD);
-            System.out.println("Conexión establecida correctamente");
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encuentra el driver. Revisa el pom.xml");
         } catch (SQLException e) {

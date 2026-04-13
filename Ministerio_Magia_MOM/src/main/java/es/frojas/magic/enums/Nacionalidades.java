@@ -1,12 +1,13 @@
 package es.frojas.magic.enums;
 
 public enum Nacionalidades {
-    INGLATERRA,     // Hogwarts
-    FRANCESA,      // Beauxbatons
-    BULGARA,       // Durmstrang
-    ESTADOUNIDENSE, // Ilvermorny
-    BRASILENA,     // Castelobruxo (Sin la Ñ para evitar errores de BD)
-    AFRICANA,      // Uagadou
-    JAPONESA,      // Mahoutokoro
-    ESPANA         // POR MI JAJAJA
+    INGLATERRA,
+    HUNGRIA,    // Habia metido un colacuerno así que la agregue
+    ESPANA,      // Para muggles como mis compañeros jaja
+    FRANCESA,
+    BULGARA,
+    ESTADOUNIDENSE,
+    BRASILENA,
+    AFRICANA,
+    JAPONESA
 }

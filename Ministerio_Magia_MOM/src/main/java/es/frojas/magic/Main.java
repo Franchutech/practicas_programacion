@@ -4,10 +4,12 @@ import es.frojas.magic.dbconfg.SQLDataBaseManager;
 import es.frojas.magic.daos.SerVivoDAO;
 import es.frojas.magic.enums.Casas;
 import es.frojas.magic.enums.Nacionalidades;
+import es.frojas.magic.exceptions.SerVivoNoEncontradoException;
 import es.frojas.magic.models.*;
 
 import java.sql.Connection;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,165 +20,134 @@ public class Main {
         Connection con = SQLDataBaseManager.getConnection();
 
         if (con != null) {
-            System.out.println("🧙🏻¡EXCELENTE NO ERES UN MUGGLE! La base de datos responde.");
+            System.out.println("🧙🏻¡EXCELENTE! La base de datos del Ministerio responde.");
 
-            int option = -1;
-            while (option != 0) {
-                System.out.println("\n INICIANDO MINISTERIO DE MAGIA ");
-                System.out.println("1. GESTION DE SERES VIVOS (Censo)");
-                System.out.println("2. LABORATORIO DE POCIONES");
-                System.out.println("3. INVERNADERO DE HERBOLOGÍA");
-                System.out.println("4. DEPARTAMENTO DE DEPORTES");
-                System.out.println("0. SALIR");
-                System.out.print("> Elige: ");
+            int opt = -1;
+            while (opt != 0) {
+                System.out.println(" MENÚ CENSO DEL MINISTERIO DE MAGIA");
+                System.out.println("1. Registrar Nuevo Ser Vivo");
+                System.out.println("2. Ver Censo Completo");
+                System.out.println("3. Buscar por Nombre");
+                System.out.println("4. Buscar por Tipo");
+                System.out.println("5. Buscar por ID único");
+                System.out.println("6. Expulsar Ser Vivo (Eliminar)");
+                System.out.println("7. Actualizar Datos Básicos");
+                System.out.println("0. SALIR DE LA APLICACIÓN");
+                System.out.print("\n> Elija trámite ministerial: ");
 
                 try {
-                    option = Integer.parseInt(sc.nextLine());
+                    opt = Integer.parseInt(sc.nextLine());
 
-                    switch (option) {
+                    switch (opt) {
                         case 1:
-                            abrirGestionCenso(sc, dao);
+                            registrarNuevoSer(sc, dao);
                             break;
                         case 2:
-                            System.out.println("\nAVISO: LABORATORIO DE POCIONES CLAUSURADO.");
-                            System.out.println("Un caldero ha explotado y hay vapores de Filtro de Muerta en Vida.");
+                            List<SerVivo> listaCenso = dao.obtenerCensoCompleto();
+                            for (SerVivo s : listaCenso) {
+                                System.out.println(s.obtenerFicha());
+                            }
                             break;
                         case 3:
-                            System.out.println("\nAVISO: INVERNADERO DE HERBOLOGÍA CERRADO.");
-                            System.out.println("Las Mandrágoras están en época de replantado y sus gritos son letales.");
+                            System.out.print("Nombre a buscar: ");
+                            String nombreBusq = sc.nextLine();
+                            for (SerVivo s : dao.buscarPorNombre(nombreBusq)) {
+                                System.out.println(s.obtenerFicha());
+                            }
                             break;
                         case 4:
-                            System.out.println("\nAVISO: DEPARTAMENTO DE DEPORTES SIN SERVICIO.");
-                            System.out.println("Todo el personal se ha ido al Mundial de Quidditch en Bulgaria.");
+                            System.out.print("Tipo (MAGO/MUGGLE/CRIATURA): ");
+                            String tipoBusq = sc.nextLine().toUpperCase();
+                            for (SerVivo s : dao.buscarPorTipo(tipoBusq)) {
+                                System.out.println(s.obtenerFicha());
+                            }
+                            break;
+                        case 5:
+                            System.out.print("ID del Ser Vivo: ");
+                            int idBusq = Integer.parseInt(sc.nextLine());
+                            try {
+                                SerVivo encontrado = dao.buscarPorId(idBusq);
+                                System.out.println(encontrado.obtenerFicha());
+                            } catch (SerVivoNoEncontradoException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            break;
+                        case 6:
+                            System.out.print("ID del ser a expulsar (o 0 para cancelar): ");
+                            int idBorrar = Integer.parseInt(sc.nextLine());
+
+                            if (idBorrar == 0) {
+                                System.out.println("Operación cancelada. El sujeto permanece en el censo.");
+                            } else {
+                                int resultBorrado = dao.eliminarSerVivo(idBorrar);
+                                if (resultBorrado > 0) {
+                                    System.out.println("Sujeto expulsado correctamente.");
+                                } else {
+                                    System.out.println("No se encontró ningún registro con ese ID.");
+                                }
+                            }
+                            break;
+
+                        case 7:
+                            System.out.print("ID a actualizar (o 0 para cancelar): ");
+                            int idAct = Integer.parseInt(sc.nextLine());
+
+                            if (idAct == 0) {
+                                System.out.println("Actualización cancelada.");
+                            } else {
+                                System.out.print("Nuevo Nombre: ");
+                                String nuevoNom = sc.nextLine();
+                                System.out.print("Nueva Nacionalidad: ");
+                                String nuevaNac = sc.nextLine();
+                                dao.actualizarDatosBasicos(idAct, nuevoNom, nuevaNac);
+                                System.out.println("Datos actualizados.");
+                            }
                             break;
                         case 0:
-                            System.out.println("Cerrando sesión. Travesura realizada.");
+                            System.out.println("Travesura realizada... Cerrando sesión.");
                             break;
                         default:
-                            System.out.println("Esa opción no existe ni en el Callejón Knockturn.");
+                            System.out.println("Opción no válida.");
                     }
                 } catch (Exception e) {
-                    System.out.println("Error: Introduce un número válido.");
+                    System.out.println("Error: Introduce un número válido para el menú.");
                 }
             }
         } else {
-            System.err.println("🤬MALDITO MUGGLE!!!!: No se pudo conectar. Revisa QUE HICISTE MAL!!!!.");
+            System.err.println("🤬 MALDITO MUGGLE !!! Revisa que hiciste mal.");
         }
-    }//CIERRE VOID MAIN
+    }
 
-    public static void abrirGestionCenso(Scanner sc, SerVivoDAO dao) {
-        int opt = -1;
-        while (opt != 0) {
-            System.out.println("\nCENSO DEL MINISTERIO");
-            System.out.println("1. Registrar Nuevo");
-            System.out.println("2. Ver Censo Completo");
-            System.out.println("3. Buscar por Nombre");
-            System.out.println("4. Buscar por Tipo");
-            System.out.println("5. Buscar por ID");
-            System.out.println("6. Expulsar (Eliminar)");
-            System.out.println("7. Actualizar Datos Básicos");
-            System.out.println("0. VOLVER");
-            System.out.print("> Opción: ");
-
-            try {
-                opt = Integer.parseInt(sc.nextLine());
-                switch (opt) {
-                    case 1:
-                        registrarNuevoSer(sc, dao);
-                        break;
-                    case 2:
-                        for (SerVivo s : dao.obtenerCensoCompleto()) {
-                            System.out.println(s.obtenerFicha());
-                        }
-                        break;
-                    case 3:
-                        System.out.print("Nombre a buscar: ");
-                        String n = sc.nextLine();
-                        for (SerVivo s : dao.buscarPorNombre(n)) {
-                            System.out.println(s.obtenerFicha());
-                        }
-                        break;
-                    case 4:
-                        System.out.print("Tipo (MAGO/MUGGLE/CRIATURA): ");
-                        String t = sc.nextLine().toUpperCase();
-                        for (SerVivo s : dao.buscarPorTipo(t)) {
-                            System.out.println(s.obtenerFicha());
-                        }
-                        break;
-                    case 5:
-                        System.out.print("ID a buscar: ");
-                        int id = Integer.parseInt(sc.nextLine());
-                        SerVivo s = dao.buscarPorId(id);
-                        if (s != null) {
-                            System.out.println(s.obtenerFicha());
-                        } else {
-                            System.out.println("No se encontró ese ID.");
-                        }
-                        break;
-                    case 6:
-                        System.out.print("ID a expulsar: ");
-                        int idB = Integer.parseInt(sc.nextLine());
-                        int filas = dao.eliminarSerVivo(idB);
-                        System.out.println(filas > 0 ? "Expulsado correctamente." : "No existe.");
-                        break;
-                    case 7:
-                        System.out.print("ID a actualizar: ");
-                        int idA = Integer.parseInt(sc.nextLine());
-                        System.out.print("Nuevo Nombre: ");
-                        String nom = sc.nextLine();
-                        System.out.print("Nueva Nacionalidad: ");
-                        String nac = sc.nextLine();
-                        dao.actualizarDatosBasicos(idA, nom, nac);
-                        System.out.println("Datos actualizados.");
-                        break;
-                    case 0:
-                        break;
-                    default:
-                        System.out.println("Opción no válida.");
-                }
-            } catch (Exception e) {
-                System.out.println("Error en la entrada de datos.");
-            }
-        }
-    }//CIERRE ABRIR GESTION CENSO
-
+    // MÉTODO DE REGISTRO INTEGRADO
     public static void registrarNuevoSer(Scanner sc, SerVivoDAO dao) {
         try {
-            System.out.println("\n¿Qué deseas registrar?");
+            System.out.println("\n¿Qué desea registrar?");
             System.out.println("1. Mago | 2. Muggle | 3. Criatura");
             int tipo = Integer.parseInt(sc.nextLine());
 
             System.out.print("Nombre: ");
             String nom = sc.nextLine();
-            System.out.print("Nacionalidad (ej. ESPANA, REINO_UNIDO): ");
+            System.out.print("Nacionalidad (ej. INGLATERRA, ESPANA, FRANCESA): ");
             Nacionalidades nac = Nacionalidades.valueOf(sc.nextLine().toUpperCase());
 
             if (tipo == 1) {
-                System.out.println("Elige Casa: 1.Gryffindor, 2.Slytherin, 3.Hufflepuff, 4.Ravenclaw");
+                System.out.println("Seleccione Casa: 1.Gryffindor, 2.Slytherin, 3.Hufflepuff, 4.Ravenclaw");
                 int numCasa = Integer.parseInt(sc.nextLine());
 
-                Casas casaSeleccionada = null;
-                int idCasa = numCasa; // Guardamos el número para enviarlo al DAO
-
-                if (numCasa == 1) {
-                    casaSeleccionada = Casas.GRYFFINDOR;
-                } else if (numCasa == 2) {
-                    casaSeleccionada = Casas.SLYTHERIN;
-                } else if (numCasa == 3) {
-                    casaSeleccionada = Casas.HUFFLEPUFF;
-                } else if (numCasa == 4) {
-                    casaSeleccionada = Casas.RAVENCLAW;
-                }
+                Casas casaSel = null;
+                if (numCasa == 1) casaSel = Casas.GRYFFINDOR;
+                else if (numCasa == 2) casaSel = Casas.SLYTHERIN;
+                else if (numCasa == 3) casaSel = Casas.HUFFLEPUFF;
+                else if (numCasa == 4) casaSel = Casas.RAVENCLAW;
 
                 System.out.print("Patronus: ");
                 String pat = sc.nextLine();
-                System.out.print("Nivel Mágico (0-10): ");
+                System.out.print("Nivel Mágico (1-10): ");
                 int niv = Integer.parseInt(sc.nextLine());
                 System.out.print("¿Es Mortífago? (true/false): ");
                 boolean mor = Boolean.parseBoolean(sc.nextLine());
 
-
-                dao.insertarMago(new Mago(0, nom, nac, casaSeleccionada, pat, niv, mor), idCasa);
+                dao.insertarMago(new Mago(0, nom, nac, casaSel, pat, niv, mor), numCasa);
 
             } else if (tipo == 2) {
                 System.out.print("Profesión: ");
@@ -194,10 +165,10 @@ public class Main {
 
                 dao.insertarCriatura(new Criatura(0, nom, nac, peli, dom));
             }
-            System.out.println("\nRegistro completado con éxito.");
+            System.out.println("Registro realizado con éxito.");
 
         } catch (Exception e) {
-            System.out.println("Error al registrar: Revisa que los datos sean correctos.");
+            System.out.println("Error al registrar: Datos inválidos o nacionalidad no reconocida.");
         }
-    }//CIERRE REGISTRAR NUEVO SER
-}//CIERRE MAIN
+    }
+}

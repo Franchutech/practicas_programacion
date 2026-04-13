@@ -7,6 +7,7 @@ import es.frojas.magic.models.Mago;
 import es.frojas.magic.models.Muggle;
 import es.frojas.magic.models.Criatura;
 import es.frojas.magic.models.SerVivo;
+import es.frojas.magic.exceptions.SerVivoNoEncontradoException;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -114,7 +115,7 @@ public class SerVivoDAO {
 
                 if(tipo.equals("MAGO")){
                     String patronus = dataset.getString("patronus");
-                    int nivelMagico = dataset.getInt("nivel_peligrosidad");
+                    int nivelMagico = dataset.getInt("nivel_magico");
                     boolean esMortifago = dataset.getBoolean("es_mortifago");
 
                     int idCasaBD = dataset.getInt("id_casa");
@@ -256,7 +257,7 @@ public class SerVivoDAO {
 
 
     //BUSCAR POR ID ÚNICO
-    public SerVivo buscarPorId(int idBusqueda) {
+    public SerVivo buscarPorId(int idBusqueda) throws SerVivoNoEncontradoException {
         SerVivo sv = null;
         String sql = "SELECT * FROM ser_vivo WHERE id_ser_vivo = ?";
 
@@ -266,7 +267,7 @@ public class SerVivoDAO {
             statement.setInt(1, idBusqueda);
 
             try (ResultSet dataset = statement.executeQuery()) {
-                if (dataset.next()) { // Uso IF en vez de WHILE porque solo hay uno
+                if (dataset.next()) {
                     String tipo = dataset.getString("tipo_ser_vivo");
                     int id = dataset.getInt("id_ser_vivo");
                     String nombre = dataset.getString("nombre_ser_vivo");
@@ -289,23 +290,27 @@ public class SerVivoDAO {
                     } else if (tipo.equals("MUGGLE")) {
                         String profesion = dataset.getString("profesion");
                         boolean conoceMagia = dataset.getBoolean("conoce_mundo_magico");
-
                         sv = new Muggle(id, nombre, nac, profesion, conoceMagia);
 
                     } else if (tipo.equals("CRIATURA")) {
                         int nivelPeli = dataset.getInt("nivel_peligrosidad");
                         boolean esDomestico = dataset.getBoolean("es_domesticable");
-
                         sv = new Criatura(id, nombre, nac, nivelPeli, esDomestico);
                     }
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error al buscar por ID: " + e.getMessage());
+        } catch (SQLException e) {
+            // Error técnico de base de datos
+            System.err.println("Error técnico en la base de datos: " + e.getMessage());
         }
-        return sv; //si no se encuentra devuelvo un null
 
-    } // CIERRE BUSCAR POR ID
+        // AQUI ESTÁ EL CAMBIO IMPORTANTE:
+        if (sv == null) {
+            throw new SerVivoNoEncontradoException(idBusqueda);
+        }
+
+        return sv;
+    }//CIERRE BUSCAR POR ID
 
 // EXPULSAR SER VIVO POR ID (ELIMINAR)
 public int eliminarSerVivo(int id) {
