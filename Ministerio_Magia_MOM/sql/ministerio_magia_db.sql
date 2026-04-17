@@ -39,3 +39,10 @@ INSERT INTO cualidades (id_cualidad, nombre_cualidad, id_casa_afinidad) VALUES
 (10, 'LIDERAZGO', 2),
 (11, 'CREATIVIDAD', 3),
 (12, 'TRABAJO DURO', 4);
+
+CREATE TABLE ser_vivo (
+id_ser_vivo INT AUTO_INCREMENT PRIMARY KEY,
+nombre_ser_vivo VARCHAR(100) NOT NULL,
+nacionalidad_ser_vivo VARCHAR(50),
+tipo_ser_vivo ENUM('MAGO', 'MUGGLE', 'CRIATURA') NOT NULL
+);
