@@ -1,0 +1,48 @@
+
+.root {
+    -fx-background-color: #F0F2F5;
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.hbox-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.label {
+    -fx-text-fill: #4A4A4A;
+    -fx-font-weight: bold;
+    -fx-min-width: 130;
+}
+
+.text-field {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 7;
+}
+
+.text-field:focused {
+    -fx-border-color: #74B9FF;
+}
+
+#enviar {
+    -fx-background-color: #55E6C1;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-padding: 10 30;
+}
+
+#cancelar {
+    -fx-background-color: #FF7675;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-padding: 10 30;
+}

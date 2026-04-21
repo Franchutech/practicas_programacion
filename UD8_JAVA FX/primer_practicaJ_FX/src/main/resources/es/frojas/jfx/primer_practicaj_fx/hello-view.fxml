@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="es.frojas.jfx.primer_practicaj_fx.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Holiiii!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.frojas.jfx.primer_practicaj_fx.MainController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" spacing="20.0">
+          <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+          </padding>
+         <Label fx:id="ltitulo" alignment="CENTER" contentDisplay="CENTER" text="Encuesta General" textFill="#000000a8">
+            <font>
+               <Font size="30.0" />
+            </font>
+         </Label>
+
+         <HBox fx:id="hname" styleClass="hbox-card">
+            <children>
+               <Label fx:id="name" text="Nombre" />
+               <TextField fx:id="tname" minWidth="400.0" />
+            </children>
+         </HBox>
+
+         <HBox fx:id="hadress" styleClass="hbox-card">
+            <children>
+               <Label fx:id="direccion" text="Dirección" />
+               <TextField fx:id="tdireccion" minWidth="400.0" />
+            </children>
+         </HBox>
+
+         <HBox fx:id="hmail" styleClass="hbox-card">
+            <children>
+               <Label fx:id="mail" text="Correo Electrónico" />
+               <TextField fx:id="tmail" minWidth="400.0" />
+            </children>
+         </HBox>
+
+         <HBox fx:id="htelefono" styleClass="hbox-card">
+            <children>
+               <Label fx:id="telefono" text="Teléfono" />
+               <TextField fx:id="tphone" minWidth="400.0" />
+            </children>
+         </HBox>
+
+         <HBox alignment="CENTER" spacing="20.0">
+            <children>
+                <Button fx:id="cancelar" onAction="#onHelloButtonClick" text="Cancelar" />
+                <Button fx:id="enviar" onAction="#onHelloButtonClick" text="Enviar" />
+            </children>
+         </HBox>
+      </VBox>
+   </children>
+</AnchorPane>

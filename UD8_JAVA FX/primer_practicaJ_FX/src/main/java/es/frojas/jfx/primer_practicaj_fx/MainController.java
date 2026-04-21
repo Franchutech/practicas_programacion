@@ -1,6 +1,7 @@
 package es.frojas.jfx.primer_practicaj_fx;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class MainController {
@@ -12,3 +13,6 @@ public class MainController {
         welcomeText.setText("Mi primer proyecto Java FX");
     }
 }
+
+
+
