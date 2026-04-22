@@ -46,3 +46,31 @@ nombre_ser_vivo VARCHAR(100) NOT NULL,
 nacionalidad_ser_vivo VARCHAR(50),
 tipo_ser_vivo ENUM('MAGO', 'MUGGLE', 'CRIATURA') NOT NULL
 );
+
+CREATE TABLE magos(
+    id_ser_vivo INT PRIMARY KEY,
+    id_casa INT,
+    patronus VARCHAR(50),
+    estatus_sangre ENUM('SANGRE_PURA', 'MESTIZO', 'PADRES_MUGGLES') NOT NULL,
+    es_mortifago BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_mago_base FOREIGN KEY (id_ser_vivo) REFERENCES ser_vivo(id_ser_vivo) ON
+    DELETE CASCADE,
+    CONSTRAINT fk_mago_casa FOREIGN KEY (id_casa) REFERENCES casas(id)
+    );
+
+CREATE TABLE muggles (
+    id_ser_vivo INT PRIMARY KEY,
+    profesion VARCHAR(100),
+    conoce_mundo_magico BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_muggle_base FOREIGN KEY (id_ser_vivo) REFERENCES ser_vivo(id_ser_vivo) ON DELETE CASCADE
+);
+
+CREATE TABLE criaturas (
+    id_ser_vivo INT PRIMARY KEY,
+    nivel_peligrosidad INT,
+    es_domesticable BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_criatura_base FOREIGN KEY (id_ser_vivo) REFERENCES ser_vivo(id_ser_vivo) ON DELETE CASCADE
+);
+
+
+

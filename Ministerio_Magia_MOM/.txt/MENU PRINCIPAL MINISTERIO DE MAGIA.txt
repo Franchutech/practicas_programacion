@@ -1,19 +1,70 @@
 
-        ESTRUCTURA DE NAVEGACIÓN - MINISTERIO DE MAGIA
+SISTEMA DE CONTROL GUBERNAMENTAL - MINISTERIO DE MAGIA
 
-
-MENU PRINCIPAL: MINISTERIO DE MAGIA (Switch 1)
+MENU PRINCIPAL: SEDE CENTRAL DEL MINISTERIO (Switch 1)
 │
-├── [1] GESTIÓN DE SERES VIVOS (Censo) -- (Entra al Switch 2)
-    ├── [1] REGISTRAR NUEVO (Mago, Muggle, Criatura)
-    ├── [2] Ver Censo Completo
-    ├── [3] Buscar por Nombre
-    ├── [4] Buscar por Tipo
-    ├── [5] Buscar por ID único
-    ├── [6] Expulsar Ser Vivo (Eliminar)
-    ├── [7] Actualizar Datos Básicos (Nombre/Origen)
-    └── [0] VOLVER AL MENÚ PRINCIPAL
-├── [2] LABORATORIO DE POCIONES -- (Entra al Switch 2)
-├── [3] INVERNADERO DE HERBOLOGÍA -- (Entra al Switch 2)
-├── [4] DEPARTAMENTO DE DEPORTES (Quidditch) -- (Entra al Switch 2)
-└── [0] SALIR DE LA APLICACIÓN (Cierra el programa)
+├── [1] CONTROL DE SERES VIVOS (Control de Seres Vivos: Mago/Muggle/Criatura)
+│   ├── [1] REGISTRAR NUEVO (Flujo: Identidad -> Atributos Hijos -> Guardar)
+│   ├── [2] VER CENSO NACIONAL (SQL: SELECT con JOIN)
+│   ├── [3] BUSCAR POR IDENTIFICADOR (ID único)
+│   ├── [4] GENERAR REPORTE (.txt)
+│   ├── [5] ORDEN DE EXPULSIÓN (DELETE con CASCADE)
+│   └── [0] VOLVER
+│
+├── [2] DEPARTAMENTO DE MISTERIOS-POSIONES (Registro de Pociones y Sustancias)
+│   ├── [1] REGISTRAR NUEVA
+│   ├── [2] INSPECCIONAR CALDEROS
+│   ├── [3] BUSCAR POR IDENTIFICADOR
+│   ├── [4] GENERAR REPORTE (.dat - Serialización)
+│   ├── [5] DESTRUIR LOTE (DELETE)
+│   └── [0] VOLVER
+│
+├── [3] REGULACION DE HERBOLOGÍA (Regulación de Botánica Mágica)
+│   ├── [1] REGISTRAR ESPECIE
+│   ├── [2] VER INVERNADERO ESTATAL
+│   ├── [3] BUSCAR POR IDENTIFICADOR
+│   ├── [4] GENERAR REPORTE (.log)
+│   ├── [5] ARRANCAR DE RAÍZ (DELETE)
+│   └── [0] VOLVER
+│
+├── [4] REGISTRO DE HECHIZOS Y CONJUROS
+│   ├── [1] REGISTRAR NUEVO CONJURO
+│   ├── [2] VER LIBRO DE LEYES MÁGICAS
+│   ├── [3] BUSCAR POR IDENTIFICADOR
+│   ├── [4] GENERAR REPORTE (.xml / .json)
+│   ├── [5] PROHIBIR HECHIZO (DELETE)
+│   └── [0] VOLVER
+│
+├── [5] REGISTRO DE LIBROS MÁGICOS Y PROFECÍAS
+│   ├── [1] REGISTRAR TOMO
+│   ├── [2] VER ARCHIVO BIBLIOGRÁFICO
+│   ├── [3] BUSCAR POR IDENTIFICADOR
+│   ├── [4] GENERAR CATÁLOGO (.html)
+│   ├── [5] QUEMAR / ELIMINAR REGISTRO (DELETE)
+│   └── [0] VOLVER
+│
+├── [6] FEDERACIÓN DE QUIDDITCH
+│   ├── [1] REGISTRAR EQUIPO (Nombre, Ciudad, Estadio, Colores)
+│   ├── [2] ASIGNAR MAGO A EQUIPO (Update SQL: vinculación de ID)
+│   ├── [3] VER CLASIFICACIÓN DE LA LIGA
+│   ├── [4] BUSCAR EQUIPO POR ID (Detalle + Lista de Jugadores)
+│   ├── [5] GENERAR ACTA DE PARTIDO (.csv)
+│   ├── [6] DISOLVER EQUIPO (DELETE)
+│   └── [0] VOLVER
+│
+└── [0] CLAUSURAR SESIÓN -TRAVESURA REALIZADA
+
+
+INTERFAZ JAVA FX
+
+SISTEMA DE CONTROL GUBERNAMENTAL - MINISTERIO DE MAGIA
+
+MENU PRINCIPAL: SEDE CENTRAL DEL MINISTERIO
+│
+├── [1] CONTROL DE SERES VIVOS
+├── [2] DEPARTAMENTO DE MISTERIOS-POCIONES
+├── [3] REGULACIÓN DE HERBOLOGÍA
+├── [4] REGISTRO DE HECHIZOS Y CONJUROS
+├── [5] REGISTRO DE LIBROS MÁGICOS Y PROFECÍAS
+├── [6] FEDERACIÓN DE QUIDDITCH
+└── [0] CLAUSURAR SESIÓN - TRAVESURA REALIZADA

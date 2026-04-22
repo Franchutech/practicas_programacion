@@ -3,6 +3,7 @@ package es.frojas.magic.models;
 import es.frojas.magic.enums.Casas;
 import es.frojas.magic.enums.Nacionalidades;
 import es.frojas.magic.enums.TipoSer;
+import es.frojas.magic.enums.EstatusSangre;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class Mago extends SerVivo implements Serializable {
 
     private Casas casas;
     private String patronus; // lo traigo de SQL
-    private int nivelMagico;
+    private EstatusSangre estatusSangre;
     private boolean esMortifago;
 
     //CONSTRUCTOR
@@ -24,13 +25,13 @@ public class Mago extends SerVivo implements Serializable {
 
     public Mago(int idSerVivo, String nombreSerVivo, Nacionalidades nacionalidadSerVivo,
                 Casas casas, String patronus,
-                int nivelMagico, boolean esMortifago) {
+                EstatusSangre estatusSangre, boolean esMortifago) {
         // Aquí le paso el TipoSer.MAGO directamente a la madre
         super(idSerVivo, nombreSerVivo, nacionalidadSerVivo, TipoSer.MAGO);
         this.casas = casas;
         this.patronus = patronus;
         this.esMortifago = esMortifago;
-        this.setNivelMagico(nivelMagico);
+        this.estatusSangre = estatusSangre;
     }
 
 
@@ -40,18 +41,17 @@ public class Mago extends SerVivo implements Serializable {
         return casas;
     }
 
-    public String getpatronus() {
+    public String getPatronus() {
         return patronus;
-    }
-
-    public int getNivelMagico() {
-        return nivelMagico;
     }
 
     public boolean isEsMortifago() {
         return esMortifago;
     }
 
+    public EstatusSangre getEstatusSangre() {
+        return estatusSangre;
+    }
 
     //SETTERS
 
@@ -64,13 +64,8 @@ public class Mago extends SerVivo implements Serializable {
         this.patronus = patronus;
     }
 
-    public void setNivelMagico(int nivelMagico) {
-        if (nivelMagico >= 0 && nivelMagico <= 10){
-            this.nivelMagico = nivelMagico;
-        }else  {
-            System.out.println("El nivel magico es invalido, el rango del Ministerio de Magia es del 0 al 10");
-        }
-
+    public void setEstatusSangre(EstatusSangre estatusSangre) {
+        this.estatusSangre = estatusSangre;
     }
 
     public void setEsMortifago(boolean esMortifago) {
@@ -86,10 +81,10 @@ public class Mago extends SerVivo implements Serializable {
             Nacionalidad: %s
             Casa: %s
             Patronus: %s
-            Nivel: %d
-            Mortífago: %b
+            Estatus de Sangre: %s
+            Mortífago: %s
             """,
                 idSerVivo, nombreSerVivo, nacionalidadSerVivo,
-                casas, patronus, nivelMagico, esMortifago);
+                casas, patronus, estatusSangre, esMortifago ? "SÍ" : "NO");
     }
 }//CIERRE CLASE PRINCIPAL MAGO
