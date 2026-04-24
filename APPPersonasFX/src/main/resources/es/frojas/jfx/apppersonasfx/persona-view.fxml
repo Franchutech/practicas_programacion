@@ -1,16 +1,200 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="es.frojas.jfx.apppersonasfx.PersonasController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane fx:id="MainPanel" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.frojas.jfx.apppersonasfx.PersonasController">
+   <children>
+      <AnchorPane fx:id="mainView" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" styleClass="my-background" stylesheets="@../../../../style.css" visible="false">
+         <children>
+            <Label layoutX="145.0" layoutY="21.0" text="App Gestión Personas" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="40.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="img_portada" fitHeight="226.0" fitWidth="640.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="126.0">
+               <image>
+                  <Image url="@../../../../wireframes/img_personas.jpg" />
+               </image>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutX="75.0" layoutY="384.0" prefHeight="150.0" prefWidth="150.0" spacing="50.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="75.0">
+               <children>
+                  <Button fx:id="binsertar" mnemonicParsing="false" onAction="#onInsertarButtonAction" prefHeight="41.0" prefWidth="151.0" styleClass="my-button" text="Insertar Persona" />
+                  <Button fx:id="bbuscar" mnemonicParsing="false" onAction="#onBuscarButtonAction" prefHeight="42.0" prefWidth="155.0" styleClass="my-button" text="Buscar Persona" />
+               </children>
+            </VBox>
+            <VBox layoutX="388.0" layoutY="420.0" prefHeight="150.0" prefWidth="150.0" spacing="50.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="75.0">
+               <children>
+                  <Button fx:id="bver" mnemonicParsing="false" onAction="#onVerButtonAction" prefHeight="46.0" prefWidth="152.0" styleClass="my-button" text="Ver Personas" />
+                  <Button fx:id="bsalir" mnemonicParsing="false" onAction="#onSalirButtonAction" prefHeight="50.0" prefWidth="151.0" styleClass="my-button" text="Salir" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="formView" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" styleClass="my-background" stylesheets="@../../../../style.css">
+         <children>
+            <VBox layoutX="24.0" layoutY="107.0" prefHeight="100.0" prefWidth="600.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <HBox prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni" alignment="CENTER" contentDisplay="CENTER" minHeight="50.0" minWidth="100.0" prefHeight="50.0" prefWidth="131.0" text="DNI" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="dnitextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="12345678T">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="hboxnombre" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni1" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="131.0" text="Nombre" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nombretextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="Francella">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="hboxapellido" layoutX="10.0" layoutY="60.0" prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni11" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="131.0" text="Apellido" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="apellidotextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="Rojas Castillo">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="hboxEmail" layoutX="10.0" layoutY="110.0" prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni111" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="131.0" text="Email" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="emailtextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="gtgggg@framce.com">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="hboxEdad" layoutX="10.0" layoutY="160.0" prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni1111" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="131.0" text="Edad" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="edadtextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="37">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="210.0" prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <Label fx:id="hboxdni11111" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="131.0" text="Teléfono" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="telefonotextf" alignment="CENTER" minHeight="10.0" prefHeight="40.0" prefWidth="450.0" promptText="6547878787878">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label fx:id="labelformtitle" alignment="CENTER" prefHeight="42.0" prefWidth="641.0" text="Insertar Personas" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <HBox fx:id="hboxbuttons" layoutX="368.0" layoutY="498.0" prefHeight="100.0" prefWidth="277.0" spacing="30.0" stylesheets="@../../../../style.css" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="490.0">
+               <children>
+                  <Button fx:id="guardarformButton" mnemonicParsing="false" onAction="#onGuardarButttonClick" styleClass="my-button" stylesheets="@../../../../style.css" text="Guardar" />
+                  <Button fx:id="cancelarButton" mnemonicParsing="false" onAction="#onCancelarButtonClick" styleClass="my-button" stylesheets="@../../../../style.css" text="Cancelar" />
+               </children>
+            </HBox>
+         </children></AnchorPane>
+      <AnchorPane fx:id="listView" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" visible="false" />
+   </children>
+</AnchorPane>
