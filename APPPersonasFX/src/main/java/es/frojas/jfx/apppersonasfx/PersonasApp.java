@@ -14,6 +14,7 @@ public class PersonasApp extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 640);
         stage.setTitle("App administración de Personas");
         stage.setScene(scene);
+        stage.setResizable(false);//CON ESTO EL TAMAÑO DE LA VENTANA NO SE PUEDE CAMBIAR
         stage.show();
 
     }

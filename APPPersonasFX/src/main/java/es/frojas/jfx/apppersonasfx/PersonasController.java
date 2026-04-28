@@ -59,7 +59,63 @@ public class PersonasController implements Initializable {
         this.mainView.setVisible(true);
         this.formView.setVisible(false);
         this.clearFieldText();
-    }
+
+        //INSERTAR LOS LISTENERS A LAS PROPIEDADES DE FOCUS
+
+        this.dnitextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(dnitextf.getText())){
+                    this.dnitextf.setText("");
+                    this.dnitextf.setPromptText("Ingresar el DNI en formato correcto");
+                }
+            }
+        });
+
+        this.nombretextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(nombretextf.getText())){
+                    this.nombretextf.setText("");
+                    this.nombretextf.setPromptText("Ingresar el nombre en formato correcto");
+                }
+            }
+        });
+
+        this.apellidotextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(apellidotextf.getText())){
+                    this.apellidotextf.setText("");
+                    this.apellidotextf.setPromptText("Ingrese un apellido válido");
+                }
+            }
+        });
+        this.emailtextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(emailtextf.getText())){
+                    this.emailtextf.setText("");
+                    this.emailtextf.setPromptText("Ingrese un email en el formato correcto");
+                }
+            }
+        });
+        this.edadtextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(edadtextf.getText())){
+                    this.edadtextf.setText("");
+                    this.edadtextf.setPromptText("Ingrese un edad en formato correcto");
+                }
+            }
+        });
+
+        this.telefonotextf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                if(this.validation(telefonotextf.getText())){
+                    this.telefonotextf.setText("");
+                    this.telefonotextf.setPromptText("Ingrese un telefono en formato correcto");
+                }
+            }
+        });
+
+
+    }//CIERRE CLASE INITIALIZE
 
 
 
@@ -89,7 +145,19 @@ public class PersonasController implements Initializable {
 
     @FXML
     public void onGuardarButttonClick(ActionEvent actionEvent){
+        //GUARDAR EN EL FORMULARIO, INSERTAR EN EL SQL
+        this.pp = Persona.builder()
+                        .dni(this.dnitextf.getText())
+                        .name(this.nombretextf.getText())
+                        .surname(this.apellidotextf.getText())
+                        .email(this.emailtextf.getText())
+                        .age(Integer.parseInt(this.edadtextf.getText()))
+                        .phone(this.telefonotextf.getText())
+                        .build();
 
+        if(SQLAccessPersona.createPersona(pp)){
+            this.clearFieldText();
+        }
 
     }
 
@@ -108,7 +176,41 @@ public class PersonasController implements Initializable {
         this.edadtextf.clear();
         this.telefonotextf.clear();
         this.emailtextf.clear();
+
+        this.dnitextf.setPromptText("Ingresse un DNI 12345678");
+        this.nombretextf.setPromptText("Ingrese un nombre");
+        this.apellidotextf.setPromptText("Ingrese un apellido");
+        this.edadtextf.setPromptText("Ingrese una edad");
+        this.telefonotextf.setPromptText("Ingrese un telefono");
+        this.emailtextf.setPromptText("Ingrese un email xxxx@xxxx.com");
     }
+
+    private boolean validation(String dni){
+        return dni.matches("[1-9]{1,3}");
+    }
+
+    private boolean validationEmail(String email) {
+    return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+}
+
+private boolean validationPhone(String telefono) {
+    return telefono.matches("[0-9]{9}");
+}
+
+private boolean validationNombre(String nombre) {
+    // Acepta letras mayúsculas, minúsculas, tildes, ñ y espacios.
+    return nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$");
+}
+
+private boolean validationApellido(String apellido) {
+    return apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$");
+}
+private boolean validationEdad(String edad) {
+    // Comprueba que solo haya números y que tenga entre 1 y 3 dígitos
+    return edad != null && edad.trim().matches("[0-9]{1,3}");
+}
+
+
 
 
 }//CIERRE PERSONAS CONTROLLER

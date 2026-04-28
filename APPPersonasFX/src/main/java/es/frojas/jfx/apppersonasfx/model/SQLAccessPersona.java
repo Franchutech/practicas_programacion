@@ -112,10 +112,10 @@ public class SQLAccessPersona {
         return p;
     }
 
-    public boolean createPersona(Persona persona){
+    public static boolean createPersona(Persona persona){
         boolean result=false;
 
-        String sqlInsertpersonas = "INSERT INTO perso (dni, name, surname, email, age, phone) VALUES (?,?,?,?,?,?)";
+        String sqlInsertpersonas = "INSERT INTO person (dni, name, surname, email, age, phone) VALUES (?,?,?,?,?,?)";
 
 
         try(Connection connection = SQLDataBaseManager.getConnection();
@@ -126,13 +126,20 @@ public class SQLAccessPersona {
             statement.setString(4, persona.getEmail());
             statement.setInt(5, persona.getAge());
             statement.setString(6, persona.getPhone());
+
+            int filasAfectadas = statement.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            result = true;
+        }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return result;
     }
 
-    public boolean updatePersona(Persona persona){
+    public static boolean updatePersona(Persona persona){
         boolean result=false;
         String sqlUpdatePersona = "UPDATE person SET name = ?, surname = ?, " +
                 "email = ?, age = ?, phone = ? WHERE dni = ?";
@@ -154,7 +161,7 @@ public class SQLAccessPersona {
 
         return result;
     }
-    public boolean deletePersonaByDNI(String dni){
+    public static boolean deletePersonaByDNI(String dni){
         boolean result=false;
         String sqlDeletepersonas = "DELETE FROM personas WHERE dni=?";
 
@@ -169,6 +176,47 @@ public class SQLAccessPersona {
         }
         return false;
     }
+
+    /*COPIAR DEL GITHUB DE ANUAR
+    public static List<Persona> getpersonasByNameContains(){
+        List<Persona> personas = new LinkedList<>();
+
+        //SETENCIA SQL
+        String sqlpersonas = "SELECT * FROM person WHERE name LIKE ?";
+
+        try(Connection conexion = SQLDataBaseManager.getConnection();
+            PreparedStatement statement = Connection.prepareStatment(sqlpersonas)){
+
+        }
+
+            statement.setString
+            ResultSet resultSets = statement.executeQuery(sqlpersonas)) {
+
+
+            while (resultSets.next()){
+                String dni = resultSets.getNString(1);
+                String name = resultSets.getNString(2);
+                String surname = resultSets.getNString(3);
+                String email = resultSets.getNString(4);
+                int age = resultSets.getInt(5);
+                String phone = resultSets.getNString(6);
+
+                //USO DEL BUILDER
+                Persona p = Persona.builder()
+                        .dni(dni)
+                        .name(name)
+                        .surname(surname)
+                        .email(email)
+                        .age(age)
+                        .phone(phone)
+                        .build();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return personas;
+
+    }//CIERRE LIST PERSONA get persona por name (copiara a anuar)*/
 
 
 }//CIERRE ACCESS PERSONA

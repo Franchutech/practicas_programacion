@@ -1,4 +1,5 @@
 CREATE SCHEMA dawpeople;
+USE dawpeople;
 
 CREATE TABLE `dawpeople`.`person` (
 `dni` VARCHAR(10) NOT NULL,
@@ -24,3 +25,5 @@ VALUES
 ('66778899H', 'Alejandro', 'Pérez Castillo', 'aleperez.castillo@email.com', 38, '+34677554433'),
 ('33445566I', 'Carmen', 'Ruiz Navarro', 'carmen.ruizn@email.com', 50, '+34688112233'),
 ('77889900J', 'Daniel', 'Martín Romero', 'daniel.martinr@email.com', 29, '+34699667788');
+
+SELECT * FROM dawpeople;
