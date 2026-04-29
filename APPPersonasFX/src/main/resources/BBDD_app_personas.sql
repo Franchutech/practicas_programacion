@@ -27,3 +27,5 @@ VALUES
 ('77889900J', 'Daniel', 'Martín Romero', 'daniel.martinr@email.com', 29, '+34699667788');
 
 SELECT * FROM dawpeople;
+
+SELECT * FROM person;
